@@ -22,4 +22,23 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+    <!-- Прописываем главный класс в jar-архиве-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!--Здесь поменять на другой, когда будет необходимо.-->
+                            <mainClass>com.netcracker.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
