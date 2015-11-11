@@ -1,6 +1,7 @@
-package com.O26;
+package o26;
 
-import com.O26.Data.*;
+import o26.Data.Journal;
+import o26.Data.Task;
 
 import java.util.Date;
 import java.util.Scanner;

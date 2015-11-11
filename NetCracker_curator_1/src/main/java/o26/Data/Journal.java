@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.O26.Data;
+package o26.Data;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
