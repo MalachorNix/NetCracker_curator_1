@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package o26.Data;
+package o26.Controller;
+
+import o26.Model.Task;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,34 +8,29 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-/**
- *
- * @author monin
- */
-public class Journal implements Journalable{
+
+public class Journal {
     private ArrayList tasks;
     
-    @Override
     public void addTask(Task task) {
         this.tasks.add(task.clone());
     }
 
-    @Override
+    
     public void deleteTask(int id) {
         this.tasks.remove(id);
     }
 
-    @Override
+    
     public void editTask(int id, Task task) {
         this.tasks.set(id, task.clone());
     }
 
-    @Override
+    
     public ArrayList getTasks() {
         return (ArrayList)this.tasks.clone();
     }
 
-    @Override
     public void loadTasks() {
         FileInputStream fis = null;
         ObjectInputStream ois = null;
@@ -71,7 +63,6 @@ public class Journal implements Journalable{
         }
     }
 
-    @Override
     public void saveTasks() {
         if(this.tasks!=null && !this.tasks.isEmpty()){
             FileOutputStream fos = null;
@@ -107,7 +98,4 @@ public class Journal implements Journalable{
             System.out.println("Can't save empty Journal!");
         }
     }
-
-
-
 }

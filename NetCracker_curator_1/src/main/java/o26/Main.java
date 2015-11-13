@@ -1,21 +1,11 @@
 package o26;
 
-import o26.Data.Journal;
-import o26.Data.Task;
+import o26.Controller.Journal;
+import o26.Model.Task;
 
 import java.util.Date;
 import java.util.Scanner;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author monin
- */
 public class Main {
 
     public static void showTask(Task task){
@@ -48,8 +38,8 @@ public class Main {
         }
     }
 
-    private static void edit(Scanner in, String concurency, Task task) {
-        switch (concurency) {
+    private static void edit(Scanner in, String concurrency, Task task) {
+        switch (concurrency) {
             case "1":
                 System.out.print("Введите другое название задачи: ");
                 String name = in.nextLine();
@@ -76,9 +66,6 @@ public class Main {
 
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
 
         System.out.println("ПЛАНИРОВЩИК ЗАДАЧ");
