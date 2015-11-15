@@ -41,6 +41,7 @@ public class Task implements Serializable{
     public void setDate(Date newDate){
         this.date = (Date)newDate.clone();
     }
+
     public Task(String name, String description, String contacts, Date date){
         this.name = name;
         this.description = description;

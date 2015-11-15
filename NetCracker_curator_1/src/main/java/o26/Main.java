@@ -71,7 +71,7 @@ public class Main {
         System.out.println("ПЛАНИРОВЩИК ЗАДАЧ");
 
         Journal journal = new Journal();
-        journal.loadTasks();
+        journal.load();
 
         Scanner in = new Scanner(System.in);
         String s;
@@ -99,7 +99,7 @@ public class Main {
                     String contacts = in.nextLine();
                     Task task = new Task(name, description, contacts, date);
                     journal.addTask(task);
-                    journal.saveTasks();
+                    journal.save();
                     break;
                 case "3":
                     System.out.print("Введите номер задачи для редактирования: ");
@@ -125,7 +125,7 @@ public class Main {
                     journal.deleteTask(idTask);
                     break;
                 case "exit":
-                    journal.saveTasks();
+                    journal.save();
                     System.exit(0);
                     break;
             }
