@@ -1,16 +1,19 @@
 package o26.Controller;
 
 import o26.Model.Task;
+import o26.Model.TaskParameters;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Journal {
     private ArrayList tasks;
     private DataLoader dataLoader = new DataLoader();
-    private TaskCreator taskCreator = new TaskCreator();
+    private TaskCreator taskCreator;
     
-    public void addTask(Task task) {
-        this.tasks.add(task);
+    public void addTask(Map <TaskParameters, Object> parameters) {
+        taskCreator = new TaskCreator();
+        this.tasks.add(taskCreator.createTask(parameters));
     }
 
     public void deleteTask(int id) {

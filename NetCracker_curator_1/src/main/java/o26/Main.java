@@ -109,8 +109,7 @@ public class Main {
                     System.out.print("Введите контакты:");
                     String contacts = in.nextLine();
                     parameters.put(TaskParameters.CONTACTS, contacts);
-                    Task task = new Task(parameters);
-                    journal.addTask(task);
+                    journal.addTask(parameters);
                     journal.save();
                     break;
                 case "3":
