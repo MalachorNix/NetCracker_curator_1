@@ -1,60 +1,22 @@
 package o26.Model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Map;
+
 
 public class Task implements Serializable{
-    private String name;
-    private String description;
-    private String contacts;
-    private Date date;
 
-    
-    public String getName(){
-        return this.name;
-    }
-    
-    public String getDescription(){
-        return this.description;
-    }
-    
-    public String getContacts(){
-        return this.contacts;
-    }
-    
-    public Date getDate(){
-        return (Date)this.date.clone();
-    }
-    
-    public void setName(String newName){
-        this.name = newName;
-    }
-    
-    public void setDescription(String newDescription){
-        this.description = newDescription;
-    }
-    
-    public void setContacts(String newContacts){
-        this.contacts = newContacts;
-    }
-    
-    public void setDate(Date newDate){
-        this.date = (Date)newDate.clone();
+    private Map<TaskParameters, Object> parameters;
+
+    public Task(Map<TaskParameters, Object> parameters) {
+        this.parameters = parameters;
     }
 
-    public Task(String name, String description, String contacts, Date date){
-        this.name = name;
-        this.description = description;
-        this.contacts = contacts;
-        this.date = (Date)date.clone();
+    public Object getValue(TaskParameters parameter) {
+        return this.parameters.get(parameter);
     }
 
-    @Override
-    public Task clone(){
-        String name = this.getName();
-        String description = this.getDescription();
-        String contacts = this.getContacts();
-        Date date = this.getDate();
-         return new Task(name, description, contacts, date);
+    public void setValue(TaskParameters parameter, Object value) {
+        this.parameters.put(parameter, value);
     }
 }

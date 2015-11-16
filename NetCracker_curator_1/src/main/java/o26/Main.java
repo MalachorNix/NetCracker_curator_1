@@ -2,17 +2,20 @@ package o26;
 
 import o26.Controller.Journal;
 import o26.Model.Task;
+import o26.Model.TaskParameters;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
 
     public static void showTask(Task task){
-        String name = task.getName();
-        String description = task.getDescription();
-        String contacts = task.getContacts();
-        Date date = task.getDate();
+        String name = (String) task.getValue(TaskParameters.NAME);
+        String description = (String) task.getValue(TaskParameters.DESCRIPTION);
+        String contacts = (String) task.getValue(TaskParameters.CONTACTS);
+        Date date = (Date) task.getValue(TaskParameters.DATE);
         String result = "Name:\n\t"+name+"\n";
         result += "Description:\n\t"+description+"\n";
         result += "Contacts:\n\t"+contacts+"\n";
@@ -22,19 +25,23 @@ public class Main {
 
     public static void showJournal(Journal journal){
         int countTask = journal.getTasks().size();
-        for(int i = 0; i < countTask; i++){
-            int lengthId = i+"".length();
-            String breakingLine = "";
-            int lengthLine = 40 - lengthId - 2;
+        if (countTask != 0) {
+            for(int i = 0; i < countTask; i++){
+                int lengthId = i+"".length();
+                String breakingLine = "";
+                int lengthLine = 40 - lengthId - 2;
 
-            for(int j = 0; j < lengthLine; j++) {
-                breakingLine+="~";
+                for(int j = 0; j < lengthLine; j++) {
+                    breakingLine+="~";
+                }
+                breakingLine = "<"+i+">"+breakingLine;
+
+                System.out.println(breakingLine);
+                showTask((Task)journal.getTasks().get(i));
+                System.out.println(breakingLine);
             }
-            breakingLine = "<"+i+">"+breakingLine;
-
-            System.out.println(breakingLine);
-            showTask((Task)journal.getTasks().get(i));
-            System.out.println(breakingLine);
+        } else {
+            System.out.println("Список задач пуст!");
         }
     }
 
@@ -43,22 +50,22 @@ public class Main {
             case "1":
                 System.out.print("Введите другое название задачи: ");
                 String name = in.nextLine();
-                task.setName(name);
+                task.setValue(TaskParameters.NAME, name);
                 break;
             case "2":
                 System.out.print("Введите другое описание задачи: ");
                 String description = in.nextLine();
-                task.setDescription(description);
+                task.setValue(TaskParameters.DESCRIPTION, description);
                 break;
             case "3":
                 System.out.println("Введите другую дату оповещения: "); //Добавить заполнение даты.
                 Date date1 = new Date();
-                task.setDate(date1);
+                task.setValue(TaskParameters.DATE, date1);
                 break;
             case "4":
                 System.out.print("Введите другие контакты: ");
                 String contacts = in.nextLine();
-                task.setContacts(contacts);
+                task.setValue(TaskParameters.CONTACTS, contacts);
                 break;
             case "exit":
                 break;
@@ -89,15 +96,20 @@ public class Main {
                     showJournal(journal);
                     break;
                 case "2":
+                    Map<TaskParameters, Object> parameters = new HashMap();
                     System.out.print("Введите название задачи: ");
                     String name = in.nextLine();
+                    parameters.put(TaskParameters.NAME, name);
                     System.out.print("Введите описание задачи: ");
                     String description = in.nextLine();
+                    parameters.put(TaskParameters.DESCRIPTION, description);
                     System.out.println("Введите дату оповещения: ");
                     Date date = new Date(); // Добавить установку даты оповещения.
+                    parameters.put(TaskParameters.DATE, date);
                     System.out.print("Введите контакты:");
                     String contacts = in.nextLine();
-                    Task task = new Task(name, description, contacts, date);
+                    parameters.put(TaskParameters.CONTACTS, contacts);
+                    Task task = new Task(parameters);
                     journal.addTask(task);
                     journal.save();
                     break;

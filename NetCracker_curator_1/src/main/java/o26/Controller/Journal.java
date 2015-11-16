@@ -7,10 +7,10 @@ import java.util.ArrayList;
 public class Journal {
     private ArrayList tasks;
     private DataLoader dataLoader = new DataLoader();
-//    private TaskCreator taskCreator = new TaskCreator();
+    private TaskCreator taskCreator = new TaskCreator();
     
     public void addTask(Task task) {
-        this.tasks.add(task.clone());
+        this.tasks.add(task);
     }
 
     public void deleteTask(int id) {
@@ -18,11 +18,11 @@ public class Journal {
     }
 
     public void editTask(int id, Task task) {
-        this.tasks.set(id, task.clone());
+        this.tasks.set(id, task);
     }
 
     public ArrayList getTasks() {
-        return (ArrayList)this.tasks.clone();
+        return this.tasks;
     }
 
     public void save(){
