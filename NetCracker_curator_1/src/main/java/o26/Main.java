@@ -4,7 +4,10 @@ import o26.Controller.Journal;
 import o26.Model.Task;
 import o26.Model.TaskParameters;
 
-import java.util.Date;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -15,7 +18,7 @@ public class Main {
         String name = (String) task.getValue(TaskParameters.NAME);
         String description = (String) task.getValue(TaskParameters.DESCRIPTION);
         String contacts = (String) task.getValue(TaskParameters.CONTACTS);
-        Date date = (Date) task.getValue(TaskParameters.DATE);
+        GregorianCalendar date = (GregorianCalendar) task.getValue(TaskParameters.DATE);
         String result = "Name:\n\t"+name+"\n";
         result += "Description:\n\t"+description+"\n";
         result += "Contacts:\n\t"+contacts+"\n";
@@ -59,8 +62,20 @@ public class Main {
                 break;
             case "3":
                 System.out.println("Введите другую дату оповещения: "); //Добавить заполнение даты.
-                Date date1 = new Date();
-                task.setValue(TaskParameters.DATE, date1);
+                System.out.print("Введите год: ");
+                int year = in.nextInt();
+                System.out.print("Введите месяц: ");
+                int month = in.nextInt();
+                System.out.print("Введите день: ");
+                int day = in.nextInt();
+                System.out.print("Введите час: ");
+                int hour = in.nextInt();
+                System.out.print("Введите минуту: ");
+                int minute = in.nextInt();
+                System.out.print("Введите секунду: ");
+                int second= in.nextInt();
+                GregorianCalendar newDate = new GregorianCalendar(year, month, day, hour, minute, second);
+                task.setValue(TaskParameters.DATE, newDate);
                 break;
             case "4":
                 System.out.print("Введите другие контакты: ");
@@ -73,7 +88,7 @@ public class Main {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         System.out.println("ПЛАНИРОВЩИК ЗАДАЧ");
 
@@ -97,18 +112,37 @@ public class Main {
                     break;
                 case "2":
                     Map<TaskParameters, Object> parameters = new HashMap();
+
                     System.out.print("Введите название задачи: ");
                     String name = in.nextLine();
                     parameters.put(TaskParameters.NAME, name);
+
                     System.out.print("Введите описание задачи: ");
                     String description = in.nextLine();
                     parameters.put(TaskParameters.DESCRIPTION, description);
+
                     System.out.println("Введите дату оповещения: ");
-                    Date date = new Date(); // Добавить установку даты оповещения.
+                    System.out.print("Введите год: ");
+                    int year = in.nextInt();
+                    System.out.print("Введите месяц: ");
+                    int month = in.nextInt();
+                    System.out.print("Введите день: ");
+                    int day = in.nextInt();
+                    System.out.print("Введите час: ");
+                    int hour = in.nextInt();
+                    System.out.print("Введите минуту: ");
+                    int minute = in.nextInt();
+                    System.out.print("Введите секунду: ");
+                    int second= in.nextInt();
+                    GregorianCalendar date = new GregorianCalendar(year, month, day, hour, minute, second);
                     parameters.put(TaskParameters.DATE, date);
-                    System.out.print("Введите контакты:");
-                    String contacts = in.nextLine();
+
+                    Scanner sc = new Scanner(System.in);
+
+                    System.out.print("Введите контакты: ");
+                    String contacts = sc.nextLine();
                     parameters.put(TaskParameters.CONTACTS, contacts);
+
                     journal.addTask(parameters);
                     journal.save();
                     break;
@@ -125,9 +159,9 @@ public class Main {
                     System.out.println("Нажмите 4, чтобы редактировать контакты.");
                     System.out.println("Наберите exit, чтобы отменить редактирование.");
 
-                    Scanner scanner = new Scanner(System.in);
-                    String a = scanner.nextLine();
-                    edit(scanner, a, task1);
+                    Scanner anotherScanner = new Scanner(System.in);
+                    String a = anotherScanner.nextLine();
+                    edit(anotherScanner, a, task1);
                     journal.editTask(id, task1);
                     break;
                 case "4":
