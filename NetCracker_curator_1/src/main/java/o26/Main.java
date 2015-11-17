@@ -4,9 +4,7 @@ import o26.Controller.Journal;
 import o26.Model.Task;
 import o26.Model.TaskParameters;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -111,7 +109,7 @@ public class Main {
                     showJournal(journal);
                     break;
                 case "2":
-                    Map<TaskParameters, Object> parameters = new HashMap();
+                    Map<TaskParameters, Object> parameters = new HashMap<TaskParameters, Object>();
 
                     System.out.print("Введите название задачи: ");
                     String name = in.nextLine();
