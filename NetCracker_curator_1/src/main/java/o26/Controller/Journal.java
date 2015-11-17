@@ -13,7 +13,11 @@ public class Journal {
     
     public void addTask(Map <TaskParameters, Object> parameters) {
         taskCreator = new TaskCreator();
-        this.tasks.add(taskCreator.createTask(parameters));
+        if (taskCreator.validate(parameters)) {
+            this.tasks.add(taskCreator.createTask(parameters));
+        } else {
+            System.out.println(" Задачу создать нельзя!");
+        }
     }
 
     public void deleteTask(int id) {

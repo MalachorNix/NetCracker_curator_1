@@ -113,10 +113,18 @@ public class Main {
 
                     System.out.print("Введите название задачи: ");
                     String name = in.nextLine();
+                    while (!TaskParameters.NAME.validate(name)) {
+                        System.out.println("Нельзя иметь пустое значение! Введите его: ");
+                        name = in.nextLine();
+                    }
                     parameters.put(TaskParameters.NAME, name);
 
                     System.out.print("Введите описание задачи: ");
                     String description = in.nextLine();
+                    while (!TaskParameters.DESCRIPTION.validate(description)) {
+                        System.out.println("Нельзя иметь пустое значение! Введите его: ");
+                        description = in.nextLine();
+                    }
                     parameters.put(TaskParameters.DESCRIPTION, description);
 
                     System.out.println("Введите дату оповещения: ");
@@ -139,6 +147,10 @@ public class Main {
 
                     System.out.print("Введите контакты: ");
                     String contacts = sc.nextLine();
+                    while (!TaskParameters.CONTACTS.validate(contacts)) {
+                        System.out.println("Нельзя иметь пустое значение! Введите его: ");
+                        contacts = in.nextLine();
+                    }
                     parameters.put(TaskParameters.CONTACTS, contacts);
 
                     journal.addTask(parameters);
