@@ -23,7 +23,7 @@ public class Inner {
                     int minute = in.nextInt();
                     System.out.print("Введите секунду: ");
                     int second= in.nextInt();
-                    return new GregorianCalendar(year, month, day, hour, minute, second);
+                    return new GregorianCalendar(year, month-1, day, hour, minute, second);
             }
             default:{
                 return new Scanner(System.in).nextLine();
