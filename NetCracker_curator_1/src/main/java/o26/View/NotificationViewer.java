@@ -1,23 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package o26.View;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.WindowConstants;
 import o26.Controller.Journal;
 
-/**
- *
- * @author BLACK_JESUS
- */
+
 public class NotificationViewer implements Viewer{
 
     @Override
@@ -44,10 +34,10 @@ public class NotificationViewer implements Viewer{
         constraints.weighty = 0f;
         constraints.fill = GridBagConstraints.NONE;
         constraints.anchor = GridBagConstraints.NORTH;
-        JButton cloesButton = new JButton("X");
+        /*JButton cloesButton = new JButton("X");
         cloesButton.setMargin(new Insets(1, 4, 1, 4));
         cloesButton.setFocusable(false);
-        frame.add(cloesButton, constraints);
+        frame.add(cloesButton, constraints);*/
         constraints.gridx = 0;
         constraints.gridy++;
         constraints.weightx = 1.0f;
@@ -56,7 +46,7 @@ public class NotificationViewer implements Viewer{
         constraints.fill = GridBagConstraints.BOTH;
         JLabel messageLabel = new JLabel("<HtMl>"+message);
         frame.add(messageLabel, constraints);
-        //frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
     
