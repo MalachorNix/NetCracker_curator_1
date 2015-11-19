@@ -6,10 +6,7 @@
 package o26.View;
 
 import o26.Controller.Journal;
-/**
- *
- * @author BLACK_JESUS
- */
+
 public interface Viewer {
     public void show(Journal journal);
 }

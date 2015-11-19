@@ -21,12 +21,6 @@ public class TaskCreator {
 
         GregorianCalendar calendar = new GregorianCalendar();
         GregorianCalendar value = (GregorianCalendar) parameters.get(TaskParameters.DATE);
-        /*
-        if (value.compareTo(calendar) == -1) {
-            System.out.print("Выбранная дата уже прошла.");
-            return false;
-        }
-        */
         return true;
     }
 }
