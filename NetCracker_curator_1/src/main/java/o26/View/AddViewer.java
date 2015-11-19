@@ -19,6 +19,7 @@ public class AddViewer implements Viewer{
         parameters.put(TaskParameters.DATE, in.doIt(TaskParameters.DATE));
         journal.addTask(parameters);
         System.out.println("Задача добавлена!\n");
+        journal.journalChanged();
     }
     
     @Override

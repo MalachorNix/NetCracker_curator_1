@@ -28,6 +28,7 @@ public class DeleteViewer implements Viewer{
                     if(choise.doIt(0, 1)!=0){
                         journal.deleteTask(selectedId-1);
                         System.out.println("Задача удалена!\n");
+                        journal.journalChanged();
                     }
                     break;
                 }

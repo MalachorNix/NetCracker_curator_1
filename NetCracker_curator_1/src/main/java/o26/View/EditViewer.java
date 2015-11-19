@@ -35,6 +35,7 @@ public class EditViewer implements Viewer{
                                 editParameters(((Task) journal.getTasks().get(selectedId-1)).getParameters())
                         );
                         System.out.println("Задача изменена!\n");
+                        journal.journalChanged();
                     }
                     break;
                 }

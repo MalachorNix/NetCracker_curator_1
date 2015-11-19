@@ -6,14 +6,15 @@ import java.awt.Insets;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import o26.Controller.Journal;
+import o26.Model.Task;
+import o26.Model.TaskParameters;
 
 
-public class NotificationViewer implements Viewer{
+public class NotificationViewer{
 
-    @Override
-    public void show(Journal journal) {
-        String message = "You got a new notification message. Is not it awesome to have such a notification message.";
-        String header = "This is header of notification message";
+    public void show(Journal journal, int id) {
+        String message = journal.getTasks().get(id).toString();
+        String header = ((Task)journal.getTasks().get(id)).getValue(TaskParameters.NAME).toString();
         JFrame frame = new JFrame();
         frame.setSize(300,125);
         frame.setLayout(new GridBagLayout());

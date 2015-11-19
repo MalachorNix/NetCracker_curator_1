@@ -34,6 +34,7 @@ public class MenuViewer implements Viewer{
             else{
                 journal.save();
                 System.out.println("Goodbay!\n");
+                System.exit(0);
             }
         }while(select!=0);
     }

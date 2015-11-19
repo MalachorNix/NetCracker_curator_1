@@ -59,7 +59,11 @@ public class Journal {
     
     public void notificationStart(){
         notification = new Notification(this);
-        notification.setActualTaskIndex(this);
+        journalChanged();
         notification.start();
+    }
+    
+    public void journalChanged(){
+        notification.setActualTaskIndex(this);
     }
 }

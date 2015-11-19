@@ -9,21 +9,24 @@ import o26.View.NotificationViewer;
 public class Notification extends Thread{
     private Journal journal;
     private int actualTaskIndex;
-    private int checkTaskIndex;
+    private int checkTaskIndex = -1;
     private long timeTask;
     Task actualTask;
+    
     public Notification(Journal journal){
         this.journal = journal;
     }
+    
     public int getActualTask(ArrayList tasks) {
         int index = 0;
-        long time = ((GregorianCalendar)((Task)tasks.get(0)).getValue(TaskParameters.DATE)).getTimeInMillis();
-
-        for (int i = 1; i < tasks.size(); i++) {
-            long temp = ((GregorianCalendar)((Task)tasks.get(i)).getValue(TaskParameters.DATE)).getTimeInMillis();
-            if (time > temp){
-                time = temp;
-                index = i;
+        long time = ((GregorianCalendar)((Task)tasks.get(index)).getValue(TaskParameters.DATE)).getTimeInMillis();
+        if(tasks.size()>1){
+            for (int i = 1; i < tasks.size(); i++) {
+                long temp = ((GregorianCalendar)((Task)tasks.get(i)).getValue(TaskParameters.DATE)).getTimeInMillis();
+                if (time > temp){
+                    time = temp;
+                    index = i;
+                }
             }
         }
         return index;
@@ -31,16 +34,23 @@ public class Notification extends Thread{
     
     @Override
     public void run(){
-        if(actualTaskIndex!=checkTaskIndex){
-            checkTaskIndex = actualTaskIndex;
-            timeTask = ((GregorianCalendar)actualTask.getValue(TaskParameters.DATE)).getTimeInMillis();
-        }
-        if(System.currentTimeMillis()>=timeTask){
-            new NotificationViewer().show(journal);
+        while(true){
+            if(actualTaskIndex!=checkTaskIndex){
+                checkTaskIndex = actualTaskIndex;
+                timeTask = ((GregorianCalendar)actualTask.getValue(TaskParameters.DATE)).getTimeInMillis();
+            }
+            if(System.currentTimeMillis()>=timeTask){
+                new NotificationViewer().show(journal, actualTaskIndex);
+                journal.deleteTask(actualTaskIndex);
+                setActualTaskIndex(journal);
+            }
+            
         }
     }
+    
     public void setActualTaskIndex(Journal journal){
         actualTaskIndex = getActualTask(journal.getTasks());
         actualTask = (Task)journal.getTasks().get(actualTaskIndex);
+        timeTask = ((GregorianCalendar)actualTask.getValue(TaskParameters.DATE)).getTimeInMillis();
     }
 }
