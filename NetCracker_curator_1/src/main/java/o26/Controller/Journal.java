@@ -13,6 +13,7 @@ public class Journal {
     private DataLoader dataLoader;
     private TaskCreator taskCreator;
     private Viewer view;
+    private Notification notification;
     
     public void addTask(Map <TaskParameters, Object> parameters) {
         taskCreator = new TaskCreator();
@@ -54,5 +55,11 @@ public class Journal {
     public void showMenu(){
         view = new MenuViewer();
         this.view.show(this);
+    }
+    
+    public void notificationStart(){
+        notification = new Notification(this);
+        notification.setActualTaskIndex(this);
+        notification.start();
     }
 }

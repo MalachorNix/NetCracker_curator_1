@@ -12,6 +12,7 @@ public class MenuViewer implements Viewer{
     @Override
     public void show(Journal journal) {
         journal.load();
+        journal.notificationStart();
         points = new ArrayList<>();
         points.add(new ListViewer());
         points.add(new AddViewer());
