@@ -13,10 +13,16 @@ public class ListViewer implements Viewer{
         int countTasks = tasks.size();
         if(countTasks!=0){
             for(int i = 0; i < countTasks; i++){
+                int lengthId = i+"".length();
+                String breakingLine = "";
+                int lengthLine = 40 - lengthId - 2;
+                for(int j = 0; j < lengthLine; j++) {
+                    breakingLine+="~";
+                }
                 String task = tasks.get(i).toString();
-                System.out.println(getBreakingLine(i+1));
+                System.out.println("<"+(i+1)+">"+breakingLine);
                 System.out.println(task);
-                System.out.println(getBreakingLine(i+1));
+                System.out.println("<"+(i+1)+">"+breakingLine);
             }
             System.out.println();
         }
@@ -26,15 +32,5 @@ public class ListViewer implements Viewer{
     @Override
     public String toString(){
         return this.POINT;
-    }
-    
-    private String getBreakingLine(int i){
-        int lengthId = i+"".length();
-        String breakingLine = "";
-        int lengthLine = 40 - lengthId - 2;
-        for(int j = 0; j < lengthLine; j++) {
-            breakingLine+="~";
-        }
-        return "<"+i+">"+breakingLine;
     }
 }
