@@ -25,8 +25,6 @@ public class NotificationViewer implements Viewer{
         constraints.insets = new Insets(5, 5, 5, 5);
         constraints.fill = GridBagConstraints.BOTH;
         JLabel headingLabel = new JLabel(header);
-        //Icon headingIcon;
-        //headingLabel .setIcon(headingIcon); // --- use image icon you want to be as heading image.
         headingLabel.setOpaque(false);
         frame.add(headingLabel, constraints);
         constraints.gridx++;
@@ -34,10 +32,6 @@ public class NotificationViewer implements Viewer{
         constraints.weighty = 0f;
         constraints.fill = GridBagConstraints.NONE;
         constraints.anchor = GridBagConstraints.NORTH;
-        /*JButton cloesButton = new JButton("X");
-        cloesButton.setMargin(new Insets(1, 4, 1, 4));
-        cloesButton.setFocusable(false);
-        frame.add(cloesButton, constraints);*/
         constraints.gridx = 0;
         constraints.gridy++;
         constraints.weightx = 1.0f;
@@ -48,6 +42,7 @@ public class NotificationViewer implements Viewer{
         frame.add(messageLabel, constraints);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
     
 }
