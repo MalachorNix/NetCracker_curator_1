@@ -7,6 +7,8 @@ import o26.Model.TaskParameters;
 
 public class AddViewer implements Viewer{
     private Inner in;
+    private final String POINT = "Добавление задач";
+    
     @Override
     public void show(Journal journal) {
         Map<TaskParameters, Object> parameters = new HashMap<>();
@@ -17,5 +19,10 @@ public class AddViewer implements Viewer{
         parameters.put(TaskParameters.DATE, in.doIt(TaskParameters.DATE));
         journal.addTask(parameters);
         System.out.println("Задача добавлена!\n");
-    } 
+    }
+    
+    @Override
+    public String toString(){
+        return this.POINT;
+    }
 }

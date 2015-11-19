@@ -1,61 +1,44 @@
 package o26.View;
 
+import java.util.ArrayList;
+
 import o26.Controller.Journal;
 
 public class MenuViewer implements Viewer{
-    private Viewer list, add, edit, delete;
+    private ArrayList points;
     private Choiser choise;
-
+    private final String POINT = "Меню";
+    
     @Override
     public void show(Journal journal) {
         journal.load();
+        points = new ArrayList<>();
+        points.add(new ListViewer());
+        points.add(new AddViewer());
+        points.add(new EditViewer());
+        points.add(new DeleteViewer());
         int select;
         System.out.println("Планировщик задач");
         do{
-            showCases();
+            int countPoints = points.size();
+            for(int i = 0; i < countPoints; i++){
+                System.out.println("<"+(i+1)+"> "+points.get(i).toString());
+            }
+            System.out.println("<0> Сохранить изменения и выйти\n");
             choise = new Choiser();
-            select = choise.doIt(0, 4);
-            switch(select){
-                case 0:{
-                    journal.save();
-                    System.out.println("Goodbay!");
-                    break;
-                }
-                case 1:{
-                    list = new ListViewer();
-                    list.show(journal);
-                    break;
-                }
-                case 2:{
-                    add = new AddViewer();
-                    add.show(journal);
-                    break;
-                }
-                case 3:{
-                    edit = new EditViewer();
-                    edit.show(journal);
-                    break;
-                }
-                case 4:{
-                    delete = new DeleteViewer();
-                    delete.show(journal);
-                    break;
-                }
-                default:{
-                    journal.save();
-                    break;
-                }
+            select = choise.doIt(0, countPoints);
+            if(select!=0){
+                ((Viewer)points.get(select-1)).show(journal);
+            }
+            else{
+                journal.save();
+                System.out.println("Goodbay!\n");
             }
         }while(select!=0);
     }
     
-    private void showCases(){
-        String result = "Меню:\n";
-        result += "\t<1> Показать все задачи\n";
-        result += "\t<2> Добавить задачу\n";
-        result += "\t<3> Редактировать задачу\n";
-        result += "\t<4> Удалить задачу\n";
-        result += "\t<0> Выход\n";
-        System.out.print(result);
+    @Override
+    public String toString(){
+        return this.POINT;
     }
 }

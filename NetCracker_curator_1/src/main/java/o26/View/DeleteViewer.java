@@ -4,6 +4,8 @@ import o26.Controller.Journal;
 
 public class DeleteViewer implements Viewer{
     private Choiser choise;
+    private final String POINT = "Удаление задач";
+    
     @Override
     public void show(Journal journal) {
         int selectedId;
@@ -31,5 +33,10 @@ public class DeleteViewer implements Viewer{
                 }
             }
         }while(selectedId!=0);
+    }
+    
+    @Override
+    public String toString(){
+        return this.POINT;
     }
 }

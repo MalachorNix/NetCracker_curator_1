@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import o26.Controller.Journal;
 
 public class ListViewer implements Viewer{
+    private final String POINT = "Просмотр списка задач";
+    
     @Override
     public void show(Journal journal) {
         ArrayList tasks = journal.getTasks();
@@ -19,6 +21,11 @@ public class ListViewer implements Viewer{
             System.out.println();
         }
         else System.out.println("Список задач пуст!");
+    }
+    
+    @Override
+    public String toString(){
+        return this.POINT;
     }
     
     private String getBreakingLine(int i){

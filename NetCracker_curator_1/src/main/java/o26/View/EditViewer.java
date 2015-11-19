@@ -9,6 +9,8 @@ import o26.Model.TaskParameters;
 public class EditViewer implements Viewer{
     private Choiser choise;
     private Inner in;
+    private final String POINT = "Редактирование задач";
+    
     @Override
     public void show(Journal journal) {
         int selectedId;
@@ -38,6 +40,11 @@ public class EditViewer implements Viewer{
                 }
             }
         }while(selectedId!=0);
+    }
+    
+    @Override
+    public String toString(){
+        return this.POINT;
     }
     
     private Map<TaskParameters, Object> editParameters(Map<TaskParameters, Object> parameters){
