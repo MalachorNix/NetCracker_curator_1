@@ -14,4 +14,15 @@ public enum TaskParameters {
     public boolean validate(String value) {
         return value.length() != 0;
     }
+    
+    @Override
+    public String toString(){
+        switch(this){
+            case NAME: return "NAME";
+            case DESCRIPTION: return "DESCRIPTION";
+            case DATE: return "DATE";
+            case CONTACTS: return "CONTACTS";
+            default: return "";
+        }
+    }
 }
