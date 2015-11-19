@@ -3,7 +3,6 @@ package o26.View;
 import java.util.Map;
 
 import o26.Controller.Journal;
-import o26.Controller.TaskCreator;
 import o26.Model.Task;
 import o26.Model.TaskParameters;
 
@@ -30,10 +29,9 @@ public class EditViewer implements Viewer{
                     System.out.println("\t<1> Да");
                     System.out.println("\t<0> Нет");
                     if(choise.doIt(0, 1)!=0){
-                        Task newTask = new TaskCreator().createTask(
+                        journal.editTask(selectedId-1,
                                 editParameters(((Task) journal.getTasks().get(selectedId-1)).getParameters())
                         );
-                        journal.editTask(selectedId-1, newTask);
                         System.out.println("Задача изменена!\n");
                     }
                     break;

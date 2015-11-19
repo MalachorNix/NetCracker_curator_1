@@ -27,8 +27,12 @@ public class Journal {
         this.tasks.remove(id);
     }
 
-    public void editTask(int id, Task task) {
-        this.tasks.set(id, task);
+    public void editTask(int id, Map <TaskParameters, Object> parameters) {
+        for(Map.Entry entry : parameters.entrySet()){
+            TaskParameters parameter = (TaskParameters)entry.getKey();
+            Object value = entry.getValue();
+            ((Task) this.tasks.get(id)).setValue(parameter, value);
+        }
     }
 
     public ArrayList getTasks() {
