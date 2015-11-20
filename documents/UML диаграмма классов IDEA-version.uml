@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>o26</OriginalElement>
+  <nodes>
+    <node x="635.339380196523" y="252.0">o26.View.DeleteViewer</node>
+    <node x="899.589380196523" y="463.5">o26.View.MenuViewer</node>
+    <node x="283.75" y="0.0">o26.Model.TaskParameters</node>
+    <node x="0.0" y="285.5">o26.View.NotificationViewer</node>
+    <node x="279.75" y="497.0">o26.Controller.TaskCreator</node>
+    <node x="656.589380196523" y="497.0">o26.Controller.DataLoader</node>
+    <node x="1011.839380196523" y="44.5">o26.View.Inner</node>
+    <node x="892.089380196523" y="230.0">o26.View.EditViewer</node>
+    <node x="28.75" y="452.0">o26.Controller.Notification</node>
+    <node x="1142.089380196523" y="252.0">o26.View.AddViewer</node>
+    <node x="347.839380196523" y="685.0">o26.Controller.Journal</node>
+    <node x="478.839380196523" y="1052.0">o26.Main</node>
+    <node x="194.75" y="240.5">o26.Model.Task</node>
+    <node x="1328.1897203325775" y="44.5">o26.View.Viewer</node>
+    <node x="1315.089380196523" y="263.0">o26.View.ListViewer</node>
+    <node x="627.7560468631897" y="44.5">o26.View.Choiser</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="o26.Controller.Notification" target="o26.Model.Task">
+      <point x="57.75" y="-81.5" />
+      <point x="202.0" y="432.0" />
+      <point x="277.25" y="432.0" />
+      <point x="-82.5" y="70.5" />
+    </edge>
+    <edge source="o26.Controller.Notification" target="o26.Controller.Journal">
+      <point x="77.0" y="81.5" />
+      <point x="221.25" y="645.0" />
+      <point x="463.11715797430077" y="645.0" />
+      <point x="-92.22222222222223" y="-158.5" />
+    </edge>
+    <edge source="o26.View.MenuViewer" target="o26.View.Viewer">
+      <point x="92.14285714285711" y="-70.0" />
+      <point x="1099.2322373393802" y="432.0" />
+      <point x="1486.589380196523" y="432.0" />
+      <point x="1486.589380196523" y="210.0" />
+      <point x="1442.9397203325775" y="210.0" />
+      <point x="38.25" y="25.5" />
+    </edge>
+    <edge source="o26.Controller.Journal" target="o26.Controller.TaskCreator">
+      <point x="-46.111111111111114" y="-158.5" />
+      <point x="509.22826908541185" y="635.0" />
+      <point x="361.0" y="635.0" />
+      <point x="-81.25" y="36.5" />
+    </edge>
+    <edge source="o26.View.EditViewer" target="o26.View.Inner">
+      <point x="0.0" y="-81.0" />
+      <point x="1007.089380196523" y="170.0" />
+      <point x="1037.089380196523" y="170.0" />
+      <point x="-75.75" y="25.5" />
+    </edge>
+    <edge source="o26.View.EditViewer" target="o26.View.Choiser">
+      <point x="-92.0" y="-81.0" />
+      <point x="915.089380196523" y="170.0" />
+      <point x="727.5060468631897" y="170.0" />
+      <point x="33.25" y="25.5" />
+    </edge>
+    <edge source="o26.View.EditViewer" target="o26.View.Viewer">
+      <point x="92.0" y="-81.0" />
+      <point x="1099.089380196523" y="190.0" />
+      <point x="1366.4397203325775" y="190.0" />
+      <point x="-38.25" y="25.5" />
+    </edge>
+    <edge source="o26.View.MenuViewer" target="o26.View.Choiser">
+      <point x="-92.14285714285711" y="-70.0" />
+      <point x="914.9465230536659" y="432.0" />
+      <point x="613.839380196523" y="432.0" />
+      <point x="613.839380196523" y="200.0" />
+      <point x="638.8393801965229" y="200.0" />
+      <point x="-55.416666666666686" y="25.5" />
+    </edge>
+    <edge source="o26.Controller.Journal" target="o26.Controller.DataLoader">
+      <point x="46.111111111111114" y="-158.5" />
+      <point x="601.4504913076341" y="635.0" />
+      <point x="712.339380196523" y="635.0" />
+      <point x="-55.75" y="36.5" />
+    </edge>
+    <edge source="o26.Controller.Journal" target="o26.Controller.Notification">
+      <point x="-138.33333333333337" y="-158.5" />
+      <point x="417.0060468631896" y="655.0" />
+      <point x="144.25" y="655.0" />
+      <point x="0.0" y="81.5" />
+    </edge>
+    <edge source="o26.View.MenuViewer" target="o26.View.EditViewer">
+      <point x="0.0" y="-70.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="o26.View.AddViewer" target="o26.View.Inner">
+      <point x="-51.0" y="-59.0" />
+      <point x="1167.589380196523" y="170.0" />
+      <point x="1138.089380196523" y="170.0" />
+      <point x="25.25" y="25.5" />
+    </edge>
+    <edge source="o26.Model.Task" target="o26.Model.TaskParameters">
+      <point x="0.0" y="-70.5" />
+      <point x="0.0" y="70.0" />
+    </edge>
+    <edge source="o26.Controller.TaskCreator" target="o26.Model.Task">
+      <point x="0.0" y="-36.5" />
+      <point x="82.5" y="70.5" />
+    </edge>
+    <edge source="o26.View.MenuViewer" target="o26.View.AddViewer">
+      <point x="30.71428571428578" y="-70.0" />
+      <point x="1037.8036659108088" y="412.0" />
+      <point x="1218.589380196523" y="412.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+    <edge source="o26.View.ListViewer" target="o26.View.Viewer">
+      <point x="0.0" y="-48.0" />
+      <point x="1395.589380196523" y="210.0" />
+      <point x="1417.4397203325775" y="210.0" />
+      <point x="12.75" y="25.5" />
+    </edge>
+    <edge source="o26.View.MenuViewer" target="o26.View.ListViewer">
+      <point x="61.428571428571445" y="-70.0" />
+      <point x="1068.5179516250944" y="422.0" />
+      <point x="1395.589380196523" y="422.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="o26.View.MenuViewer" target="o26.View.DeleteViewer">
+      <point x="-30.714285714285666" y="-70.0" />
+      <point x="976.3750944822373" y="412.0" />
+      <point x="730.339380196523" y="412.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+    <edge source="o26.View.DeleteViewer" target="o26.View.Viewer">
+      <point x="63.33333333333337" y="-59.0" />
+      <point x="793.6727135298563" y="180.0" />
+      <point x="1340.9397203325775" y="180.0" />
+      <point x="-63.75" y="25.5" />
+    </edge>
+    <edge source="o26.View.DeleteViewer" target="o26.View.Choiser">
+      <point x="-63.33333333333337" y="-59.0" />
+      <point x="667.0060468631896" y="210.0" />
+      <point x="683.1727135298563" y="210.0" />
+      <point x="-11.083333333333314" y="25.5" />
+    </edge>
+    <edge source="o26.View.AddViewer" target="o26.View.Viewer">
+      <point x="51.0" y="-59.0" />
+      <point x="1269.589380196523" y="200.0" />
+      <point x="1391.9397203325775" y="200.0" />
+      <point x="-12.75" y="25.5" />
+    </edge>
+    <edge source="o26.Controller.Notification" target="o26.View.NotificationViewer">
+      <point x="-57.75" y="-81.5" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="o26.Controller.Journal" target="o26.View.MenuViewer">
+      <point x="138.33333333333337" y="-158.5" />
+      <point x="693.6727135298563" y="655.0" />
+      <point x="1007.089380196523" y="655.0" />
+      <point x="0.0" y="70.0" />
+    </edge>
+    <edge source="o26.Controller.Journal" target="o26.View.Viewer">
+      <point x="184.44444444444446" y="-158.5" />
+      <point x="739.7838246409674" y="665.0" />
+      <point x="1497.589380196523" y="665.0" />
+      <point x="1497.589380196523" y="200.0" />
+      <point x="1468.4397203325775" y="200.0" />
+      <point x="63.75" y="25.5" />
+    </edge>
+    <edge source="o26.Main" target="o26.Controller.Journal">
+      <point x="0.0" y="-25.5" />
+      <point x="0.0" y="158.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.773820124666073" x="749.0" y="551.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
