@@ -29,11 +29,15 @@ public class MenuViewer implements Viewer{
             choise = new Choiser();
             select = choise.doIt(0, countPoints);
             if(select!=0){
-                ((Viewer)points.get(select-1)).show(journal);
+                try {
+                    ((Viewer)points.get(select-1)).show(journal);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Вводите только числа!");
+                }
             }
             else{
                 journal.save();
-                System.out.println("Goodbay!\n");
+                System.out.println("Goodbye!\n");
                 System.exit(0);
             }
         }while(select!=0);

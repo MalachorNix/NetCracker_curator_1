@@ -51,7 +51,7 @@ public class EditViewer implements Viewer{
     private Map<TaskParameters, Object> editParameters(Map<TaskParameters, Object> parameters){
         int select;
         do{
-            System.out.println("Редактирвоание параметров");
+            System.out.println("Редактирование параметров");
             System.out.println("\t<1> "+TaskParameters.NAME.toString());
             System.out.println("\t<2> "+TaskParameters.DESCRIPTION.toString());
             System.out.println("\t<3> "+TaskParameters.CONTACTS.toString());
@@ -81,7 +81,7 @@ public class EditViewer implements Viewer{
                 }
             }
             if(select!=0){
-                System.out.println("Параметер изменен!\n");
+                System.out.println("Параметр изменен!\n");
             }
         }while(select!=0);
         return parameters;
