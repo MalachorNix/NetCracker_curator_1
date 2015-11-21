@@ -2,17 +2,17 @@ package o26.controller;
 
 import o26.model.Task;
 import o26.model.TaskParameter;
-import o26.view.Viewer;
+import o26.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Map;
-import o26.view.MenuViewer;
+import o26.view.MenuMenuItem;
 
 public class Journal {
     private ArrayList tasks;
     private DataLoader dataLoader;
     private TaskCreator taskCreator;
-    private Viewer view;
+    private MenuItem view;
     private Notification notification;
     
     public void addTask(Map <TaskParameter, Object> parameters) {
@@ -48,7 +48,7 @@ public class Journal {
     }
     
     public void showMenu() {
-        view = new MenuViewer();
+        view = new MenuMenuItem();
         this.view.show(this);
     }
 

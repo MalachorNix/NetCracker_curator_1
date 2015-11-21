@@ -6,7 +6,7 @@ import o26.controller.Journal;
 import o26.model.Task;
 import o26.model.TaskParameter;
 
-public class EditViewer implements Viewer{
+public class EditMenuItem implements MenuItem {
     private Choiser choise;
     private Inner in;
     private final String POINT = "Редактирование задач";

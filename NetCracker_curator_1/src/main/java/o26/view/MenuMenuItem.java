@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import o26.controller.Journal;
 
-public class MenuViewer implements Viewer{
+public class MenuMenuItem implements MenuItem {
     private ArrayList points;
     private Choiser choise;
     private final String POINT = "Меню";
@@ -14,10 +14,10 @@ public class MenuViewer implements Viewer{
         journal.load();
         journal.notificationStart();
         points = new ArrayList<>();
-        points.add(new ListViewer());
-        points.add(new AddViewer());
-        points.add(new EditViewer());
-        points.add(new DeleteViewer());
+        points.add(new ListMenuItem());
+        points.add(new AddMenuItem());
+        points.add(new EditMenuItem());
+        points.add(new DeleteMenuItem());
         int select;
         System.out.println("Планировщик задач");
         do{
@@ -30,7 +30,7 @@ public class MenuViewer implements Viewer{
             select = choise.doIt(0, countPoints);
             if(select!=0){
                 try {
-                    ((Viewer)points.get(select-1)).show(journal);
+                    ((MenuItem)points.get(select-1)).show(journal);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Вводите только числа!");
                 }

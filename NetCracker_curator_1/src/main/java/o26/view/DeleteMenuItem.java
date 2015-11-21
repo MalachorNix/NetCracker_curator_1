@@ -2,7 +2,7 @@ package o26.view;
 
 import o26.controller.Journal;
 
-public class DeleteViewer implements Viewer{
+public class DeleteMenuItem implements MenuItem {
     private Choiser choise;
     private final String POINT = "Удаление задач";
     

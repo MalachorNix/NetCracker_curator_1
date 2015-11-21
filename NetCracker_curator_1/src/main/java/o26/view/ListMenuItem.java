@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import o26.controller.Journal;
 
-public class ListViewer implements Viewer{
+public class ListMenuItem implements MenuItem {
     private final String POINT = "Просмотр списка задач";
     
     @Override

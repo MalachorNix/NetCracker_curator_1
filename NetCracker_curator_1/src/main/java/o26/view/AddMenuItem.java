@@ -5,7 +5,7 @@ import java.util.Map;
 import o26.controller.Journal;
 import o26.model.TaskParameter;
 
-public class AddViewer implements Viewer{
+public class AddMenuItem implements MenuItem {
     private Inner in;
     private final String POINT = "Добавление задач";
     
