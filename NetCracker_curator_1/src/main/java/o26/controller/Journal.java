@@ -39,26 +39,26 @@ public class Journal {
         return this.tasks;
     }
 
-    public void save(){
+    public void save() {
         dataLoader.saveData(tasks);
     }
 
-    public void load(){
+    public void load() {
         tasks = dataLoader.loadData();
     }
     
-    public void showMenu(){
+    public void showMenu() {
         view = new MenuViewer();
         this.view.show(this);
     }
-    
-    public void notificationStart(){
+
+    public void notificationStart() {
         notification = new Notification();
         journalChanged();
         notification.start();
     }
     
-    public void journalChanged(){
+    public void journalChanged() {
         notification.setActual(this);
     }
     

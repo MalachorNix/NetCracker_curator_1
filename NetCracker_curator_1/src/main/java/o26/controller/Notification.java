@@ -27,16 +27,23 @@ public class Notification extends Thread{
             this.actualTask =  (Task) tasks.get(index);
         }
     }
-    
+
     @Override
-    public void run(){
-        while(true){
-            timeTask = ((GregorianCalendar)actualTask.getValue(TaskParameters.DATE)).getTimeInMillis();
+    public void run() {
+        while(true) {
+            try {
+                timeTask = ((GregorianCalendar)actualTask.getValue(TaskParameters.DATE)).getTimeInMillis();
+            } catch (NullPointerException e) {
+
+            }
             if(System.currentTimeMillis()>=timeTask){
-                new NotificationViewer().show(journal, actualTaskIndex);
+                try {
+                    new NotificationViewer().show(journal, actualTaskIndex);
+                } catch (IndexOutOfBoundsException e) {
+
+                }
                 setActual(journal);
             }
-            
         }
     }
 }
