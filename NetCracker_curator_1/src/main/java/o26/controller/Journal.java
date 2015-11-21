@@ -53,7 +53,6 @@ public class Journal {
     }
 
     public void notificationStart() {
-        notification = new Notification();
         journalChanged();
         notification.start();
     }
@@ -68,5 +67,9 @@ public class Journal {
 
     public void setTaskCreator(TaskCreator taskCreator) {
         this.taskCreator = taskCreator;
+    }
+
+    public void setNotification(Notification notification) {
+        this.notification = notification;
     }
 }
