@@ -1,7 +1,5 @@
 package o26.controller;
 
-import o26.model.Task;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -12,15 +10,16 @@ import java.util.ArrayList;
 
 public class DataLoader {
 
-    public ArrayList loadData(ArrayList tasks) {
+    public ArrayList loadData() {
         FileInputStream fis = null;
         ObjectInputStream ois = null;
+        ArrayList result = null;
         try {
             fis = new FileInputStream("data");
             ois = new ObjectInputStream(fis);
-            tasks = (ArrayList) ois.readObject();
+            result = (ArrayList) ois.readObject();
         } catch (FileNotFoundException e) {
-            tasks = new ArrayList<Task>();
+            result = new ArrayList<>();
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Ошибка загрузки: " + e.getMessage());
         } finally {
@@ -36,7 +35,7 @@ public class DataLoader {
                 }
             }
         }
-        return tasks;
+        return result;
     }
 
     public void saveData(ArrayList tasks) {
@@ -45,7 +44,7 @@ public class DataLoader {
         try {
             fos = new FileOutputStream("data");
             oos = new ObjectOutputStream(fos);
-            oos.writeObject(tasks);
+            oos.writeObject((tasks!=null)?tasks:new ArrayList<>());
         } catch (IOException ioe) {
             System.out.println("Ошибка сохранения: " + ioe.getMessage());
         } finally {

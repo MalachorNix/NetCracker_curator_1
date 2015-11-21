@@ -41,15 +41,11 @@ public class Journal {
     }
 
     public void save(){
-        dataLoader = new DataLoader();
-        if (this.tasks != null && !this.tasks.isEmpty()) {
-            dataLoader.saveData(tasks);
-        }
+        dataLoader.saveData(tasks);
     }
 
     public void load(){
-        dataLoader = new DataLoader();
-        this.tasks = dataLoader.loadData(this.tasks);
+        this.tasks = dataLoader.loadData();
     }
     
     public void showMenu(){
@@ -65,5 +61,9 @@ public class Journal {
     
     public void journalChanged(){
         notification.setActual(this);
+    }
+    
+    public void setDataLoader(DataLoader dataLoader){
+        this.dataLoader = dataLoader;
     }
 }
