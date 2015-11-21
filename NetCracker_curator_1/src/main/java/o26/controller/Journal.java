@@ -16,23 +16,22 @@ public class Journal {
     private Notification notification;
     
     public void addTask(Map <TaskParameters, Object> parameters) {
-        taskCreator = new TaskCreator();
         if (taskCreator.validate(parameters)) {
-            this.tasks.add(taskCreator.createTask(parameters));
+            tasks.add(taskCreator.createTask(parameters));
         } else {
             System.out.println("Задачу создать нельзя!");
         }
     }
 
     public void deleteTask(int id) {
-        this.tasks.remove(id);
+        tasks.remove(id);
     }
 
     public void editTask(int id, Map <TaskParameters, Object> parameters) {
         for(Map.Entry entry : parameters.entrySet()){
             TaskParameters parameter = (TaskParameters)entry.getKey();
             Object value = entry.getValue();
-            ((Task) this.tasks.get(id)).setValue(parameter, value);
+            ((Task) tasks.get(id)).setValue(parameter, value);
         }
     }
 
@@ -45,7 +44,7 @@ public class Journal {
     }
 
     public void load(){
-        this.tasks = dataLoader.loadData();
+        tasks = dataLoader.loadData();
     }
     
     public void showMenu(){
@@ -65,5 +64,9 @@ public class Journal {
     
     public void setDataLoader(DataLoader dataLoader){
         this.dataLoader = dataLoader;
+    }
+
+    public void setTaskCreator(TaskCreator taskCreator) {
+        this.taskCreator = taskCreator;
     }
 }
