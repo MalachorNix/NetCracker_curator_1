@@ -1,8 +1,8 @@
-package o26.View;
+package o26.view;
 
 import java.util.ArrayList;
 
-import o26.Controller.Journal;
+import o26.controller.Journal;
 
 public class ListViewer implements Viewer{
     private final String POINT = "Просмотр списка задач";

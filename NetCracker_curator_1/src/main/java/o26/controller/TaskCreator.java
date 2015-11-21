@@ -1,7 +1,7 @@
-package o26.Controller;
+package o26.controller;
 
-import o26.Model.Task;
-import o26.Model.TaskParameters;
+import o26.model.Task;
+import o26.model.TaskParameters;
 
 import java.util.GregorianCalendar;
 import java.util.Map;

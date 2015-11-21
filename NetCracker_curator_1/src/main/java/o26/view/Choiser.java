@@ -1,4 +1,4 @@
-package o26.View;
+package o26.view;
 
 import java.util.Scanner;
 

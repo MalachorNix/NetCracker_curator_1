@@ -1,8 +1,8 @@
-package o26.View;
+package o26.view;
 
 import java.util.GregorianCalendar;
 import java.util.Scanner;
-import o26.Model.TaskParameters;
+import o26.model.TaskParameters;
 
 public class Inner {
     public Object doIt(TaskParameters parameter){

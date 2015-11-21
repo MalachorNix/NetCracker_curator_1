@@ -1,10 +1,10 @@
-package o26.Controller;
+package o26.controller;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import o26.Model.Task;
-import o26.Model.TaskParameters;
-import o26.View.NotificationViewer;
+import o26.model.Task;
+import o26.model.TaskParameters;
+import o26.view.NotificationViewer;
 
 public class Notification extends Thread{
     private Journal journal;

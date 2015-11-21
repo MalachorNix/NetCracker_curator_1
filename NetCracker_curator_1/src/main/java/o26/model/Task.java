@@ -1,4 +1,4 @@
-package o26.Model;
+package o26.model;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;

@@ -1,4 +1,4 @@
-package o26.View;
+package o26.view;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -7,9 +7,9 @@ import java.util.GregorianCalendar;
 //import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import o26.Controller.Journal;
-import o26.Model.Task;
-import o26.Model.TaskParameters;
+import o26.controller.Journal;
+import o26.model.Task;
+import o26.model.TaskParameters;
 
 
 public class NotificationViewer{

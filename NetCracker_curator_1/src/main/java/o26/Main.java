@@ -9,7 +9,7 @@ public class Main {
         DataLoader dataLoader = new DataLoader();
 
         Journal journal = new Journal();
-        journal.setDataLoader(dataLoader);
+        //journal.setDataLoader(dataLoader);
 
         journal.showMenu();
     }

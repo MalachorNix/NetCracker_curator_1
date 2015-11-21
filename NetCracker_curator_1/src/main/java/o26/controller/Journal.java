@@ -1,12 +1,12 @@
-package o26.Controller;
+package o26.controller;
 
-import o26.Model.Task;
-import o26.Model.TaskParameters;
-import o26.View.Viewer;
+import o26.model.Task;
+import o26.model.TaskParameters;
+import o26.view.Viewer;
 
 import java.util.ArrayList;
 import java.util.Map;
-import o26.View.MenuViewer;
+import o26.view.MenuViewer;
 
 public class Journal {
     private ArrayList tasks;

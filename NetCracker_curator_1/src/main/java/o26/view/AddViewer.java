@@ -1,9 +1,9 @@
-package o26.View;
+package o26.view;
 
 import java.util.HashMap;
 import java.util.Map;
-import o26.Controller.Journal;
-import o26.Model.TaskParameters;
+import o26.controller.Journal;
+import o26.model.TaskParameters;
 
 public class AddViewer implements Viewer{
     private Inner in;
