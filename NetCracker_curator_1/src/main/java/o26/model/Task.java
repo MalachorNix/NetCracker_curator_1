@@ -8,21 +8,21 @@ import java.util.Map.Entry;
 
 public class Task implements Serializable{
 
-    private Map<TaskParameters, Object> parameters;
+    private Map<TaskParameter, Object> parameters;
 
-    public Task(Map<TaskParameters, Object> parameters) {
+    public Task(Map<TaskParameter, Object> parameters) {
         this.parameters = parameters;
     }
 
-    public Object getValue(TaskParameters parameter) {
+    public Object getValue(TaskParameter parameter) {
         return this.parameters.get(parameter);
     }
 
-    public void setValue(TaskParameters parameter, Object value) {
+    public void setValue(TaskParameter parameter, Object value) {
         this.parameters.put(parameter, value);
     }
     
-    public Map<TaskParameters, Object> getParameters(){
+    public Map<TaskParameter, Object> getParameters(){
         return parameters;
     }
     
@@ -30,9 +30,9 @@ public class Task implements Serializable{
     public String toString(){
         String result = "";
         for(Entry entry: parameters.entrySet()) {
-            TaskParameters parameter = (TaskParameters) entry.getKey();
+            TaskParameter parameter = (TaskParameter) entry.getKey();
             Object value = entry.getValue();
-            if(parameter.equals(TaskParameters.DATE)){
+            if(parameter.equals(TaskParameter.DATE)){
                 value = ((GregorianCalendar)value).getTime();
             }
             result += parameter.toString()+":\n\t"+value.toString()+"\n";

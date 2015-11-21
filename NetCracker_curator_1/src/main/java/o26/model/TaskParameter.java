@@ -1,6 +1,6 @@
 package o26.model;
 
-public enum TaskParameters {
+public enum TaskParameter {
     NAME , DESCRIPTION , DATE, CONTACTS;
 
     

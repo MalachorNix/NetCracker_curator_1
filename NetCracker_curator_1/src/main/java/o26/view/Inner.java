@@ -2,10 +2,10 @@ package o26.view;
 
 import java.util.GregorianCalendar;
 import java.util.Scanner;
-import o26.model.TaskParameters;
+import o26.model.TaskParameter;
 
 public class Inner {
-    public Object doIt(TaskParameters parameter){
+    public Object doIt(TaskParameter parameter){
         String nameParameter = parameter.toString();
         System.out.println("Введите "+nameParameter+":\n");
         switch(nameParameter){

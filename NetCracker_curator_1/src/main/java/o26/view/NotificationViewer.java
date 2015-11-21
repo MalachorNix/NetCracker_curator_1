@@ -9,16 +9,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import o26.controller.Journal;
 import o26.model.Task;
-import o26.model.TaskParameters;
+import o26.model.TaskParameter;
 
 
 public class NotificationViewer{
 
     public void show(Journal journal, int id) {
-        String NAME = ((Task)journal.getTasks().get(id)).getValue(TaskParameters.NAME).toString();
-        String DESCRIPTION = ((Task)journal.getTasks().get(id)).getValue(TaskParameters.DESCRIPTION).toString();
-        String CONTACTS = ((Task)journal.getTasks().get(id)).getValue(TaskParameters.CONTACTS).toString();
-        String DATE = ((GregorianCalendar)(((Task)journal.getTasks().get(id)).getValue(TaskParameters.DATE))).getTime().toString();
+        String NAME = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.NAME).toString();
+        String DESCRIPTION = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.DESCRIPTION).toString();
+        String CONTACTS = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.CONTACTS).toString();
+        String DATE = ((GregorianCalendar)(((Task)journal.getTasks().get(id)).getValue(TaskParameter.DATE))).getTime().toString();
       
         String header = "<html>"+NAME+"<br>"+DATE;
         JLabel headingLabel = new JLabel(header);

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import o26.controller.Journal;
 import o26.model.Task;
-import o26.model.TaskParameters;
+import o26.model.TaskParameter;
 
 public class EditViewer implements Viewer{
     private Choiser choise;
@@ -48,32 +48,32 @@ public class EditViewer implements Viewer{
         return this.POINT;
     }
     
-    private Map<TaskParameters, Object> editParameters(Map<TaskParameters, Object> parameters){
+    private Map<TaskParameter, Object> editParameters(Map<TaskParameter, Object> parameters){
         int select;
         do{
             System.out.println("Редактирование параметров");
-            System.out.println("\t<1> "+TaskParameters.NAME.toString());
-            System.out.println("\t<2> "+TaskParameters.DESCRIPTION.toString());
-            System.out.println("\t<3> "+TaskParameters.CONTACTS.toString());
-            System.out.println("\t<4> "+TaskParameters.DATE.toString());
+            System.out.println("\t<1> "+ TaskParameter.NAME.toString());
+            System.out.println("\t<2> "+ TaskParameter.DESCRIPTION.toString());
+            System.out.println("\t<3> "+ TaskParameter.CONTACTS.toString());
+            System.out.println("\t<4> "+ TaskParameter.DATE.toString());
             System.out.println("\t<0> Сохранить изменения и вернуться к выбору задачи");
             select = choise.doIt(0, 4);
             in = new Inner();
             switch(select){
                 case 1:{
-                    parameters.replace(TaskParameters.NAME, in.doIt(TaskParameters.NAME));
+                    parameters.replace(TaskParameter.NAME, in.doIt(TaskParameter.NAME));
                     break;
                 }
                 case 2:{
-                    parameters.replace(TaskParameters.DESCRIPTION, in.doIt(TaskParameters.DESCRIPTION));
+                    parameters.replace(TaskParameter.DESCRIPTION, in.doIt(TaskParameter.DESCRIPTION));
                     break;
                 }
                 case 3:{
-                    parameters.replace(TaskParameters.CONTACTS, in.doIt(TaskParameters.CONTACTS));
+                    parameters.replace(TaskParameter.CONTACTS, in.doIt(TaskParameter.CONTACTS));
                     break;
                 }
                 case 4:{
-                    parameters.replace(TaskParameters.DATE, in.doIt(TaskParameters.DATE));
+                    parameters.replace(TaskParameter.DATE, in.doIt(TaskParameter.DATE));
                     break;
                 }
                 default:{

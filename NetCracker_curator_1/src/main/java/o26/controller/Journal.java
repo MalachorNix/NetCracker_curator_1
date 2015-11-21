@@ -1,7 +1,7 @@
 package o26.controller;
 
 import o26.model.Task;
-import o26.model.TaskParameters;
+import o26.model.TaskParameter;
 import o26.view.Viewer;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class Journal {
     private Viewer view;
     private Notification notification;
     
-    public void addTask(Map <TaskParameters, Object> parameters) {
+    public void addTask(Map <TaskParameter, Object> parameters) {
         if (taskCreator.validate(parameters)) {
             tasks.add(taskCreator.createTask(parameters));
         } else {
@@ -27,9 +27,9 @@ public class Journal {
         tasks.remove(id);
     }
 
-    public void editTask(int id, Map <TaskParameters, Object> parameters) {
+    public void editTask(int id, Map <TaskParameter, Object> parameters) {
         for(Map.Entry entry : parameters.entrySet()){
-            TaskParameters parameter = (TaskParameters)entry.getKey();
+            TaskParameter parameter = (TaskParameter)entry.getKey();
             Object value = entry.getValue();
             ((Task) tasks.get(id)).setValue(parameter, value);
         }
