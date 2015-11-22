@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class DataLoader {
+public class DataLoader implements Loader{
 
     public ArrayList loadData() {
         FileInputStream fis = null;

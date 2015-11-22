@@ -10,7 +10,7 @@ import o26.view.MenuMenuItem;
 
 public class Journal {
     private ArrayList tasks;
-    private DataLoader dataLoader;
+    private Loader loader;
     private TaskCreator taskCreator;
     private MenuItem view;
     private Notification notification;
@@ -40,11 +40,11 @@ public class Journal {
     }
 
     public void save() {
-        dataLoader.saveData(tasks);
+        loader.saveData(tasks);
     }
 
     public void load() {
-        tasks = dataLoader.loadData();
+        tasks = loader.loadData();
     }
     
     public void showMenu() {
@@ -61,8 +61,8 @@ public class Journal {
         notification.setActual(this);
     }
     
-    public void setDataLoader(DataLoader dataLoader){
-        this.dataLoader = dataLoader;
+    public void setLoader(Loader loader){
+        this.loader = loader;
     }
 
     public void setTaskCreator(TaskCreator taskCreator) {
