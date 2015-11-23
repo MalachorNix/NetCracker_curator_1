@@ -3,10 +3,15 @@ package o26.view;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
-//import javax.swing.JButton;
-import javax.swing.JFrame;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JFrame;
+
 import o26.controller.Journal;
 import o26.model.Task;
 import o26.model.TaskParameter;
@@ -53,6 +58,45 @@ public class NotificationViewer{
         constraints.gridx = 0;
         
         //frame.add(closeButton, constraints);
+
+        Map<TaskParameter, Object> map = new HashMap<>();
+        map.put(TaskParameter.NAME, NAME);
+        map.put(TaskParameter.DESCRIPTION, DESCRIPTION);
+//        map.put(TaskParameter.DATE, DATE);
+        map.put(TaskParameter.CONTACTS, CONTACTS);
+//        Task cloneTask = new Task(map);
+
+        JButton postponed = new JButton("Отложить");
+        postponed.setVisible(true);
+        postponed.setLocation(21, 21);
+        postponed.setSize(150, 150);
+        postponed.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                /*
+                * Здесь сделать ввод даты.
+                * */
+                GregorianCalendar calendar = new GregorianCalendar(2015, 11, 25, 14, 30);
+                map.put(TaskParameter.DATE, calendar);
+                journal.addTask(map);
+                System.out.println("Отложил");
+            }
+        });
+        frame.getContentPane().add(postponed);
+
+        /*JButton complete = new JButton("Завершить");
+        complete.setVisible(true);
+        complete.setLocation(322, 322);
+        complete.setSize(150, 150);
+        complete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                journal.deleteTask(id);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            }
+        });
+        frame.getContentPane().add(complete);*/
+
         
         constraints.gridy++;
         constraints.weightx = 1.0f;
