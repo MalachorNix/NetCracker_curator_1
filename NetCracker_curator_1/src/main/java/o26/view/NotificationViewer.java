@@ -133,7 +133,7 @@ public class NotificationViewer{
                         int newHour = Integer.parseInt(hour.getText());
                         int newMinute = Integer.parseInt(minute.getText());
                         int newSecond = Integer.parseInt(second.getText());
-                        GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth, newDay, newHour,newMinute, newSecond);
+                        GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth - 1, newDay, newHour, newMinute, newSecond);
                         map.put(TaskParameter.DATE, newDate);
                         journal.addTask(map);
                     }

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import o26.model.TaskParameter;
 
 public class Inner {
+
     public Object doIt(TaskParameter parameter){
         String nameParameter = parameter.toString();
         System.out.println("Введите "+nameParameter+":\n");
