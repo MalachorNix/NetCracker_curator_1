@@ -14,7 +14,7 @@ public class Notification extends Thread{
     
     public void setActual(Journal journal) {
         this.journal = journal;
-        ArrayList tasks = journal.getTasks();
+        ArrayList tasks = (ArrayList) journal.getTasks();
         if(tasks!=null && !tasks.isEmpty()){
             int countTasks = tasks.size();
             int index = 0;

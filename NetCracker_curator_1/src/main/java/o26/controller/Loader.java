@@ -1,10 +1,10 @@
 package o26.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Loader {
 
-    ArrayList loadData();
+    List loadData();
 
-    void saveData(ArrayList tasks);
+    void saveData(List tasks);
 }

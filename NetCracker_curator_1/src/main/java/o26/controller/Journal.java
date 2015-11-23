@@ -4,12 +4,12 @@ import o26.model.Task;
 import o26.model.TaskParameter;
 import o26.view.MenuItem;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import o26.view.MenuMenuItem;
 
 public class Journal {
-    private ArrayList tasks;
+    private List tasks;
     private Loader loader;
     private TaskCreator taskCreator;
     private MenuItem view;
@@ -35,7 +35,7 @@ public class Journal {
         }
     }
 
-    public ArrayList getTasks() {
+    public List getTasks() {
         return this.tasks;
     }
 

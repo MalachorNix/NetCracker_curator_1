@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataLoader implements Loader{
 
@@ -38,7 +39,7 @@ public class DataLoader implements Loader{
         return result;
     }
 
-    public void saveData(ArrayList tasks) {
+    public void saveData(List tasks) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {

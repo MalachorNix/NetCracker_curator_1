@@ -9,7 +9,7 @@ public class ListMenuItem implements MenuItem {
     
     @Override
     public void show(Journal journal) {
-        ArrayList tasks = journal.getTasks();
+        ArrayList tasks = (ArrayList) journal.getTasks();
         int countTasks = tasks.size();
         if(countTasks!=0){
             for(int i = 0; i < countTasks; i++){
