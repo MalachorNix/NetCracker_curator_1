@@ -83,24 +83,28 @@ public class NotificationViewer{
                 JTextField month = new JTextField("Месяц");
                 JTextField day = new JTextField("День");
                 JTextField hour = new JTextField("Час");
+                JTextField minute = new JTextField("Минута");
                 JTextField second = new JTextField("Секунда");
 
                 year.setSize(100, 100);
                 month.setSize(100, 100);
                 day.setSize(100, 100);
                 hour.setSize(100, 100);
+                minute.setSize(100, 100);
                 second.setSize(100, 100);
 
                 year.setLocation(0, 0);
                 month.setLocation(20, 20);
                 day.setLocation(40, 40);
                 hour.setLocation(60, 60);
-                second.setLocation(80, 80);
+                minute.setLocation(80, 80);
+                second.setLocation(100, 100);
 
                 year.setVisible(true);
                 month.setVisible(true);
                 day.setVisible(true);
                 hour.setVisible(true);
+                minute.setVisible(true);
                 second.setVisible(true);
                 frame1.setVisible(true);
 
@@ -110,8 +114,11 @@ public class NotificationViewer{
                 panel.add(month);
                 panel.add(day);
                 panel.add(hour);
+                panel.add(minute);
                 panel.add(second);
+
                 frame1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
                 JButton button = new JButton("ОК");
                 button.setSize(20, 20);
                 button.setVisible(true);
@@ -124,8 +131,9 @@ public class NotificationViewer{
                         int newMonth = Integer.parseInt(month.getText());
                         int newDay = Integer.parseInt(day.getText());
                         int newHour = Integer.parseInt(hour.getText());
+                        int newMinute = Integer.parseInt(minute.getText());
                         int newSecond = Integer.parseInt(second.getText());
-                        GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth, newDay, newHour, newSecond);
+                        GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth, newDay, newHour,newMinute, newSecond);
                         map.put(TaskParameter.DATE, newDate);
                         journal.addTask(map);
                     }
