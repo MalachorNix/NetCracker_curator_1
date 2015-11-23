@@ -1,16 +1,12 @@
 package o26.view;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 import o26.controller.Journal;
 import o26.model.Task;
@@ -36,7 +32,7 @@ public class NotificationViewer{
         closeButton.setFocusable(false);
         */
         JFrame frame = new JFrame();
-        frame.setSize(600,250);
+        frame.setSize(600, 250);
         frame.setLayout(new GridBagLayout());
         
         GridBagConstraints constraints = new GridBagConstraints();
@@ -73,13 +69,68 @@ public class NotificationViewer{
         postponed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /*
-                * Здесь сделать ввод даты.
-                * */
-                GregorianCalendar calendar = new GregorianCalendar(2015, 11, 25, 14, 30);
+
+                /*GregorianCalendar calendar = new GregorianCalendar(2015, 11, 25, 14, 30);
                 map.put(TaskParameter.DATE, calendar);
-                journal.addTask(map);
-                System.out.println("Отложил");
+                journal.addTask(map);*/
+
+                JFrame frame1 = new JFrame("Отложить задачу");
+                JPanel panel = new JPanel();
+                panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+                frame1.getContentPane().add(panel);
+
+                JTextField year = new JTextField("Год");
+                JTextField month = new JTextField("Месяц");
+                JTextField day = new JTextField("День");
+                JTextField hour = new JTextField("Час");
+                JTextField second = new JTextField("Секунда");
+
+                year.setSize(100, 100);
+                month.setSize(100, 100);
+                day.setSize(100, 100);
+                hour.setSize(100, 100);
+                second.setSize(100, 100);
+
+                year.setLocation(0, 0);
+                month.setLocation(20, 20);
+                day.setLocation(40, 40);
+                hour.setLocation(60, 60);
+                second.setLocation(80, 80);
+
+                year.setVisible(true);
+                month.setVisible(true);
+                day.setVisible(true);
+                hour.setVisible(true);
+                second.setVisible(true);
+                frame1.setVisible(true);
+
+                frame1.setSize(1024, 768);
+
+                panel.add(year);
+                panel.add(month);
+                panel.add(day);
+                panel.add(hour);
+                panel.add(second);
+                frame1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                JButton button = new JButton("ОК");
+                button.setSize(20, 20);
+                button.setVisible(true);
+                button.setLocation(400, 150);
+                panel.add(button);
+                button.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        int newYear = Integer.parseInt(year.getText());
+                        int newMonth = Integer.parseInt(month.getText());
+                        int newDay = Integer.parseInt(day.getText());
+                        int newHour = Integer.parseInt(hour.getText());
+                        int newSecond = Integer.parseInt(second.getText());
+                        GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth, newDay, newHour, newSecond);
+                        map.put(TaskParameter.DATE, newDate);
+                        journal.addTask(map);
+                    }
+                });
+//                System.out.println("Отложил");
             }
         });
         frame.getContentPane().add(postponed);
