@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import o26.controller.Journal;
 
 public class ListMenuItem implements MenuItem {
-    private final String POINT = "Просмотр списка задач";
+    private final String ITEM = "Просмотр списка задач";
     
     @Override
     public void show(Journal journal) {
@@ -31,6 +31,6 @@ public class ListMenuItem implements MenuItem {
     
     @Override
     public String toString(){
-        return this.POINT;
+        return this.ITEM;
     }
 }

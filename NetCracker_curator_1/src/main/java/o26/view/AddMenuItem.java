@@ -7,7 +7,7 @@ import o26.model.TaskParameter;
 
 public class AddMenuItem implements MenuItem {
     private Inner in;
-    private final String POINT = "Добавление задач";
+    private final String ITEM = "Добавление задач";
     
     @Override
     public void show(Journal journal) {
@@ -24,6 +24,6 @@ public class AddMenuItem implements MenuItem {
     
     @Override
     public String toString(){
-        return this.POINT;
+        return this.ITEM;
     }
 }

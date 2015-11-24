@@ -3,8 +3,8 @@ package o26.view;
 import o26.controller.Journal;
 
 public class DeleteMenuItem implements MenuItem {
-    private Choiser choise;
-    private final String POINT = "Удаление задач";
+    private Choiser choice;
+    private final String ITEM = "Удаление задач";
     
     @Override
     public void show(Journal journal) {
@@ -14,8 +14,8 @@ public class DeleteMenuItem implements MenuItem {
             System.out.println("\t<Id> Удалить задачу с индексом Id");
             System.out.println("\t<0> Вернуться в меню");
             int countTasks = journal.getTasks().size();
-            choise = new Choiser();
-            selectedId = choise.doIt(0, countTasks);
+            choice = new Choiser();
+            selectedId = choice.doIt(0, countTasks);
             switch(selectedId){
                 case 0:{
                     break;
@@ -25,7 +25,7 @@ public class DeleteMenuItem implements MenuItem {
                     System.out.println("Вы уверены, что хотите удалить эту задачу?");
                     System.out.println("\t<1> Да");
                     System.out.println("\t<0> Нет");
-                    if(choise.doIt(0, 1)!=0){
+                    if(choice.doIt(0, 1)!=0){
                         journal.deleteTask(selectedId-1);
                         System.out.println("Задача удалена!\n");
                         journal.journalChanged();
@@ -38,6 +38,6 @@ public class DeleteMenuItem implements MenuItem {
     
     @Override
     public String toString(){
-        return this.POINT;
+        return this.ITEM;
     }
 }

@@ -7,9 +7,9 @@ import o26.model.Task;
 import o26.model.TaskParameter;
 
 public class EditMenuItem implements MenuItem {
-    private Choiser choise;
+    private Choiser choice;
     private Inner in;
-    private final String POINT = "Редактирование задач";
+    private final String ITEM = "Редактирование задач";
     
     @Override
     public void show(Journal journal) {
@@ -19,8 +19,8 @@ public class EditMenuItem implements MenuItem {
             System.out.println("\t<Id> Редактировать задачу с индексом Id");
             System.out.println("\t<0> Вернуться в меню");
             int countTasks = journal.getTasks().size();
-            choise = new Choiser();
-            selectedId = choise.doIt(0, countTasks);
+            choice = new Choiser();
+            selectedId = choice.doIt(0, countTasks);
             switch(selectedId){
                 case 0:{
                     break;
@@ -30,7 +30,7 @@ public class EditMenuItem implements MenuItem {
                     System.out.println("Данную задачу вы хотите редактировать?");
                     System.out.println("\t<1> Да");
                     System.out.println("\t<0> Нет");
-                    if(choise.doIt(0, 1)!=0){
+                    if(choice.doIt(0, 1)!=0){
                         journal.editTask(selectedId-1,
                                 editParameters(((Task) journal.getTasks().get(selectedId-1)).getParameters())
                         );
@@ -45,7 +45,7 @@ public class EditMenuItem implements MenuItem {
     
     @Override
     public String toString(){
-        return this.POINT;
+        return this.ITEM;
     }
     
     private Map<TaskParameter, Object> editParameters(Map<TaskParameter, Object> parameters){
@@ -57,7 +57,7 @@ public class EditMenuItem implements MenuItem {
             System.out.println("\t<3> "+ TaskParameter.CONTACTS.toString());
             System.out.println("\t<4> "+ TaskParameter.DATE.toString());
             System.out.println("\t<0> Сохранить изменения и вернуться к выбору задачи");
-            select = choise.doIt(0, 4);
+            select = choice.doIt(0, 4);
             in = new Inner();
             switch(select){
                 case 1:{
