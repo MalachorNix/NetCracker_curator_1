@@ -10,8 +10,7 @@ public class Notification extends Thread implements INotification{
     private Journal journal;
     private int actualTaskIndex;
     private Task actualTask;
-    private long timeTask;
-    
+
     public void setActual(Journal journal) {
         this.journal = journal;
         ArrayList tasks = (ArrayList) journal.getTasks();
@@ -30,6 +29,7 @@ public class Notification extends Thread implements INotification{
 
     @Override
     public void run() {
+        long timeTask;
         while (true) {
             try {
                 timeTask = ((GregorianCalendar) actualTask.getValue(TaskParameter.DATE)).getTimeInMillis();
