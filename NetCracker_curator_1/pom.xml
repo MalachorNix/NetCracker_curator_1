@@ -64,6 +64,10 @@
                     <linkXRef>false</linkXRef>
                     <targetJdk>1.8</targetJdk>
                     <verbose>true</verbose>
+                    <rulesets>
+                        <ruleset>/rulesets/pmd-rules.xml</ruleset>
+                        <!--<ruleset>/rulesets/checkstyle-rules.xml</ruleset>-->
+                    </rulesets>
                 </configuration>
                 <executions>
                     <execution>
