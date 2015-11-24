@@ -48,7 +48,6 @@ public class Journal {
     }
     
     public void showMenu() {
-        view = new MenuMenuItem();
         this.view.show(this);
     }
 
@@ -71,5 +70,9 @@ public class Journal {
 
     public void setNotification(INotification notification) {
         this.notification = notification;
+    }
+
+    public void setView(MenuItem view) {
+        this.view = view;
     }
 }

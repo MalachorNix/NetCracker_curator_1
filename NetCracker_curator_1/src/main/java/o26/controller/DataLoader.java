@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DataLoader implements Loader{
 
-    public ArrayList loadData() {
+    public List loadData() {
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         ArrayList result = null;
@@ -45,7 +45,7 @@ public class DataLoader implements Loader{
         try {
             fos = new FileOutputStream("data");
             oos = new ObjectOutputStream(fos);
-            oos.writeObject((tasks!=null)?tasks:new ArrayList<>());
+            oos.writeObject((tasks!=null) ? tasks : new ArrayList<>());
         } catch (IOException ioe) {
             System.out.println("Ошибка сохранения: " + ioe.getMessage());
         } finally {
