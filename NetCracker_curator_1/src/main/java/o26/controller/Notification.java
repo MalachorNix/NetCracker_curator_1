@@ -21,7 +21,7 @@ public class Notification extends Thread{
             long time = ((GregorianCalendar)((Task)tasks.get(index)).getValue(TaskParameter.DATE)).getTimeInMillis();
             for (int i = 0; i < countTasks; i++) {
                 long temp = ((GregorianCalendar)((Task)tasks.get(i)).getValue(TaskParameter.DATE)).getTimeInMillis();
-                index = (time > temp) ? i : index;
+                index = time > temp ? i : index;
             }
             this.actualTaskIndex = index;
             this.actualTask =  (Task) tasks.get(index);
@@ -30,19 +30,19 @@ public class Notification extends Thread{
 
     @Override
     public void run() {
-        while(true) {
+        while (true) {
             try {
-                timeTask = ((GregorianCalendar)actualTask.getValue(TaskParameter.DATE)).getTimeInMillis();
-            } catch (NullPointerException e) {
-
-            }
-            if(System.currentTimeMillis()>=timeTask){
-                try {
+                timeTask = ((GregorianCalendar) actualTask.getValue(TaskParameter.DATE)).getTimeInMillis();
+                if (System.currentTimeMillis() >= timeTask) {
                     new NotificationViewer().show(journal, actualTaskIndex);
-                } catch (IndexOutOfBoundsException e) {
-
+                    setActual(journal);
                 }
-                setActual(journal);
+            } catch (Exception e) {
+                try {
+                    Thread.sleep(1000L);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
             }
         }
     }
