@@ -16,15 +16,16 @@ import o26.model.TaskParameter;
 public class NotificationViewer{
 
     public void show(Journal journal, int id) {
-        String NAME = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.NAME).toString();
-        String DESCRIPTION = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.DESCRIPTION).toString();
-        String CONTACTS = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.CONTACTS).toString();
-        String DATE = ((GregorianCalendar)(((Task)journal.getTasks().get(id)).getValue(TaskParameter.DATE))).getTime().toString();
+
+        String name = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.NAME).toString();
+        String description = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.DESCRIPTION).toString();
+        String contacts = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.CONTACTS).toString();
+        String date = ((GregorianCalendar)(((Task)journal.getTasks().get(id)).getValue(TaskParameter.DATE))).getTime().toString();
       
-        String header = "<html>"+NAME+"<br>"+DATE;
+        String header = "<html>"+name+"<br>"+date;
         JLabel headingLabel = new JLabel(header);
         
-        String message = "<html>"+DESCRIPTION+"<br>"+CONTACTS;
+        String message = "<html>"+description+"<br>"+contacts;
         JLabel messageLabel = new JLabel(message);
         /*
         JButton closeButton = new JButton("X");
@@ -56,10 +57,10 @@ public class NotificationViewer{
         //frame.add(closeButton, constraints);
 
         Map<TaskParameter, Object> map = new HashMap<>();
-        map.put(TaskParameter.NAME, NAME);
-        map.put(TaskParameter.DESCRIPTION, DESCRIPTION);
+        map.put(TaskParameter.NAME, name);
+        map.put(TaskParameter.DESCRIPTION, description);
 //        map.put(TaskParameter.DATE, DATE);
-        map.put(TaskParameter.CONTACTS, CONTACTS);
+        map.put(TaskParameter.CONTACTS, contacts);
 //        Task cloneTask = new Task(map);
 
         JButton postponed = new JButton("Отложить");
@@ -86,7 +87,7 @@ public class NotificationViewer{
                 JTextField minute = new JTextField("Минута");
                 JTextField second = new JTextField("Секунда");
 
-                year.setSize(100, 100);
+                /*year.setSize(100, 100);
                 month.setSize(100, 100);
                 day.setSize(100, 100);
                 hour.setSize(100, 100);
@@ -98,7 +99,7 @@ public class NotificationViewer{
                 day.setLocation(40, 40);
                 hour.setLocation(60, 60);
                 minute.setLocation(80, 80);
-                second.setLocation(100, 100);
+                second.setLocation(100, 100);*/
 
                 year.setVisible(true);
                 month.setVisible(true);
