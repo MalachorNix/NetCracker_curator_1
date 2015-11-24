@@ -11,7 +11,7 @@ import o26.view.MenuMenuItem;
 public class Journal {
     private List tasks;
     private Loader loader;
-    private TaskCreator taskCreator;
+    private ITaskCreator taskCreator;
     private MenuItem view;
     private INotification notification;
     
@@ -65,7 +65,7 @@ public class Journal {
         this.loader = loader;
     }
 
-    public void setTaskCreator(TaskCreator taskCreator) {
+    public void setTaskCreator(ITaskCreator taskCreator) {
         this.taskCreator = taskCreator;
     }
 

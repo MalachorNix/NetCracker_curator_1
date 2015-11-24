@@ -5,7 +5,7 @@ import o26.model.TaskParameter;
 
 import java.util.Map;
 
-public class TaskCreator {
+public class TaskCreator implements ITaskCreator{
 
     public Task createTask(Map<TaskParameter, Object> parameters) {
         return new Task(parameters);
