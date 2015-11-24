@@ -6,7 +6,7 @@ import o26.model.Task;
 import o26.model.TaskParameter;
 import o26.view.NotificationViewer;
 
-public class Notification extends Thread{
+public class Notification extends Thread implements INotification{
     private Journal journal;
     private int actualTaskIndex;
     private Task actualTask;

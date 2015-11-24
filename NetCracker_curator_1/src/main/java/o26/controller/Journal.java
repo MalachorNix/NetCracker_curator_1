@@ -13,7 +13,7 @@ public class Journal {
     private Loader loader;
     private TaskCreator taskCreator;
     private MenuItem view;
-    private Notification notification;
+    private INotification notification;
     
     public void addTask(Map <TaskParameter, Object> parameters) {
         if (taskCreator.validate(parameters)) {
@@ -69,7 +69,7 @@ public class Journal {
         this.taskCreator = taskCreator;
     }
 
-    public void setNotification(Notification notification) {
+    public void setNotification(INotification notification) {
         this.notification = notification;
     }
 }
