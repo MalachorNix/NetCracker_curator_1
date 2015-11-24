@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 
-public class Task implements Serializable{
+public class Task implements Serializable, ITask{
 
     private Map<TaskParameter, Object> parameters;
 
