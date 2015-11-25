@@ -92,6 +92,8 @@ public class NotificationViewer{
 
                 JFrame postponedFrame = new JFrame("Отложить задачу");
 
+                frame.dispose();
+
                 Box boxYear = Box.createHorizontalBox();
                 JLabel labelYear = new JLabel("Год:");
                 JTextField year = new JTextField(15);
@@ -203,10 +205,17 @@ public class NotificationViewer{
                         JFrame frame2 = new JFrame("Отложить задачу");
                         frame2.setVisible(true);
                         frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        frame2.setSize(200, 250);
-                        JTextArea textArea = new JTextArea("Задача отложена");
-                        textArea.setVisible(true);
-                        frame2.getContentPane().add(textArea);
+                        frame2.setSize(100, 125);
+                        JLabel successLabel = new JLabel("Задача отложена");
+                        successLabel.setVisible(true);
+
+                        Box success = Box.createHorizontalBox();
+                        success.add(Box.createVerticalStrut(12));
+                        success.add(successLabel);
+                        success.add(Box.createVerticalStrut(12));
+
+
+                        frame2.setContentPane(success);
                         frame2.setLocationRelativeTo(null);
                     }
                 });
