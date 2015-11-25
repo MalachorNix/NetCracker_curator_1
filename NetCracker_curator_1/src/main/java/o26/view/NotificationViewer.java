@@ -21,44 +21,71 @@ public class NotificationViewer{
         String description = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.DESCRIPTION).toString();
         String contacts = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.CONTACTS).toString();
         String date = ((GregorianCalendar)(((Task)journal.getTasks().get(id)).getValue(TaskParameter.DATE))).getTime().toString();
-      
-        String header = "<html>"+name+"<br>"+date;
-        JLabel headingLabel = new JLabel(header);
-        
-        String message = "<html>"+description+"<br>"+contacts;
-        JLabel messageLabel = new JLabel(message);
 
         JFrame frame = new JFrame();
-        frame.setSize(600, 250);
-        frame.setLayout(new GridBagLayout());
-        
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.weightx = 1.0f;
-        constraints.weighty = 1.0f;
-        constraints.insets = new Insets(5, 5, 5, 5);
-        constraints.fill = GridBagConstraints.BOTH;
-        headingLabel.setOpaque(false);
-        
-        frame.add(headingLabel, constraints);
-        
-        constraints.gridx++;
-        constraints.weightx = 0f;
-        constraints.weighty = 0f;
-        constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.NORTH;
-        constraints.gridx = 0;
-        
+        frame.setSize(700, 250);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+
+        Box boxName = Box.createHorizontalBox();
+        JLabel labelName = new JLabel("NAME:");
+        JLabel textName = new JLabel(name);
+        boxName.add(labelName);
+        boxName.add(Box.createHorizontalStrut(12));
+        boxName.add(textName);
+
+        Box boxDescription = Box.createHorizontalBox();
+        JLabel labelDescription = new JLabel("DESCRIPTION:");
+        JLabel textDescription = new JLabel(description);
+        boxDescription.add(labelDescription);
+        boxDescription.add(Box.createHorizontalStrut(12));
+        boxDescription.add(textDescription);
+
+        Box boxContacts = Box.createHorizontalBox();
+        JLabel labelContacts = new JLabel("CONTACTS:");
+        JLabel textContacts = new JLabel(contacts);
+        boxContacts.add(labelContacts);
+        boxContacts.add(Box.createHorizontalStrut(12));
+        boxContacts.add(textContacts);
+
+        Box boxDate = Box.createHorizontalBox();
+        JLabel labelDate = new JLabel("DATE:");
+        JLabel textDate = new JLabel(date);
+        boxDate.add(labelDate);
+        boxDate.add(Box.createHorizontalStrut(12));
+        boxDate.add(textDate);
+
+        Box boxPostponed = Box.createHorizontalBox();
+        JButton postponed = new JButton("Отложить");
+        boxPostponed.add(postponed, Component.CENTER_ALIGNMENT);
+
+        Box boxFrame = Box.createVerticalBox();
+        boxFrame.add(Box.createVerticalStrut(12));
+        boxFrame.add(boxName);
+        boxFrame.add(Box.createVerticalStrut(12));
+        boxFrame.add(boxDescription);
+        boxFrame.add(Box.createVerticalStrut(12));
+        boxFrame.add(boxDate);
+        boxFrame.add(Box.createVerticalStrut(12));
+        boxFrame.add(boxContacts);
+        boxFrame.add(Box.createVerticalStrut(12));
+        boxFrame.add(boxPostponed);
+        boxFrame.add(Box.createVerticalStrut(12));
+
+        labelDate.setPreferredSize(labelContacts.getPreferredSize());
+        labelDescription.setPreferredSize(labelDate.getPreferredSize());
+        labelName.setPreferredSize(labelDescription.getPreferredSize());
+
+        frame.setContentPane(boxFrame);
+        frame.pack();
+
         Map<TaskParameter, Object> map = new HashMap<>();
         map.put(TaskParameter.NAME, name);
         map.put(TaskParameter.DESCRIPTION, description);
         map.put(TaskParameter.CONTACTS, contacts);
 
-        JButton postponed = new JButton("Отложить");
         postponed.setVisible(true);
-        postponed.setLocation(21, 21);
-        postponed.setSize(150, 150);
         postponed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -148,6 +175,7 @@ public class NotificationViewer{
                 postponedFrame.setVisible(true);
 
                 postponedFrame.setSize(200, 300);
+                postponedFrame.setLocationRelativeTo(null);
 
 
 
@@ -179,23 +207,15 @@ public class NotificationViewer{
                         JTextArea textArea = new JTextArea("Задача отложена");
                         textArea.setVisible(true);
                         frame2.getContentPane().add(textArea);
+                        frame2.setLocationRelativeTo(null);
                     }
                 });
             }
         });
-        frame.getContentPane().add(postponed);
 
-        constraints.gridy++;
-        constraints.weightx = 1.0f;
-        constraints.weighty = 1.0f;
-        constraints.insets = new Insets(5, 5, 5, 5);
-        constraints.fill = GridBagConstraints.BOTH;
+
         
-        frame.add(messageLabel, constraints);
-        
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
+
         
         journal.deleteTask(id);
     }
