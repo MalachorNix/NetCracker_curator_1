@@ -1,8 +1,6 @@
 package o26.view;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
@@ -65,17 +63,81 @@ public class NotificationViewer{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JFrame frame1 = new JFrame("Отложить задачу");
-                JPanel panel = new JPanel();
-                panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-                frame1.getContentPane().add(panel);
+                JFrame postponedFrame = new JFrame("Отложить задачу");
 
-                JTextField year = new JTextField("Год");
-                JTextField month = new JTextField("Месяц");
-                JTextField day = new JTextField("День");
-                JTextField hour = new JTextField("Час");
-                JTextField minute = new JTextField("Минута");
-                JTextField second = new JTextField("Секунда");
+                Box boxYear = Box.createHorizontalBox();
+                JLabel labelYear = new JLabel("Год:");
+                JTextField year = new JTextField(15);
+                boxYear.add(labelYear);
+                boxYear.add(Box.createHorizontalStrut(6));
+                boxYear.add(year);
+
+                Box boxMonth = Box.createHorizontalBox();
+                JLabel labelMonth = new JLabel("Месяц:");
+                JTextField month = new JTextField(15);
+                boxMonth.add(labelMonth);
+                boxMonth.add(Box.createHorizontalStrut(6));
+                boxMonth.add(month);
+
+                Box boxDay = Box.createHorizontalBox();
+                JLabel labelDay = new JLabel("День:");
+                JTextField day = new JTextField(15);
+                boxDay.add(labelDay);
+                boxDay.add(Box.createHorizontalStrut(6));
+                boxDay.add(day);
+
+                Box boxHour = Box.createHorizontalBox();
+                JLabel labelHour = new JLabel("Час:");
+                JTextField hour = new JTextField(15);
+                boxHour.add(labelHour);
+                boxHour.add(Box.createHorizontalStrut(6));
+                boxHour.add(hour);
+
+                Box boxMinute = Box.createHorizontalBox();
+                JLabel labelMinute = new JLabel("Минута:");
+                JTextField minute = new JTextField(15);
+                boxMinute.add(labelMinute);
+                boxMinute.add(Box.createHorizontalStrut(6));
+                boxMinute.add(minute);
+
+                Box boxSecond = Box.createHorizontalBox();
+                JLabel labelSecond = new JLabel("Секунда:");
+                JTextField second = new JTextField(15);
+                boxSecond.add(labelSecond);
+                boxSecond.add(Box.createHorizontalStrut(6));
+                boxSecond.add(second);
+
+                Box boxOK = Box.createHorizontalBox();
+                JButton okButton = new JButton("ОК");
+                boxOK.add(okButton, Component.CENTER_ALIGNMENT);
+
+                labelMinute.setPreferredSize(labelSecond.getPreferredSize());
+                labelHour.setPreferredSize(labelMinute.getPreferredSize());
+                labelDay.setPreferredSize(labelHour.getPreferredSize());
+                labelMonth.setPreferredSize(labelDay.getPreferredSize());
+                labelYear.setPreferredSize(labelMonth.getPreferredSize());
+
+                Box mainBox = Box.createVerticalBox();
+                mainBox.add(Box.createVerticalStrut(12));
+                mainBox.add(boxYear);
+                mainBox.add(Box.createVerticalStrut(12));
+                mainBox.add(boxMonth);
+                mainBox.add(Box.createVerticalStrut(12));
+                mainBox.add(boxDay);
+                mainBox.add(Box.createVerticalStrut(12));
+                mainBox.add(boxHour);
+                mainBox.add(Box.createVerticalStrut(12));
+                mainBox.add(boxMinute);
+                mainBox.add(Box.createVerticalStrut(12));
+                mainBox.add(boxSecond);
+                mainBox.add(Box.createVerticalStrut(17));
+                mainBox.add(boxOK);
+
+                postponedFrame.setContentPane(mainBox);
+                postponedFrame.setResizable(false);
+                postponedFrame.pack();
+
+
 
                 year.setVisible(true);
                 month.setVisible(true);
@@ -83,25 +145,18 @@ public class NotificationViewer{
                 hour.setVisible(true);
                 minute.setVisible(true);
                 second.setVisible(true);
-                frame1.setVisible(true);
+                postponedFrame.setVisible(true);
 
-                frame1.setSize(600, 250);
+                postponedFrame.setSize(200, 300);
 
-                panel.add(year);
-                panel.add(month);
-                panel.add(day);
-                panel.add(hour);
-                panel.add(minute);
-                panel.add(second);
 
-                frame1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                JButton button = new JButton("ОК");
-                button.setSize(20, 20);
-                button.setVisible(true);
-                button.setLocation(400, 150);
-                panel.add(button);
-                button.addActionListener(new ActionListener() {
+                postponedFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+//                okButton.setSize(20, 20);
+                okButton.setVisible(true);
+//                okButton.setLocation(400, 150);
+                okButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         int newYear = Integer.parseInt(year.getText());
@@ -110,10 +165,20 @@ public class NotificationViewer{
                         int newHour = Integer.parseInt(hour.getText());
                         int newMinute = Integer.parseInt(minute.getText());
                         int newSecond = Integer.parseInt(second.getText());
-                        GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth - 1, newDay, newHour, newMinute, newSecond);
+                        GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth - 1, newDay, newHour,
+                                newMinute, newSecond);
                         map.put(TaskParameter.DATE, newDate);
                         journal.addTask(map);
                         journal.journalChanged();
+                        postponedFrame.dispose();
+
+                        JFrame frame2 = new JFrame("Отложить задачу");
+                        frame2.setVisible(true);
+                        frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        frame2.setSize(200, 250);
+                        JTextArea textArea = new JTextArea("Задача отложена");
+                        textArea.setVisible(true);
+                        frame2.getContentPane().add(textArea);
                     }
                 });
             }
