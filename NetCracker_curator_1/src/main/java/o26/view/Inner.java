@@ -9,7 +9,10 @@ import o26.model.TaskParameter;
 
 public class Inner {
 
+    GregorianCalendar date;
+
     public Object doIt(TaskParameter parameter){
+
 
         String nameParameter = parameter.toString();
         Scanner text = new Scanner(System.in);
@@ -23,27 +26,8 @@ public class Inner {
 
             case "DATE": {
 
-                Scanner in = new Scanner(System.in);
-                System.out.print("Введите год: ");
-                int year = in.nextInt();
-
-                System.out.print("Введите месяц: ");
-                int month = in.nextInt();
-
-                System.out.print("Введите день: ");
-                int day = in.nextInt();
-
-                System.out.print("Введите час: ");
-                int hour = in.nextInt();
-
-                System.out.print("Введите минуту: ");
-                int minute = in.nextInt();
-
-                System.out.print("Введите секунду: ");
-                int second = in.nextInt();
-
-                GregorianCalendar date = new GregorianCalendar(year, month - 1, day, hour, minute, second);
-                return date;
+                setDate();
+                return getDate();
 
             }
 
@@ -102,5 +86,41 @@ public class Inner {
             default:
                 return text.nextLine();
         }
+    }
+
+    private void setDate() {
+        try {
+
+            Scanner in = new Scanner(System.in);
+            System.out.print("Введите год: ");
+            int year = in.nextInt();
+
+            System.out.print("Введите месяц: ");
+            int month = in.nextInt();
+
+            System.out.print("Введите день: ");
+            int day = in.nextInt();
+
+            System.out.print("Введите час: ");
+            int hour = in.nextInt();
+
+            System.out.print("Введите минуту: ");
+            int minute = in.nextInt();
+
+            System.out.print("Введите секунду: ");
+            int second = in.nextInt();
+
+            date = new GregorianCalendar(year, month - 1, day, hour, minute, second);
+
+
+
+        } catch (Exception e) {
+            System.out.println("Вводите только целые числа! Повторите ввод.");
+            setDate();
+        }
+    }
+
+    private GregorianCalendar getDate() {
+        return date;
     }
 }

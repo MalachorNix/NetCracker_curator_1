@@ -228,7 +228,7 @@ public class NotificationViewer{
                             frame2.setLocationRelativeTo(null);
                         } catch (NumberFormatException e1) {
                             JFrame errorFrame = new JFrame("Ошибка");
-                            JLabel errorLabel = new JLabel("Значения отсутствуют или введен текст! Исправьте ошибки.");
+                            JLabel errorLabel = new JLabel("Значения отсутствуют, введен текст или нецелые числа! Исправьте ошибки.");
                             Box errorBox = Box.createHorizontalBox();
                             errorBox.add(Box.createVerticalStrut(12));
                             errorBox.add(errorLabel);
