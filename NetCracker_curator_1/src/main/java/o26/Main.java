@@ -1,6 +1,7 @@
 package o26;
 
 import o26.controller.*;
+import o26.view.MenuItem;
 import o26.view.MenuMenuItem;
 
 public final class Main {
@@ -15,9 +16,9 @@ public final class Main {
 
     public static void main(String[] args){
         Loader dataLoader = new DataLoader();
-        TaskCreator taskCreator = new TaskCreator();
-        Notification notification = new Notification();
-        MenuMenuItem menuItem = new MenuMenuItem();
+        ITaskCreator taskCreator = new TaskCreator();
+        INotification notification = new Notification();
+        MenuItem menuItem = new MenuMenuItem();
         Journal journal = new Journal();
 
         journal.setLoader(dataLoader);
