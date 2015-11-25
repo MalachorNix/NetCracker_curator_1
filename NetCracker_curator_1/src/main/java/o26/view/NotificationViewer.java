@@ -189,12 +189,19 @@ public class NotificationViewer{
                 okButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        JTextField[] fields = {year, month, day, hour, minute, second};
+
                         int newYear = Integer.parseInt(year.getText());
                         int newMonth = Integer.parseInt(month.getText());
                         int newDay = Integer.parseInt(day.getText());
                         int newHour = Integer.parseInt(hour.getText());
                         int newMinute = Integer.parseInt(minute.getText());
                         int newSecond = Integer.parseInt(second.getText());
+
+                        /*for (int i = 0; i < fields.length; i++) {
+                            if (fields[i].getText().length() == 0)
+                        }*/
+
                         GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth - 1, newDay, newHour,
                                 newMinute, newSecond);
                         map.put(TaskParameter.DATE, newDate);

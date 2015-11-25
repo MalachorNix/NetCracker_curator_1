@@ -2,6 +2,9 @@ package o26.view;
 
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import o26.model.TaskParameter;
 
 public class Inner {
@@ -10,6 +13,9 @@ public class Inner {
 
         String nameParameter = parameter.toString();
         Scanner text = new Scanner(System.in);
+        String output;
+        Pattern p;
+        Matcher m;
 
         System.out.println("Введите "+nameParameter+":\n");
 
@@ -36,10 +42,17 @@ public class Inner {
 
                 String name = text.nextLine();
 
-                while (name.length() == 0) {
+                p = Pattern.compile("^\\s+");
+                m = p.matcher(name);
+                output = m.replaceFirst("");
+
+                while (output.length() == 0) {
                     System.out.println("Пустое название запрещено.");
                     System.out.println("Введите " + nameParameter + ":\n");
                     name = text.nextLine();
+                    p = Pattern.compile("^\\s+");
+                    m = p.matcher(name);
+                    output = m.replaceFirst("");
                 }
 
                 return name;
@@ -48,11 +61,17 @@ public class Inner {
             case "DESCRIPTION": {
 
                 String description = text.nextLine();
+                p = Pattern.compile("^\\s+");
+                m = p.matcher(description);
+                output = m.replaceFirst("");
 
-                while (description.length() == 0) {
+                while (output.length() == 0) {
                     System.out.println("Пустое описание запрещено.");
                     System.out.println("Введите " + nameParameter + ":\n");
                     description = text.nextLine();
+                    p = Pattern.compile("^\\s+");
+                    m = p.matcher(description);
+                    output = m.replaceFirst("");
                 }
 
                 return description;
@@ -61,11 +80,17 @@ public class Inner {
             case "CONTACTS": {
 
                 String contacts = text.nextLine();
+                p = Pattern.compile("^\\s+");
+                m = p.matcher(contacts);
+                output = m.replaceFirst("");
 
-                while (contacts.length() == 0) {
+                while (output.length() == 0) {
                     System.out.println("Пустое поле контактов запрещено.");
                     System.out.println("Введите "+nameParameter+":\n");
                     contacts = text.nextLine();
+                    p = Pattern.compile("^\\s+");
+                    m = p.matcher(contacts);
+                    output = m.replaceFirst("");
                 }
 
                 return contacts;
