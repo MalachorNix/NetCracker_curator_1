@@ -1,6 +1,8 @@
 package o26.view;
 
-import java.awt.*;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
@@ -27,11 +29,7 @@ public class NotificationViewer{
         
         String message = "<html>"+description+"<br>"+contacts;
         JLabel messageLabel = new JLabel(message);
-        /*
-        JButton closeButton = new JButton("X");
-        closeButton.setMargin(new Insets(1, 4, 1, 4));
-        closeButton.setFocusable(false);
-        */
+
         JFrame frame = new JFrame();
         frame.setSize(600, 250);
         frame.setLayout(new GridBagLayout());
@@ -54,14 +52,10 @@ public class NotificationViewer{
         constraints.anchor = GridBagConstraints.NORTH;
         constraints.gridx = 0;
         
-        //frame.add(closeButton, constraints);
-
         Map<TaskParameter, Object> map = new HashMap<>();
         map.put(TaskParameter.NAME, name);
         map.put(TaskParameter.DESCRIPTION, description);
-//        map.put(TaskParameter.DATE, DATE);
         map.put(TaskParameter.CONTACTS, contacts);
-//        Task cloneTask = new Task(map);
 
         JButton postponed = new JButton("Отложить");
         postponed.setVisible(true);
@@ -70,10 +64,6 @@ public class NotificationViewer{
         postponed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                /*GregorianCalendar calendar = new GregorianCalendar(2015, 11, 25, 14, 30);
-                map.put(TaskParameter.DATE, calendar);
-                journal.addTask(map);*/
 
                 JFrame frame1 = new JFrame("Отложить задачу");
                 JPanel panel = new JPanel();
@@ -87,20 +77,6 @@ public class NotificationViewer{
                 JTextField minute = new JTextField("Минута");
                 JTextField second = new JTextField("Секунда");
 
-                /*year.setSize(100, 100);
-                month.setSize(100, 100);
-                day.setSize(100, 100);
-                hour.setSize(100, 100);
-                minute.setSize(100, 100);
-                second.setSize(100, 100);
-
-                year.setLocation(0, 0);
-                month.setLocation(20, 20);
-                day.setLocation(40, 40);
-                hour.setLocation(60, 60);
-                minute.setLocation(80, 80);
-                second.setLocation(100, 100);*/
-
                 year.setVisible(true);
                 month.setVisible(true);
                 day.setVisible(true);
@@ -109,7 +85,7 @@ public class NotificationViewer{
                 second.setVisible(true);
                 frame1.setVisible(true);
 
-                frame1.setSize(1024, 768);
+                frame1.setSize(600, 250);
 
                 panel.add(year);
                 panel.add(month);
@@ -137,27 +113,13 @@ public class NotificationViewer{
                         GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth - 1, newDay, newHour, newMinute, newSecond);
                         map.put(TaskParameter.DATE, newDate);
                         journal.addTask(map);
+                        journal.journalChanged();
                     }
                 });
-//                System.out.println("Отложил");
             }
         });
         frame.getContentPane().add(postponed);
 
-        /*JButton complete = new JButton("Завершить");
-        complete.setVisible(true);
-        complete.setLocation(322, 322);
-        complete.setSize(150, 150);
-        complete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                journal.deleteTask(id);
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            }
-        });
-        frame.getContentPane().add(complete);*/
-
-        
         constraints.gridy++;
         constraints.weightx = 1.0f;
         constraints.weighty = 1.0f;
