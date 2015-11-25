@@ -14,7 +14,7 @@ public class Inner {
         String nameParameter = parameter.toString();
         Scanner text = new Scanner(System.in);
         String output;
-        Pattern p;
+        Pattern p = Pattern.compile("^\\s+");
         Matcher m;
 
         System.out.println("Введите "+nameParameter+":\n");
@@ -22,27 +22,35 @@ public class Inner {
         switch(nameParameter){
 
             case "DATE": {
+
                 Scanner in = new Scanner(System.in);
                 System.out.print("Введите год: ");
                 int year = in.nextInt();
+
                 System.out.print("Введите месяц: ");
                 int month = in.nextInt();
+
                 System.out.print("Введите день: ");
                 int day = in.nextInt();
+
                 System.out.print("Введите час: ");
                 int hour = in.nextInt();
+
                 System.out.print("Введите минуту: ");
                 int minute = in.nextInt();
+
                 System.out.print("Введите секунду: ");
                 int second = in.nextInt();
-                return new GregorianCalendar(year, month - 1, day, hour, minute, second);
+
+                GregorianCalendar date = new GregorianCalendar(year, month - 1, day, hour, minute, second);
+                return date;
+
             }
 
             case "NAME": {
 
                 String name = text.nextLine();
 
-                p = Pattern.compile("^\\s+");
                 m = p.matcher(name);
                 output = m.replaceFirst("");
 
@@ -50,7 +58,6 @@ public class Inner {
                     System.out.println("Пустое название запрещено.");
                     System.out.println("Введите " + nameParameter + ":\n");
                     name = text.nextLine();
-                    p = Pattern.compile("^\\s+");
                     m = p.matcher(name);
                     output = m.replaceFirst("");
                 }
@@ -61,7 +68,6 @@ public class Inner {
             case "DESCRIPTION": {
 
                 String description = text.nextLine();
-                p = Pattern.compile("^\\s+");
                 m = p.matcher(description);
                 output = m.replaceFirst("");
 
@@ -69,7 +75,6 @@ public class Inner {
                     System.out.println("Пустое описание запрещено.");
                     System.out.println("Введите " + nameParameter + ":\n");
                     description = text.nextLine();
-                    p = Pattern.compile("^\\s+");
                     m = p.matcher(description);
                     output = m.replaceFirst("");
                 }
@@ -88,7 +93,6 @@ public class Inner {
                     System.out.println("Пустое поле контактов запрещено.");
                     System.out.println("Введите "+nameParameter+":\n");
                     contacts = text.nextLine();
-                    p = Pattern.compile("^\\s+");
                     m = p.matcher(contacts);
                     output = m.replaceFirst("");
                 }

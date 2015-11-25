@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.*;
 
 import o26.controller.Journal;
@@ -189,41 +191,54 @@ public class NotificationViewer{
                 okButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        JTextField[] fields = {year, month, day, hour, minute, second};
 
-                        int newYear = Integer.parseInt(year.getText());
-                        int newMonth = Integer.parseInt(month.getText());
-                        int newDay = Integer.parseInt(day.getText());
-                        int newHour = Integer.parseInt(hour.getText());
-                        int newMinute = Integer.parseInt(minute.getText());
-                        int newSecond = Integer.parseInt(second.getText());
-
-                        /*for (int i = 0; i < fields.length; i++) {
-                            if (fields[i].getText().length() == 0)
-                        }*/
-
-                        GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth - 1, newDay, newHour,
-                                newMinute, newSecond);
-                        map.put(TaskParameter.DATE, newDate);
-                        journal.addTask(map);
-                        journal.journalChanged();
-                        postponedFrame.dispose();
-
-                        JFrame frame2 = new JFrame("Отложить задачу");
-                        frame2.setVisible(true);
-                        frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        frame2.setSize(100, 125);
-                        JLabel successLabel = new JLabel("Задача отложена");
-                        successLabel.setVisible(true);
-
-                        Box success = Box.createHorizontalBox();
-                        success.add(Box.createVerticalStrut(12));
-                        success.add(successLabel);
-                        success.add(Box.createVerticalStrut(12));
+                        try {
+                            int newYear = Integer.parseInt(year.getText());
+                            int newMonth = Integer.parseInt(month.getText());
+                            int newDay = Integer.parseInt(day.getText());
+                            int newHour = Integer.parseInt(hour.getText());
+                            int newMinute = Integer.parseInt(minute.getText());
+                            int newSecond = Integer.parseInt(second.getText());
 
 
-                        frame2.setContentPane(success);
-                        frame2.setLocationRelativeTo(null);
+
+
+
+                            GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth - 1, newDay, newHour,
+                                    newMinute, newSecond);
+                            map.put(TaskParameter.DATE, newDate);
+                            journal.addTask(map);
+                            journal.journalChanged();
+                            postponedFrame.dispose();
+
+                            JFrame frame2 = new JFrame("Отложить задачу");
+                            frame2.setVisible(true);
+                            frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                            frame2.setSize(100, 125);
+                            JLabel successLabel = new JLabel("Задача отложена");
+                            successLabel.setVisible(true);
+
+                            Box success = Box.createHorizontalBox();
+                            success.add(Box.createVerticalStrut(12));
+                            success.add(successLabel);
+                            success.add(Box.createVerticalStrut(12));
+
+
+                            frame2.setContentPane(success);
+                            frame2.setLocationRelativeTo(null);
+                        } catch (NumberFormatException e1) {
+                            JFrame errorFrame = new JFrame("Ошибка");
+                            JLabel errorLabel = new JLabel("Значения отсутствуют или введен текст! Исправьте ошибки.");
+                            Box errorBox = Box.createHorizontalBox();
+                            errorBox.add(Box.createVerticalStrut(12));
+                            errorBox.add(errorLabel);
+                            errorBox.add(Box.createVerticalStrut(12));
+                            errorFrame.setContentPane(errorBox);
+                            errorFrame.setSize(400, 250);
+                            errorFrame.setVisible(true);
+                            errorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        }
+
                     }
                 });
             }
