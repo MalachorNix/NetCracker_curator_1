@@ -2,8 +2,8 @@ package o26.controller;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import o26.model.Parameter;
 import o26.model.Task;
-import o26.model.TaskParameter;
 import o26.view.NotificationViewer;
 
 public class Notification implements Runnable, INotification{
@@ -24,9 +24,9 @@ public class Notification implements Runnable, INotification{
         if(tasks!=null && !tasks.isEmpty()){
             int countTasks = tasks.size();
             int index = 0;
-            long time = ((GregorianCalendar)((Task)tasks.get(index)).getValue(TaskParameter.DATE)).getTimeInMillis();
+            long time = ((GregorianCalendar)((Task)tasks.get(index)).getValue(Parameter.TypeParameter.DATE)).getTimeInMillis();
             for (int i = 0; i < countTasks; i++) {
-                long temp = ((GregorianCalendar)((Task)tasks.get(i)).getValue(TaskParameter.DATE)).getTimeInMillis();
+                long temp = ((GregorianCalendar)((Task)tasks.get(i)).getValue(Parameter.TypeParameter.DATE)).getTimeInMillis();
                 index = time > temp ? i : index;
             }
             this.actualTaskIndex = index;
@@ -39,7 +39,7 @@ public class Notification implements Runnable, INotification{
         long timeTask;
         while (true) {
             try {
-                timeTask = ((GregorianCalendar) actualTask.getValue(TaskParameter.DATE)).getTimeInMillis();
+                timeTask = ((GregorianCalendar) actualTask.getValue(Parameter.TypeParameter.DATE)).getTimeInMillis();
                 if (System.currentTimeMillis() >= timeTask) {
                     notificationViewer.show(journal, actualTaskIndex);
                     setActual(journal);

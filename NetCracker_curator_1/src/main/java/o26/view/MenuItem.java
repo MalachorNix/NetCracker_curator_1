@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import o26.controller.Journal;
-import o26.model.TaskParameter;
+import o26.model.Parameter;
 
 public abstract class MenuItem {
     public abstract void show(Journal journal);
@@ -27,8 +27,8 @@ public abstract class MenuItem {
         System.out.println();
         return choice;
     }
-    protected Object in(TaskParameter parameter){
-        String nameParameter = parameter.toString();
+    protected Object in(Parameter.TypeParameter parameter){
+        String nameParameter = parameter.name();
         Scanner text = new Scanner(System.in);
         String output;
         Pattern p = Pattern.compile("^\\s+");
@@ -65,7 +65,6 @@ public abstract class MenuItem {
                 return description;
             }
             case "CONTACTS": {
-
                 String contacts = text.nextLine();
                 p = Pattern.compile("^\\s+");
                 m = p.matcher(contacts);

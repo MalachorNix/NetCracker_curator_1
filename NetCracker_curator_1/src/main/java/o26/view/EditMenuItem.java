@@ -1,10 +1,10 @@
 package o26.view;
 
-import java.util.Map;
+import java.util.List;
 
 import o26.controller.Journal;
+import o26.model.Parameter;
 import o26.model.Task;
-import o26.model.TaskParameter;
 
 public class EditMenuItem extends MenuItem {
     private final String ITEM = "Редактирование задач";
@@ -45,37 +45,18 @@ public class EditMenuItem extends MenuItem {
         return this.ITEM;
     }
     
-    private Map<TaskParameter, Object> editParameters(Map<TaskParameter, Object> parameters){
+    private List editParameters(List parameters){
         int select;
+        int count = parameters.size();
         do{
             System.out.println("Редактирование параметров");
-            System.out.println("\t<1> "+ TaskParameter.NAME.toString());
-            System.out.println("\t<2> "+ TaskParameter.DESCRIPTION.toString());
-            System.out.println("\t<3> "+ TaskParameter.CONTACTS.toString());
-            System.out.println("\t<4> "+ TaskParameter.DATE.toString());
-            System.out.println("\t<0> Сохранить изменения и вернуться к выбору задачи");
-            select = choice(0, 4);
-            switch(select){
-                case 1:{
-                    parameters.replace(TaskParameter.NAME, in(TaskParameter.NAME));
-                    break;
-                }
-                case 2:{
-                    parameters.replace(TaskParameter.DESCRIPTION, in(TaskParameter.DESCRIPTION));
-                    break;
-                }
-                case 3:{
-                    parameters.replace(TaskParameter.CONTACTS, in(TaskParameter.CONTACTS));
-                    break;
-                }
-                case 4:{
-                    parameters.replace(TaskParameter.DATE, in(TaskParameter.DATE));
-                    break;
-                }
-                default:{
-                    break;
-                }
+            for(int i = 0; i < count; i++){
+                System.out.println("\t<"+(i+1)+"> "+((Parameter)(parameters.get(i))).getType().name());
             }
+            System.out.println("\t<0> Сохранить изменения и вернуться к выбору задачи");
+            select = choice(0, count);
+            Parameter parameter = (Parameter)(parameters.get(select));
+            parameter.setValue(parameter.getType(), in(parameter.getType()));
             if(select!=0){
                 System.out.println("Параметр изменен!\n");
             }

@@ -1,12 +1,12 @@
 package o26.model;
 
-import java.util.Map;
+import java.util.List;
 
 public interface ITask {
 
-    Object getValue(TaskParameter parameter);
+    Object getValue(Parameter.TypeParameter type);
 
-    void setValue(TaskParameter parameter, Object value);
+    void setValue(Parameter.TypeParameter type, Object value);
 
-    Map<TaskParameter, Object> getParameters();
+    List getParameters();
 }

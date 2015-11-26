@@ -1,13 +1,11 @@
 package o26.controller;
 
+import java.util.List;
 import o26.model.Task;
-import o26.model.TaskParameter;
-
-import java.util.Map;
 
 public interface ITaskCreator {
 
-    Task createTask(Map<TaskParameter, Object> parameters);
+    Task createTask(List parameters);
 
-    boolean validate(Map<TaskParameter, Object> parameters);
+    boolean validate(List parameters);
 }

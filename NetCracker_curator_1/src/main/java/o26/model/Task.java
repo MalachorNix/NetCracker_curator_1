@@ -2,27 +2,41 @@ package o26.model;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.List;
 
 
 public class Task implements Serializable, ITask{
 
-    private Map<TaskParameter, Object> parameters;
+    private List<Parameter> parameters;
 
-    public Task(Map<TaskParameter, Object> parameters) {
+    public Task(List parameters) {
         this.parameters = parameters;
     }
 
-    public Object getValue(TaskParameter parameter) {
-        return this.parameters.get(parameter);
+    @Override
+    public Object getValue(Parameter.TypeParameter type) {
+        int count = parameters.size();
+        for(int i = 0; i < count; i++){
+            Parameter parameter = parameters.get(i);
+            if(type.equals(parameter.getType())) return parameter.getValue();
+        }
+        return null;
     }
 
-    public void setValue(TaskParameter parameter, Object value) {
-        this.parameters.put(parameter, value);
+    @Override
+    public void setValue(Parameter.TypeParameter type, Object value) {
+        int count = parameters.size();
+        for(int i = 0; i < count; i++){
+            Parameter parameter = parameters.get(i);
+            if(type.equals(parameter.getType())){
+                parameter.setValue(type, value);
+                break;
+            }
+        }
     }
     
-    public Map<TaskParameter, Object> getParameters(){
+    @Override
+    public List getParameters(){
         return parameters;
     }
     
@@ -30,10 +44,11 @@ public class Task implements Serializable, ITask{
     public String toString(){
         String result;
         StringBuilder stringBuilder= new StringBuilder("");
-        for(Entry entry: parameters.entrySet()) {
-            TaskParameter parameter = (TaskParameter) entry.getKey();
-            Object value = entry.getValue();
-            if(parameter.equals(TaskParameter.DATE)){
+        int count = parameters.size();
+        for(int i = 0; i < count; i++) {
+            Parameter parameter = parameters.get(i);
+            Object value = parameter.getValue();
+            if(parameter.getType().equals(Parameter.TypeParameter.DATE)){
                 value = ((GregorianCalendar)value).getTime();
             }
             stringBuilder.append(parameter.toString()).append(":\n\t").append(value.toString()).append("\n");

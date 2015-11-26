@@ -1,20 +1,20 @@
 package o26.view;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import o26.controller.Journal;
-import o26.model.TaskParameter;
+import o26.model.Parameter;
 
 public class AddMenuItem extends MenuItem {
     private final String ITEM = "Добавление задач";
     
     @Override
     public void show(Journal journal) {
-        Map<TaskParameter, Object> parameters = new HashMap<>();
-        parameters.put(TaskParameter.NAME, in(TaskParameter.NAME));
-        parameters.put(TaskParameter.DESCRIPTION, in(TaskParameter.DESCRIPTION));
-        parameters.put(TaskParameter.CONTACTS, in(TaskParameter.CONTACTS));
-        parameters.put(TaskParameter.DATE, in(TaskParameter.DATE));
+        List parameters = new ArrayList<>();
+        parameters.add(new Parameter(Parameter.TypeParameter.NAME, in(Parameter.TypeParameter.NAME)));
+        parameters.add(new Parameter(Parameter.TypeParameter.DESCRIPTION, in(Parameter.TypeParameter.DESCRIPTION)));
+        parameters.add(new Parameter(Parameter.TypeParameter.CONTACTS, in(Parameter.TypeParameter.CONTACTS)));
+        parameters.add(new Parameter(Parameter.TypeParameter.DATE, in(Parameter.TypeParameter.DATE)));
         journal.addTask(parameters);
         System.out.println("Задача добавлена!\n");
         journal.journalChanged();

@@ -3,25 +3,24 @@ package o26.view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.*;
 
 import o26.controller.Journal;
+import o26.model.Parameter;
 import o26.model.Task;
-import o26.model.TaskParameter;
 
 
 public class NotificationViewer{
 
     public void show(Journal journal, int id) {
 
-        String name = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.NAME).toString();
-        String description = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.DESCRIPTION).toString();
-        String contacts = ((Task)journal.getTasks().get(id)).getValue(TaskParameter.CONTACTS).toString();
-        String date = ((GregorianCalendar)(((Task)journal.getTasks().get(id)).getValue(TaskParameter.DATE))).getTime().toString();
+        String name = ((Task)journal.getTasks().get(id)).getValue(Parameter.TypeParameter.NAME).toString();
+        String description = ((Task)journal.getTasks().get(id)).getValue(Parameter.TypeParameter.DESCRIPTION).toString();
+        String contacts = ((Task)journal.getTasks().get(id)).getValue(Parameter.TypeParameter.CONTACTS).toString();
+        String date = ((GregorianCalendar)(((Task)journal.getTasks().get(id)).getValue(Parameter.TypeParameter.DATE))).getTime().toString();
 
         JFrame frame = new JFrame();
         frame.setSize(700, 250);
@@ -81,22 +80,22 @@ public class NotificationViewer{
         frame.setContentPane(boxFrame);
         frame.pack();
 
-        Map<TaskParameter, Object> map = new HashMap<>();
-        map.put(TaskParameter.NAME, name);
-        map.put(TaskParameter.DESCRIPTION, description);
-        map.put(TaskParameter.CONTACTS, contacts);
+        List parameters = new ArrayList<>();
+        parameters.add(new Parameter(Parameter.TypeParameter.NAME, name));
+        parameters.add(new Parameter(Parameter.TypeParameter.DESCRIPTION, description));
+        parameters.add(new Parameter(Parameter.TypeParameter.CONTACTS, contacts));
 
         postponed.setVisible(true);
         postponed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                holdTask(journal, frame, map);      
+                holdTask(journal, frame, parameters);      
             }
         }); 
         journal.deleteTask(id);
     }
     
-    private void holdTask(Journal journal, JFrame frame, Map<TaskParameter, Object> map){
+    private void holdTask(Journal journal, JFrame frame, List parameters){
         JFrame postponedFrame = new JFrame("Отложить задачу");
         frame.dispose();
         ArrayList<JTextField> listTextFields = new ArrayList<>();
@@ -197,12 +196,12 @@ public class NotificationViewer{
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                inputNewDate(journal ,map, postponedFrame, listTextFields);
+                inputNewDate(journal , parameters, postponedFrame, listTextFields);
             }
         });
     }
     
-    private void inputNewDate(Journal journal, Map<TaskParameter, Object> map, JFrame postponedFrame,  ArrayList<JTextField> list){
+    private void inputNewDate(Journal journal, List parameters, JFrame postponedFrame,  ArrayList<JTextField> list){
         try {
                 int newYear = Integer.parseInt(list.get(0).getText());
                 int newMonth = Integer.parseInt(list.get(1).getText());
@@ -213,8 +212,8 @@ public class NotificationViewer{
 
                 GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth - 1, newDay, newHour,
                         newMinute, newSecond);
-                map.put(TaskParameter.DATE, newDate);
-                journal.addTask(map);
+                parameters.add(new Parameter(Parameter.TypeParameter.DATE, newDate));
+                journal.addTask(parameters);
                 journal.journalChanged();
                 postponedFrame.dispose();
 

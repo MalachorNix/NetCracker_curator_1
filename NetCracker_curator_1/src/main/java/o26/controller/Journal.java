@@ -1,11 +1,10 @@
 package o26.controller;
 
 import o26.model.Task;
-import o26.model.TaskParameter;
 import o26.view.MenuItem;
 
 import java.util.List;
-import java.util.Map;
+import o26.model.Parameter;
 
 public class Journal {
     private List tasks;
@@ -14,7 +13,7 @@ public class Journal {
     private MenuItem view;
     private INotification notification;
     
-    public void addTask(Map <TaskParameter, Object> parameters) {
+    public void addTask(List parameters) {
         if (taskCreator.validate(parameters)) {
             tasks.add(taskCreator.createTask(parameters));
         } else {
@@ -26,11 +25,11 @@ public class Journal {
         tasks.remove(id);
     }
 
-    public void editTask(int id, Map <TaskParameter, Object> parameters) {
-        for(Map.Entry entry : parameters.entrySet()){
-            TaskParameter parameter = (TaskParameter)entry.getKey();
-            Object value = entry.getValue();
-            ((Task) tasks.get(id)).setValue(parameter, value);
+    public void editTask(int id, List parameters) {
+        int count = parameters.size();
+        for(int i = 0; i < count; i++){
+            Parameter parameter = (Parameter) parameters.get(i);
+            ((Task) tasks.get(id)).setValue(parameter.getType(), parameter.getValue());
         }
     }
 

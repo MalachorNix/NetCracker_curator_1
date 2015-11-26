@@ -1,13 +1,12 @@
 package o26.controller;
 
+import java.util.List;
 import o26.model.Task;
-import o26.model.TaskParameter;
-
-import java.util.Map;
 
 public class TaskCreator implements ITaskCreator{
 
-    public Task createTask(Map<TaskParameter, Object> parameters) {
+    @Override
+    public Task createTask(List parameters) {
         return new Task(parameters);
     }
 
@@ -16,7 +15,8 @@ public class TaskCreator implements ITaskCreator{
     * Имеет смысл делать это только с датой, так как остальные параметры просто строковое описание.
     * */
 
-    public boolean validate(Map<TaskParameter, Object> parameters) {
+    @Override
+    public boolean validate(List parameters) {
         return true;
     }
 }

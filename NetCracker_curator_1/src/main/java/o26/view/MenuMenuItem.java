@@ -1,11 +1,12 @@
 package o26.view;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import o26.controller.Journal;
 
 public class MenuMenuItem extends MenuItem {
-    private ArrayList item;
+    private List item;
     private final String ITEM = "Меню";
     
     @Override
