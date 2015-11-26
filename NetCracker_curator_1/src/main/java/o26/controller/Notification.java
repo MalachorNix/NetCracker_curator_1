@@ -6,11 +6,18 @@ import o26.model.Task;
 import o26.model.TaskParameter;
 import o26.view.NotificationViewer;
 
-public class Notification extends Thread implements INotification{
+public class Notification implements Runnable, INotification{
     private Journal journal;
+    private NotificationViewer notificationViewer;
     private int actualTaskIndex;
     private Task actualTask;
 
+    @Override
+    public void setNotificationViewer(NotificationViewer notificationViewer){
+        this.notificationViewer = notificationViewer;
+    }
+    
+    @Override
     public void setActual(Journal journal) {
         this.journal = journal;
         ArrayList tasks = (ArrayList) journal.getTasks();
@@ -30,12 +37,10 @@ public class Notification extends Thread implements INotification{
     @Override
     public void run() {
         long timeTask;
-        NotificationViewer notificationViewer;
         while (true) {
             try {
                 timeTask = ((GregorianCalendar) actualTask.getValue(TaskParameter.DATE)).getTimeInMillis();
                 if (System.currentTimeMillis() >= timeTask) {
-                    notificationViewer = new NotificationViewer();
                     notificationViewer.show(journal, actualTaskIndex);
                     setActual(journal);
                 }
@@ -47,5 +52,10 @@ public class Notification extends Thread implements INotification{
                 }
             }
         }
+    }
+
+    @Override
+    public void start() {
+        new Thread(this).start();
     }
 }

@@ -2,8 +2,7 @@ package o26.view;
 
 import o26.controller.Journal;
 
-public class DeleteMenuItem implements MenuItem {
-    private Choiser choice;
+public class DeleteMenuItem extends MenuItem {
     private final String ITEM = "Удаление задач";
     
     @Override
@@ -14,8 +13,7 @@ public class DeleteMenuItem implements MenuItem {
             System.out.println("\t<Id> Удалить задачу с индексом Id");
             System.out.println("\t<0> Вернуться в меню");
             int countTasks = journal.getTasks().size();
-            choice = new Choiser();
-            selectedId = choice.doIt(0, countTasks);
+            selectedId = choice(0, countTasks);
             switch(selectedId){
                 case 0:{
                     break;
@@ -25,7 +23,7 @@ public class DeleteMenuItem implements MenuItem {
                     System.out.println("Вы уверены, что хотите удалить эту задачу?");
                     System.out.println("\t<1> Да");
                     System.out.println("\t<0> Нет");
-                    if(choice.doIt(0, 1)!=0){
+                    if(choice(0, 1)!=0){
                         journal.deleteTask(selectedId-1);
                         System.out.println("Задача удалена!\n");
                         journal.journalChanged();

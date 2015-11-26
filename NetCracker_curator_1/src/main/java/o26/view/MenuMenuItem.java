@@ -4,15 +4,12 @@ import java.util.ArrayList;
 
 import o26.controller.Journal;
 
-public class MenuMenuItem implements MenuItem {
+public class MenuMenuItem extends MenuItem {
     private ArrayList item;
-    private Choiser choise;
     private final String ITEM = "Меню";
     
     @Override
     public void show(Journal journal) {
-        journal.load();
-        journal.notificationStart();
         item = new ArrayList<>();
         item.add(new ListMenuItem());
         item.add(new AddMenuItem());
@@ -26,8 +23,7 @@ public class MenuMenuItem implements MenuItem {
                 System.out.println("<"+(i+1)+"> "+ item.get(i).toString());
             }
             System.out.println("<0> Сохранить изменения и выйти\n");
-            choise = new Choiser();
-            select = choise.doIt(0, countPoints);
+            select = choice(0, countPoints);
             if(select!=0){
                 try {
                     ((MenuItem) item.get(select-1)).show(journal);
@@ -38,7 +34,6 @@ public class MenuMenuItem implements MenuItem {
             else{
                 journal.save();
                 System.out.println("Goodbye!\n");
-                System.exit(0);
             }
         }while(select!=0);
     }

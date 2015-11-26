@@ -6,9 +6,7 @@ import o26.controller.Journal;
 import o26.model.Task;
 import o26.model.TaskParameter;
 
-public class EditMenuItem implements MenuItem {
-    private Choiser choice;
-    private Inner in;
+public class EditMenuItem extends MenuItem {
     private final String ITEM = "Редактирование задач";
     
     @Override
@@ -19,8 +17,7 @@ public class EditMenuItem implements MenuItem {
             System.out.println("\t<Id> Редактировать задачу с индексом Id");
             System.out.println("\t<0> Вернуться в меню");
             int countTasks = journal.getTasks().size();
-            choice = new Choiser();
-            selectedId = choice.doIt(0, countTasks);
+            selectedId = choice(0, countTasks);
             switch(selectedId){
                 case 0:{
                     break;
@@ -30,7 +27,7 @@ public class EditMenuItem implements MenuItem {
                     System.out.println("Данную задачу вы хотите редактировать?");
                     System.out.println("\t<1> Да");
                     System.out.println("\t<0> Нет");
-                    if(choice.doIt(0, 1)!=0){
+                    if(choice(0, 1)!=0){
                         journal.editTask(selectedId-1,
                                 editParameters(((Task) journal.getTasks().get(selectedId-1)).getParameters())
                         );
@@ -57,23 +54,22 @@ public class EditMenuItem implements MenuItem {
             System.out.println("\t<3> "+ TaskParameter.CONTACTS.toString());
             System.out.println("\t<4> "+ TaskParameter.DATE.toString());
             System.out.println("\t<0> Сохранить изменения и вернуться к выбору задачи");
-            select = choice.doIt(0, 4);
-            in = new Inner();
+            select = choice(0, 4);
             switch(select){
                 case 1:{
-                    parameters.replace(TaskParameter.NAME, in.doIt(TaskParameter.NAME));
+                    parameters.replace(TaskParameter.NAME, in(TaskParameter.NAME));
                     break;
                 }
                 case 2:{
-                    parameters.replace(TaskParameter.DESCRIPTION, in.doIt(TaskParameter.DESCRIPTION));
+                    parameters.replace(TaskParameter.DESCRIPTION, in(TaskParameter.DESCRIPTION));
                     break;
                 }
                 case 3:{
-                    parameters.replace(TaskParameter.CONTACTS, in.doIt(TaskParameter.CONTACTS));
+                    parameters.replace(TaskParameter.CONTACTS, in(TaskParameter.CONTACTS));
                     break;
                 }
                 case 4:{
-                    parameters.replace(TaskParameter.DATE, in.doIt(TaskParameter.DATE));
+                    parameters.replace(TaskParameter.DATE, in(TaskParameter.DATE));
                     break;
                 }
                 default:{

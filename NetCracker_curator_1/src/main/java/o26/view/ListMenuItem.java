@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import o26.controller.Journal;
 
-public class ListMenuItem implements MenuItem {
+public class ListMenuItem extends MenuItem {
     private final String ITEM = "Просмотр списка задач";
     
     @Override
