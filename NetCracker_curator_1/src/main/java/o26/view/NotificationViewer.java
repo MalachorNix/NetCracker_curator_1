@@ -234,7 +234,7 @@ public class NotificationViewer{
                             errorBox.add(errorLabel);
                             errorBox.add(Box.createVerticalStrut(12));
                             errorFrame.setContentPane(errorBox);
-                            errorFrame.setSize(400, 250);
+                            errorFrame.setSize(500, 250);
                             errorFrame.setVisible(true);
                             errorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         }

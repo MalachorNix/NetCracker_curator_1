@@ -30,11 +30,13 @@ public class Notification extends Thread implements INotification{
     @Override
     public void run() {
         long timeTask;
+        NotificationViewer notificationViewer;
         while (true) {
             try {
                 timeTask = ((GregorianCalendar) actualTask.getValue(TaskParameter.DATE)).getTimeInMillis();
                 if (System.currentTimeMillis() >= timeTask) {
-                    new NotificationViewer().show(journal, actualTaskIndex);
+                    notificationViewer = new NotificationViewer();
+                    notificationViewer.show(journal, actualTaskIndex);
                     setActual(journal);
                 }
             } catch (Exception e) {

@@ -28,15 +28,17 @@ public class Task implements Serializable, ITask{
     
     @Override
     public String toString(){
-        String result = "";
+        String result;
+        StringBuilder stringBuilder= new StringBuilder("");
         for(Entry entry: parameters.entrySet()) {
             TaskParameter parameter = (TaskParameter) entry.getKey();
             Object value = entry.getValue();
             if(parameter.equals(TaskParameter.DATE)){
                 value = ((GregorianCalendar)value).getTime();
             }
-            result += parameter.toString()+":\n\t"+value.toString()+"\n";
+            stringBuilder.append(parameter.toString()).append(":\n\t").append(value.toString()).append("\n");
         }
+        result = stringBuilder.toString();
         return result;
     }
 }
