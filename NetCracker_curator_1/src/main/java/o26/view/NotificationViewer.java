@@ -3,6 +3,8 @@ package o26.view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -22,9 +24,50 @@ public class NotificationViewer {
         String contacts = ((Task)journal.getTasks().get(id)).getValue(Parameter.TypeParameter.CONTACTS).toString();
         String date = ((GregorianCalendar)(((Task)journal.getTasks().get(id)).getValue(Parameter.TypeParameter.DATE))).getTime().toString();
 
+        List parameters = new ArrayList<>();
+        parameters.add(new Parameter(Parameter.TypeParameter.NAME, name));
+        parameters.add(new Parameter(Parameter.TypeParameter.DESCRIPTION, description));
+        parameters.add(new Parameter(Parameter.TypeParameter.CONTACTS, contacts));
+
         JFrame frame = new JFrame();
         frame.setSize(800, 250);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                holdTask(journal, frame, parameters);
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
 
@@ -84,10 +127,6 @@ public class NotificationViewer {
         frame.pack();
         frame.setResizable(false);
 
-        List parameters = new ArrayList<>();
-        parameters.add(new Parameter(Parameter.TypeParameter.NAME, name));
-        parameters.add(new Parameter(Parameter.TypeParameter.DESCRIPTION, description));
-        parameters.add(new Parameter(Parameter.TypeParameter.CONTACTS, contacts));
 
         postponed.setVisible(true);
         postponed.addActionListener(new ActionListener() {
