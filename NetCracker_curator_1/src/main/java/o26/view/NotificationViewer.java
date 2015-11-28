@@ -56,9 +56,12 @@ public class NotificationViewer {
         boxDate.add(Box.createHorizontalStrut(12));
         boxDate.add(textDate);
 
-        Box boxPostponed = Box.createHorizontalBox();
+        Box boxButtons = Box.createHorizontalBox();
         JButton postponed = new JButton("Отложить");
-        boxPostponed.add(postponed, Component.CENTER_ALIGNMENT);
+        JButton complete = new JButton("Завершить");
+        boxButtons.add(postponed, Component.CENTER_ALIGNMENT);
+        boxButtons.add(Box.createHorizontalStrut(12));
+        boxButtons.add(complete, Component.CENTER_ALIGNMENT);
 
         Box boxFrame = Box.createVerticalBox();
         boxFrame.add(Box.createVerticalStrut(12));
@@ -70,7 +73,7 @@ public class NotificationViewer {
         boxFrame.add(Box.createVerticalStrut(12));
         boxFrame.add(boxContacts);
         boxFrame.add(Box.createVerticalStrut(12));
-        boxFrame.add(boxPostponed);
+        boxFrame.add(boxButtons);
         boxFrame.add(Box.createVerticalStrut(12));
 
         labelDate.setPreferredSize(labelContacts.getPreferredSize());
@@ -94,6 +97,33 @@ public class NotificationViewer {
             }
         }); 
         journal.deleteTask(id);
+
+        complete.setVisible(true);
+        complete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                JFrame completeFrame = new JFrame("Завершено");
+                completeFrame.setVisible(true);
+                completeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                completeFrame.setResizable(false);
+                completeFrame.setSize(100, 125);
+
+                JLabel completeLabel = new JLabel("Задача завершена");
+                completeLabel.setVisible(true);
+
+                Box completeBox = Box.createHorizontalBox();
+                completeBox.add(Box.createVerticalStrut(12));
+                completeBox.add(completeLabel);
+                completeBox.add(Box.createVerticalStrut(12));
+
+                completeFrame.setContentPane(completeBox);
+                completeFrame.setLocationRelativeTo(null);
+                completeFrame.setResizable(false);
+
+
+            }
+        });
     }
     
     private void holdTask(Journal journal, JFrame frame, List parameters){
