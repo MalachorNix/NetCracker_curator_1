@@ -23,34 +23,34 @@ public class NotificationViewer {
         String date = ((GregorianCalendar)(((Task)journal.getTasks().get(id)).getValue(Parameter.TypeParameter.DATE))).getTime().toString();
 
         JFrame frame = new JFrame();
-        frame.setSize(700, 250);
+        frame.setSize(800, 250);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
 
         Box boxName = Box.createHorizontalBox();
-        JLabel labelName = new JLabel("NAME:");
+        JLabel labelName = new JLabel("Название задачи:");
         JLabel textName = new JLabel(name);
         boxName.add(labelName);
         boxName.add(Box.createHorizontalStrut(12));
         boxName.add(textName);
 
         Box boxDescription = Box.createHorizontalBox();
-        JLabel labelDescription = new JLabel("DESCRIPTION:");
+        JLabel labelDescription = new JLabel("Описание задачи:");
         JLabel textDescription = new JLabel(description);
         boxDescription.add(labelDescription);
         boxDescription.add(Box.createHorizontalStrut(12));
         boxDescription.add(textDescription);
 
         Box boxContacts = Box.createHorizontalBox();
-        JLabel labelContacts = new JLabel("CONTACTS:");
+        JLabel labelContacts = new JLabel("Контакты:");
         JLabel textContacts = new JLabel(contacts);
         boxContacts.add(labelContacts);
         boxContacts.add(Box.createHorizontalStrut(12));
         boxContacts.add(textContacts);
 
         Box boxDate = Box.createHorizontalBox();
-        JLabel labelDate = new JLabel("DATE:");
+        JLabel labelDate = new JLabel("Время:");
         JLabel textDate = new JLabel(date);
         boxDate.add(labelDate);
         boxDate.add(Box.createHorizontalStrut(12));
@@ -79,6 +79,7 @@ public class NotificationViewer {
 
         frame.setContentPane(boxFrame);
         frame.pack();
+        frame.setResizable(false);
 
         List parameters = new ArrayList<>();
         parameters.add(new Parameter(Parameter.TypeParameter.NAME, name));
@@ -203,34 +204,35 @@ public class NotificationViewer {
     
     private void inputNewDate(Journal journal, List parameters, JFrame postponedFrame,  ArrayList<JTextField> list){
         try {
-                int newYear = Integer.parseInt(list.get(0).getText());
-                int newMonth = Integer.parseInt(list.get(1).getText());
-                int newDay = Integer.parseInt(list.get(2).getText());
-                int newHour = Integer.parseInt(list.get(3).getText());
-                int newMinute = Integer.parseInt(list.get(4).getText());
-                int newSecond = Integer.parseInt(list.get(5).getText());
+            int newYear = Integer.parseInt(list.get(0).getText());
+            int newMonth = Integer.parseInt(list.get(1).getText());
+            int newDay = Integer.parseInt(list.get(2).getText());
+            int newHour = Integer.parseInt(list.get(3).getText());
+            int newMinute = Integer.parseInt(list.get(4).getText());
+            int newSecond = Integer.parseInt(list.get(5).getText());
 
-                GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth - 1, newDay, newHour,
-                        newMinute, newSecond);
-                parameters.add(new Parameter(Parameter.TypeParameter.DATE, newDate));
-                journal.addTask(parameters);
-                journal.journalChanged();
-                postponedFrame.dispose();
+            GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth - 1, newDay, newHour,
+                    newMinute, newSecond);
+            parameters.add(new Parameter(Parameter.TypeParameter.DATE, newDate));
+            journal.addTask(parameters);
+            journal.journalChanged();
+            postponedFrame.dispose();
 
-                JFrame frame2 = new JFrame("Отложить задачу");
-                frame2.setVisible(true);
-                frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame2.setSize(100, 125);
-                JLabel successLabel = new JLabel("Задача отложена");
-                successLabel.setVisible(true);
+            JFrame frame2 = new JFrame("Отложить задачу");
+            frame2.setVisible(true);
+            frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame2.setSize(100, 125);
+            JLabel successLabel = new JLabel("Задача отложена");
+            successLabel.setVisible(true);
 
-                Box success = Box.createHorizontalBox();
-                success.add(Box.createVerticalStrut(12));
-                success.add(successLabel);
-                success.add(Box.createVerticalStrut(12));
+            Box success = Box.createHorizontalBox();
+            success.add(Box.createVerticalStrut(12));
+            success.add(successLabel);
+            success.add(Box.createVerticalStrut(12));
 
-                frame2.setContentPane(success);
-                frame2.setLocationRelativeTo(null);
+            frame2.setContentPane(success);
+            frame2.setLocationRelativeTo(null);
+            frame2.setResizable(false);
         } 
         catch (NumberFormatException e1) {
             JFrame errorFrame = new JFrame("Ошибка");
@@ -240,9 +242,10 @@ public class NotificationViewer {
             errorBox.add(errorLabel);
             errorBox.add(Box.createVerticalStrut(12));
             errorFrame.setContentPane(errorBox);
-            errorFrame.setSize(400, 250);
+            errorFrame.setSize(500, 250);
             errorFrame.setVisible(true);
             errorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            errorFrame.setResizable(false);
         }
     }
 }

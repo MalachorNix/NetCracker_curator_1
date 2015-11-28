@@ -28,17 +28,17 @@ public abstract class MenuItem {
         return choice;
     }
     protected Object in(Parameter.TypeParameter parameter){
-        String nameParameter = parameter.name();
+        String nameParameter = parameter.toString();
         Scanner text = new Scanner(System.in);
         String output;
         Pattern p = Pattern.compile("^\\s+");
         Matcher m;
         System.out.println("Введите "+nameParameter+":\n");
         switch(nameParameter){
-            case "DATE": {
+            case "время оповещения": {
                 return getDate();
             }
-            case "NAME": {
+            case "название задачи": {
                 String name = text.nextLine();
                 m = p.matcher(name);
                 output = m.replaceFirst("");
@@ -51,7 +51,7 @@ public abstract class MenuItem {
                 }
                 return name;
             }
-            case "DESCRIPTION": {
+            case "описание задачи": {
                 String description = text.nextLine();
                 m = p.matcher(description);
                 output = m.replaceFirst("");
@@ -64,7 +64,7 @@ public abstract class MenuItem {
                 }
                 return description;
             }
-            case "CONTACTS": {
+            case "контакты": {
                 String contacts = text.nextLine();
                 p = Pattern.compile("^\\s+");
                 m = p.matcher(contacts);

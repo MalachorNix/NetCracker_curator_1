@@ -4,17 +4,32 @@ import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 public class Parameter implements Serializable{
-    static public enum TypeParameter{
-        NAME
-                {
-
-//            @Override
+    public enum TypeParameter{
+        NAME {
             public boolean validate(Object value) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
-        
-        } , DESCRIPTION , DATE, CONTACTS;
-//        public abstract boolean validate(Object value);
+
+            @Override
+            public String toString() {
+                return "название задачи";
+            }
+        } , DESCRIPTION {
+            @Override
+            public String toString() {
+                return "описание задачи";
+            }
+        } , DATE {
+            @Override
+            public String toString() {
+                return "время оповещения";
+            }
+        }, CONTACTS {
+            @Override
+            public String toString() {
+                return "контакты";
+            }
+        }
     }
     private TypeParameter type;
     private Object value;
@@ -41,9 +56,9 @@ public class Parameter implements Serializable{
     public Object getValue(){
         switch(type){
             case DATE:{
-                return (GregorianCalendar)value;
+                return value;
             }
-            default: return (String)value;
+            default: return value;
         }
     }
 }
