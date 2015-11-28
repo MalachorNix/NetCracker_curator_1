@@ -13,7 +13,7 @@ import o26.model.Parameter;
 import o26.model.Task;
 
 
-public class NotificationViewer{
+public class NotificationViewer {
 
     public void show(Journal journal, int id) {
 

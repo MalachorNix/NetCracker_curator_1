@@ -9,7 +9,7 @@ public class Task implements Serializable, ITask{
 
     private List<Parameter> parameters;
 
-    public Task(List parameters) {
+    public Task(List<Parameter> parameters) {
         this.parameters = parameters;
     }
 
@@ -18,7 +18,7 @@ public class Task implements Serializable, ITask{
         int count = parameters.size();
         for(int i = 0; i < count; i++){
             Parameter parameter = parameters.get(i);
-            if(type.equals(parameter.getType())) return parameter.getValue();
+            if(type == parameter.getType()) return parameter.getValue();
         }
         return null;
     }

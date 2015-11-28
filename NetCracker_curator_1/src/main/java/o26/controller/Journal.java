@@ -33,7 +33,7 @@ public class Journal {
         }
     }
 
-    public List getTasks() {
+    public List<Task> getTasks() {
         return this.tasks;
     }
 

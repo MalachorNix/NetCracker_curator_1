@@ -5,7 +5,16 @@ import java.util.GregorianCalendar;
 
 public class Parameter implements Serializable{
     static public enum TypeParameter{
-        NAME , DESCRIPTION , DATE, CONTACTS;
+        NAME
+                {
+
+//            @Override
+            public boolean validate(Object value) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        
+        } , DESCRIPTION , DATE, CONTACTS;
+//        public abstract boolean validate(Object value);
     }
     private TypeParameter type;
     private Object value;
