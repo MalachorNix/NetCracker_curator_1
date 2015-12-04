@@ -36,6 +36,6 @@ public class DeleteMenuItem extends MenuItem {
     
     @Override
     public String toString(){
-        return this.ITEM;
+        return ITEM;
     }
 }

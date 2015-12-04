@@ -10,7 +10,7 @@ public class MenuMenuItem extends MenuItem {
     
     @Override
     public void show(Journal journal) {
-        List item = new ArrayList<>();
+        List<MenuItem> item = new ArrayList<>();
         item.add(new ListMenuItem());
         item.add(new AddMenuItem());
         item.add(new EditMenuItem());
@@ -30,7 +30,7 @@ public class MenuMenuItem extends MenuItem {
             }
             else{
                 try {
-                    ((MenuItem) item.get(select-1)).show(journal);
+                    item.get(select-1).show(journal);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Вводите только числа!");
                 }
@@ -40,6 +40,6 @@ public class MenuMenuItem extends MenuItem {
     
     @Override
     public String toString(){
-        return this.ITEM;
+        return ITEM;
     }
 }

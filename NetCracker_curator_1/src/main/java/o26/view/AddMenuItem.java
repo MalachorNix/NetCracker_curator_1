@@ -22,6 +22,6 @@ public class AddMenuItem extends MenuItem {
     
     @Override
     public String toString(){
-        return this.ITEM;
+        return ITEM;
     }
 }

@@ -29,7 +29,7 @@ public class EditMenuItem extends MenuItem {
                     System.out.println("\t<0> Нет");
                     if(choice(0, 1)!=0){
                         journal.editTask(selectedId-1,
-                                editParameters(((Task) journal.getTasks().get(selectedId-1)).getParameters())
+                                editParameters(( journal.getTasks().get(selectedId-1)).getParameters())
                         );
                         System.out.println("Задача изменена!\n");
                         journal.journalChanged();
@@ -42,7 +42,7 @@ public class EditMenuItem extends MenuItem {
     
     @Override
     public String toString(){
-        return this.ITEM;
+        return ITEM;
     }
     
     private List editParameters(List parameters){
