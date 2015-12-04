@@ -1,11 +1,11 @@
 package o26.controller;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
 import o26.model.Parameter;
 import o26.model.Task;
 import o26.view.NotificationViewer;
+
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class Notification implements Runnable, INotification {
     private Journal journal;

@@ -1,7 +1,6 @@
 package o26.model;
 
 import java.io.Serializable;
-import java.util.GregorianCalendar;
 
 public class Parameter implements Serializable{
     public enum TypeParameter{

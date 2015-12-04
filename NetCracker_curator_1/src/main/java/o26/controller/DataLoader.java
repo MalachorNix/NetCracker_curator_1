@@ -45,7 +45,8 @@ public class DataLoader implements Loader{
         try {
             fos = new FileOutputStream("data");
             oos = new ObjectOutputStream(fos);
-            oos.writeObject((tasks!=null) ? tasks : new ArrayList<>());
+//            oos.writeObject((tasks!=null) ? tasks : new ArrayList<>());
+            oos.writeObject((tasks == null) ? new ArrayList<>() : tasks);
         } catch (IOException ioe) {
             System.out.println("Ошибка сохранения: " + ioe.getMessage());
         } finally {

@@ -25,16 +25,16 @@ public class MenuMenuItem extends MenuItem {
             }
             System.out.println("<0> Сохранить изменения и выйти\n");
             select = choice(0, countPoints);
-            if(select!=0){
+            if(select == 0){
+                journal.save();
+                System.out.println("До свидания!\n");
+            }
+            else{
                 try {
                     ((MenuItem) item.get(select-1)).show(journal);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Вводите только числа!");
                 }
-            }
-            else{
-                journal.save();
-                System.out.println("Goodbye!\n");
             }
         }while(select!=0);
     }
