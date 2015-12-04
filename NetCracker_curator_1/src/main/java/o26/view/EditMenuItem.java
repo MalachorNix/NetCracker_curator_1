@@ -7,7 +7,7 @@ import o26.model.Parameter;
 import o26.model.Task;
 
 public class EditMenuItem extends MenuItem {
-    private final String ITEM = "Редактирование задач";
+    private static final String ITEM = "Редактирование задач";
     
     @Override
     public void show(Journal journal) {

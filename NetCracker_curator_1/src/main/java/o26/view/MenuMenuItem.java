@@ -6,12 +6,11 @@ import java.util.List;
 import o26.controller.Journal;
 
 public class MenuMenuItem extends MenuItem {
-    private List item;
-    private final String ITEM = "Меню";
+    private static final String ITEM = "Меню";
     
     @Override
     public void show(Journal journal) {
-        item = new ArrayList<>();
+        List item = new ArrayList<>();
         item.add(new ListMenuItem());
         item.add(new AddMenuItem());
         item.add(new EditMenuItem());

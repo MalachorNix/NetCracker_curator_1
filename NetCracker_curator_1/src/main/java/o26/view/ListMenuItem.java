@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import o26.controller.Journal;
 
 public class ListMenuItem extends MenuItem {
-    private final String ITEM = "Просмотр списка задач";
+    private static final String ITEM = "Просмотр списка задач";
     
     @Override
     public void show(Journal journal) {
