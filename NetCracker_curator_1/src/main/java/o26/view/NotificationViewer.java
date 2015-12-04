@@ -271,7 +271,7 @@ public class NotificationViewer {
         });
     }
     
-    private void inputNewDate(Journal journal, List parameters, JFrame postponedFrame,  ArrayList<JTextField> list){
+    private void inputNewDate(Journal journal, List parameters, JFrame postponedFrame,  List<JTextField> list){
         try {
             int newYear = Integer.parseInt(list.get(0).getText());
             int newMonth = Integer.parseInt(list.get(1).getText());

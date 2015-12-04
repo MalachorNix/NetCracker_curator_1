@@ -51,7 +51,7 @@ public class EditMenuItem extends MenuItem {
         do{
             System.out.println("Редактирование параметров");
             for(int i = 0; i < count; i++){
-                System.out.println("\t<"+(i+1)+"> "+((Parameter)(parameters.get(i))).getType().name());
+                System.out.println("\t<"+(i+1)+"> "+((Parameter)(parameters.get(i))).getType().toString());
             }
             System.out.println("\t<0> Сохранить изменения и вернуться к выбору задачи");
             select = choice(0, count);

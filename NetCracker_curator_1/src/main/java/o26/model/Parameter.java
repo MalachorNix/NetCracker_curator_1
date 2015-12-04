@@ -53,11 +53,16 @@ public class Parameter implements Serializable{
     }
     
     public Object getValue(){
-        switch(type){
+        /*switch(type){
             case DATE:{
                 return value;
             }
             default: return value;
+        }*/
+        if (type == TypeParameter.DATE) {
+            return value;
+        } else {
+            return value;
         }
     }
 }
