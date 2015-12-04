@@ -21,7 +21,7 @@ public abstract class MenuItem {
             }while(notValid);
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
             choice = -1;
         }
         System.out.println();
