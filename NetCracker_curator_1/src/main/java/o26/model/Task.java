@@ -51,7 +51,7 @@ public class Task implements Serializable, ITask{
             if(parameter.getType().equals(Parameter.TypeParameter.DATE)){
                 value = ((GregorianCalendar)value).getTime();
             }
-            stringBuilder.append(parameter.getType().name()).append(":\n\t").append(value.toString()).append("\n");
+            stringBuilder.append(parameter.getType().toString()).append(":\n\t").append(value.toString()).append("\n");
         }
         result = stringBuilder.toString();
         return result;
