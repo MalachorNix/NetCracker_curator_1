@@ -10,6 +10,7 @@ public class ListMenuItem extends MenuItem {
     private static final String ITEM = "Просмотр списка задач";
     
     @Override
+    @SuppressWarnings("unchecked")
     public void show(Journal journal) {
         List<ITask> tasks = (ArrayList) journal.getTasks();
         int countTasks = tasks.size();

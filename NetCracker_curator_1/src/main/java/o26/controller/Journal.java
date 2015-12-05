@@ -26,9 +26,8 @@ public class Journal {
     }
 
     public void editTask(int id, List parameters) {
-        int count = parameters.size();
-        for(int i = 0; i < count; i++){
-            Parameter parameter = (Parameter) parameters.get(i);
+        for (Object parameter1 : parameters) {
+            Parameter parameter = (Parameter) parameter1;
             tasks.get(id).setValue(parameter.getType(), parameter.getValue());
         }
     }
@@ -41,6 +40,7 @@ public class Journal {
         loader.saveData(tasks);
     }
 
+    @SuppressWarnings("unchecked")
     public void load() {
         tasks = loader.loadData();
     }

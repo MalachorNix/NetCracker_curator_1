@@ -16,20 +16,16 @@ public class Task implements Serializable, ITask{
 
     @Override
     public Object getValue(Parameter.TypeParameter type) {
-        int count = parameters.size();
-        for(int i = 0; i < count; i++){
-            Parameter parameter = parameters.get(i);
-            if(type == parameter.getType()) return parameter.getValue();
+        for (Parameter parameter : parameters) {
+            if (type == parameter.getType()) return parameter.getValue();
         }
         return null;
     }
 
     @Override
     public void setValue(Parameter.TypeParameter type, Object value) {
-        int count = parameters.size();
-        for(int i = 0; i < count; i++){
-            Parameter parameter = parameters.get(i);
-            if(type.equals(parameter.getType())){
+        for (Parameter parameter : parameters) {
+            if (type.equals(parameter.getType())) {
                 parameter.setValue(type, value);
                 break;
             }
@@ -45,13 +41,11 @@ public class Task implements Serializable, ITask{
     public String toString(){
         String result;
         StringBuilder stringBuilder= new StringBuilder("");
-        int count = parameters.size();
-        for(int i = 0; i < count; i++) {
-            Parameter parameter = parameters.get(i);
+        for (Parameter parameter : parameters) {
             Object value = parameter.getValue();
-            if(parameter.getType().equals(Parameter.TypeParameter.DATE)){
+            if (parameter.getType().equals(Parameter.TypeParameter.DATE)) {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM y 'г.' HH:mm:ss");
-                value = simpleDateFormat.format(((GregorianCalendar)value).getTime());
+                value = simpleDateFormat.format(((GregorianCalendar) value).getTime());
             }
             stringBuilder.append(parameter.getType().toString()).append(":\n\t").append(value.toString()).append("\n");
         }

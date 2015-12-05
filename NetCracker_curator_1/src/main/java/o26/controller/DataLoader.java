@@ -13,6 +13,7 @@ import java.util.List;
 
 public class DataLoader implements Loader{
 
+    @SuppressWarnings("unchecked")
     public List<ITask> loadData() {
         FileInputStream fis = null;
         ObjectInputStream ois = null;
