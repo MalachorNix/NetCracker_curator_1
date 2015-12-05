@@ -1,6 +1,7 @@
 package o26.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -49,7 +50,8 @@ public class Task implements Serializable, ITask{
             Parameter parameter = parameters.get(i);
             Object value = parameter.getValue();
             if(parameter.getType().equals(Parameter.TypeParameter.DATE)){
-                value = ((GregorianCalendar)value).getTime();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM y 'г.' HH:mm:ss");
+                value = simpleDateFormat.format(((GregorianCalendar)value).getTime());
             }
             stringBuilder.append(parameter.getType().toString()).append(":\n\t").append(value.toString()).append("\n");
         }

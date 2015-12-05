@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -18,10 +19,12 @@ public class NotificationViewer {
 
     public void show(Journal journal, int id) {
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM y 'г.' HH:mm:ss");
+
         String name = journal.getTasks().get(id).getValue(Parameter.TypeParameter.NAME).toString();
         String description = journal.getTasks().get(id).getValue(Parameter.TypeParameter.DESCRIPTION).toString();
         String contacts = journal.getTasks().get(id).getValue(Parameter.TypeParameter.CONTACTS).toString();
-        String date = ((GregorianCalendar)(journal.getTasks().get(id).getValue(Parameter.TypeParameter.DATE))).getTime().toString();
+        String date = simpleDateFormat.format(((GregorianCalendar)(journal.getTasks().get(id).getValue(Parameter.TypeParameter.DATE))).getTime());
 
         List<Parameter> parameters = new ArrayList<>();
         parameters.add(new Parameter(Parameter.TypeParameter.NAME, name));
