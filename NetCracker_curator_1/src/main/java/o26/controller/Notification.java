@@ -40,10 +40,18 @@ public class Notification implements Runnable, INotification {
     public void run() {
         long timeTask;
         while (true) {
-            timeTask = ((GregorianCalendar) actualTask.getValue(Parameter.TypeParameter.DATE)).getTimeInMillis();
-            if (System.currentTimeMillis() >= timeTask) {
-                notificationViewer.show(journal, actualTaskIndex);
-                setActual(journal);
+            if (actualTask == null) {
+                try {
+                    Thread.sleep(1000L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                timeTask = ((GregorianCalendar) actualTask.getValue(Parameter.TypeParameter.DATE)).getTimeInMillis();
+                if (System.currentTimeMillis() >= timeTask) {
+                    notificationViewer.show(journal, actualTaskIndex);
+                    setActual(journal);
+                }
             }
         }
     }

@@ -87,7 +87,7 @@ public abstract class MenuItem {
             System.out.println("Введите 1, если хотите установить свою дату оповещения.");
             System.out.println("Введите любое число, если хотите, чтобы мы напомнили через 30 минут.");
 
-            GregorianCalendar calendar = null;
+            GregorianCalendar calendar;
             Scanner in = new Scanner(System.in);
             int choice = in.nextInt();
 
