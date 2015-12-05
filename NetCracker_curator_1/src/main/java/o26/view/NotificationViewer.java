@@ -1,30 +1,29 @@
 package o26.view;
 
+import o26.controller.Journal;
+import o26.model.Parameter;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import javax.swing.*;
-
-import o26.controller.Journal;
-import o26.model.Parameter;
-import o26.model.Task;
+import java.util.List;
 
 
 public class NotificationViewer {
 
     public void show(Journal journal, int id) {
 
-        String name = ((Task)journal.getTasks().get(id)).getValue(Parameter.TypeParameter.NAME).toString();
-        String description = ((Task)journal.getTasks().get(id)).getValue(Parameter.TypeParameter.DESCRIPTION).toString();
-        String contacts = ((Task)journal.getTasks().get(id)).getValue(Parameter.TypeParameter.CONTACTS).toString();
-        String date = ((GregorianCalendar)(((Task)journal.getTasks().get(id)).getValue(Parameter.TypeParameter.DATE))).getTime().toString();
+        String name = journal.getTasks().get(id).getValue(Parameter.TypeParameter.NAME).toString();
+        String description = journal.getTasks().get(id).getValue(Parameter.TypeParameter.DESCRIPTION).toString();
+        String contacts = journal.getTasks().get(id).getValue(Parameter.TypeParameter.CONTACTS).toString();
+        String date = ((GregorianCalendar)(journal.getTasks().get(id).getValue(Parameter.TypeParameter.DATE))).getTime().toString();
 
-        List parameters = new ArrayList<>();
+        List<Parameter> parameters = new ArrayList<>();
         parameters.add(new Parameter(Parameter.TypeParameter.NAME, name));
         parameters.add(new Parameter(Parameter.TypeParameter.DESCRIPTION, description));
         parameters.add(new Parameter(Parameter.TypeParameter.CONTACTS, contacts));
@@ -165,7 +164,7 @@ public class NotificationViewer {
         });
     }
     
-    private void holdTask(Journal journal, JFrame frame, List parameters){
+    private void holdTask(Journal journal, JFrame frame, List<Parameter> parameters){
         JFrame postponedFrame = new JFrame("Отложить задачу");
         frame.dispose();
         ArrayList<JTextField> listTextFields = new ArrayList<>();
@@ -271,7 +270,7 @@ public class NotificationViewer {
         });
     }
     
-    private void inputNewDate(Journal journal, List parameters, JFrame postponedFrame,  List<JTextField> list){
+    private void inputNewDate(Journal journal, List<Parameter> parameters, JFrame postponedFrame,  List<JTextField> list){
         try {
             int newYear = Integer.parseInt(list.get(0).getText());
             int newMonth = Integer.parseInt(list.get(1).getText());

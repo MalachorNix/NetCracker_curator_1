@@ -1,5 +1,6 @@
 package o26.controller;
 
+import o26.model.ITask;
 import o26.model.Parameter;
 import o26.model.Task;
 import o26.view.NotificationViewer;
@@ -21,13 +22,13 @@ public class Notification implements Runnable, INotification {
     @Override
     public void setActual(Journal journal) {
         this.journal = journal;
-        List<Task> tasks = journal.getTasks();
+        List<ITask> tasks = journal.getTasks();
         if(tasks!=null && !tasks.isEmpty()){
             int countTasks = tasks.size();
             int index = 0;
-            long time = ((GregorianCalendar)((Task)tasks.get(index)).getValue(Parameter.TypeParameter.DATE)).getTimeInMillis();
+            long time = ((GregorianCalendar)(tasks.get(index)).getValue(Parameter.TypeParameter.DATE)).getTimeInMillis();
             for (int i = 0; i < countTasks; i++) {
-                long temp = ((GregorianCalendar)((Task)tasks.get(i)).getValue(Parameter.TypeParameter.DATE)).getTimeInMillis();
+                long temp = ((GregorianCalendar)(tasks.get(i)).getValue(Parameter.TypeParameter.DATE)).getTimeInMillis();
                 index = time > temp ? i : index;
             }
             this.actualTaskIndex = index;

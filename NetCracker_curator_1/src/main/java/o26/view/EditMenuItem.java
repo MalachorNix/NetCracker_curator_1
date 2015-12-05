@@ -1,10 +1,9 @@
 package o26.view;
 
-import java.util.List;
-
 import o26.controller.Journal;
 import o26.model.Parameter;
-import o26.model.Task;
+
+import java.util.List;
 
 public class EditMenuItem extends MenuItem {
     private static final String ITEM = "Редактирование задач";
@@ -29,7 +28,7 @@ public class EditMenuItem extends MenuItem {
                     System.out.println("\t<0> Нет");
                     if(choice(0, 1)!=0){
                         journal.editTask(selectedId-1,
-                                editParameters(( journal.getTasks().get(selectedId-1)).getParameters())
+                                editParameters((journal.getTasks().get(selectedId-1)).getParameters())
                         );
                         System.out.println("Задача изменена!\n");
                         journal.journalChanged();
@@ -45,17 +44,17 @@ public class EditMenuItem extends MenuItem {
         return ITEM;
     }
     
-    private List editParameters(List parameters){
+    private List<Parameter> editParameters(List<Parameter> parameters){
         int select;
         int count = parameters.size();
         do{
             System.out.println("Редактирование параметров");
             for(int i = 0; i < count; i++){
-                System.out.println("\t<"+(i+1)+"> "+((Parameter)(parameters.get(i))).getType().toString());
+                System.out.println("\t<"+(i+1)+"> "+ parameters.get(i).getType().toString());
             }
             System.out.println("\t<0> Сохранить изменения и вернуться к выбору задачи");
             select = choice(0, count);
-            Parameter parameter = (Parameter)(parameters.get(select-1));
+            Parameter parameter = parameters.get(select-1);
             parameter.setValue(parameter.getType(), in(parameter.getType()));
             if(select!=0){
                 System.out.println("Параметр изменен!\n");

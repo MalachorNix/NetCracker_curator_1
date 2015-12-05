@@ -8,5 +8,5 @@ public interface ITask {
 
     void setValue(Parameter.TypeParameter type, Object value);
 
-    List getParameters();
+    List<Parameter> getParameters();
 }

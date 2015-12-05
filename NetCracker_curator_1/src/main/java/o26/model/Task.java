@@ -36,7 +36,7 @@ public class Task implements Serializable, ITask{
     }
     
     @Override
-    public List getParameters(){
+    public List<Parameter> getParameters(){
         return parameters;
     }
     

@@ -6,7 +6,7 @@ public class Parameter implements Serializable{
     public enum TypeParameter{
         NAME {
             public boolean validate(Object value) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet.");
             }
 
             @Override
@@ -53,12 +53,6 @@ public class Parameter implements Serializable{
     }
     
     public Object getValue(){
-        /*switch(type){
-            case DATE:{
-                return value;
-            }
-            default: return value;
-        }*/
         if (type == TypeParameter.DATE) {
             return value;
         } else {

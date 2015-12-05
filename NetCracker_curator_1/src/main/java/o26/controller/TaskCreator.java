@@ -1,12 +1,14 @@
 package o26.controller;
 
 import java.util.List;
+
+import o26.model.Parameter;
 import o26.model.Task;
 
 public class TaskCreator implements ITaskCreator{
 
     @Override
-    public Task createTask(List parameters) {
+    public Task createTask(List<Parameter> parameters) {
         return new Task(parameters);
     }
 
@@ -16,7 +18,7 @@ public class TaskCreator implements ITaskCreator{
     * */
 
     @Override
-    public boolean validate(List parameters) {
+    public boolean validate(List<Parameter> parameters) {
         return true;
     }
 }

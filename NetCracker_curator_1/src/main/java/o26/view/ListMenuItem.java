@@ -1,15 +1,17 @@
 package o26.view;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import o26.controller.Journal;
+import o26.model.ITask;
 
 public class ListMenuItem extends MenuItem {
     private static final String ITEM = "Просмотр списка задач";
     
     @Override
     public void show(Journal journal) {
-        ArrayList tasks = (ArrayList) journal.getTasks();
+        List<ITask> tasks = (ArrayList) journal.getTasks();
         int countTasks = tasks.size();
 
         if (countTasks == 0) {

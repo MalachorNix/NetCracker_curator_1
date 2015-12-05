@@ -1,19 +1,19 @@
 package o26.controller;
 
-import o26.model.Task;
+import o26.model.ITask;
+import o26.model.Parameter;
 import o26.view.MenuItem;
 
 import java.util.List;
-import o26.model.Parameter;
 
 public class Journal {
-    private List tasks;
+    private List<ITask> tasks;
     private Loader loader;
     private ITaskCreator taskCreator;
     private MenuItem view;
     private INotification notification;
     
-    public void addTask(List parameters) {
+    public void addTask(List<Parameter> parameters) {
         if (taskCreator.validate(parameters)) {
             tasks.add(taskCreator.createTask(parameters));
         } else {
@@ -29,11 +29,11 @@ public class Journal {
         int count = parameters.size();
         for(int i = 0; i < count; i++){
             Parameter parameter = (Parameter) parameters.get(i);
-            ((Task) tasks.get(id)).setValue(parameter.getType(), parameter.getValue());
+            tasks.get(id).setValue(parameter.getType(), parameter.getValue());
         }
     }
 
-    public List<Task> getTasks() {
+    public List<ITask> getTasks() {
         return this.tasks;
     }
 

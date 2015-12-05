@@ -1,5 +1,7 @@
 package o26.controller;
 
+import o26.model.ITask;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -11,10 +13,10 @@ import java.util.List;
 
 public class DataLoader implements Loader{
 
-    public List loadData() {
+    public List<ITask> loadData() {
         FileInputStream fis = null;
         ObjectInputStream ois = null;
-        ArrayList result = null;
+        List<ITask> result = null;
         try {
             fis = new FileInputStream("data");
             ois = new ObjectInputStream(fis);
@@ -39,13 +41,12 @@ public class DataLoader implements Loader{
         return result;
     }
 
-    public void saveData(List tasks) {
+    public void saveData(List<ITask> tasks) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {
             fos = new FileOutputStream("data");
             oos = new ObjectOutputStream(fos);
-//            oos.writeObject((tasks!=null) ? tasks : new ArrayList<>());
             oos.writeObject((tasks == null) ? new ArrayList<>() : tasks);
         } catch (IOException ioe) {
             System.out.println("Ошибка сохранения: " + ioe.getMessage());
