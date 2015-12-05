@@ -17,9 +17,9 @@ import java.util.List;
 
 public class NotificationViewer {
 
-    public void show(Journal journal, int id) {
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM y 'г.' HH:mm:ss");
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM y 'г.' HH:mm:ss");
+    public void show(Journal journal, int id) {
 
         String name = journal.getTasks().get(id).getValue(Parameter.TypeParameter.NAME).toString();
         String description = journal.getTasks().get(id).getValue(Parameter.TypeParameter.DESCRIPTION).toString();
@@ -262,9 +262,7 @@ public class NotificationViewer {
 
         postponedFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-//                okButton.setSize(20, 20);
         okButton.setVisible(true);
-//                okButton.setLocation(400, 150);
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -292,13 +290,20 @@ public class NotificationViewer {
             JFrame frame2 = new JFrame("Отложить задачу");
             frame2.setVisible(true);
             frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame2.setSize(100, 125);
-            JLabel successLabel = new JLabel("Задача отложена");
+            frame2.setSize(322, 125);
+            String newDateFormat = simpleDateFormat.format(newDate.getTime());
+            JLabel successLabel = new JLabel("Задача отложена на ");
+            JLabel successLabelDate = new JLabel(newDateFormat);
             successLabel.setVisible(true);
+            successLabelDate.setVisible(true);
+
+            successLabel.setPreferredSize(successLabelDate.getPreferredSize());
 
             Box success = Box.createHorizontalBox();
             success.add(Box.createVerticalStrut(12));
             success.add(successLabel);
+            success.add(Box.createVerticalStrut(12));
+            success.add(successLabelDate);
             success.add(Box.createVerticalStrut(12));
 
             frame2.setContentPane(success);
