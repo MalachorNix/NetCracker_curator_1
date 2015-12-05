@@ -1,5 +1,6 @@
 package o26.view;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -83,20 +84,34 @@ public abstract class MenuItem {
     }
     private GregorianCalendar getDate() {
         try {
+            System.out.println("Введите 1, если хотите установить свою дату оповещения.");
+            System.out.println("Введите любое число, если хотите, чтобы мы напомнили через 30 минут.");
+
+            GregorianCalendar calendar = null;
             Scanner in = new Scanner(System.in);
-            System.out.print("Введите год: ");
-            int year = in.nextInt();
-            System.out.print("Введите месяц: ");
-            int month = in.nextInt();
-            System.out.print("Введите день: ");
-            int day = in.nextInt();
-            System.out.print("Введите час: ");
-            int hour = in.nextInt();
-            System.out.print("Введите минуту: ");
-            int minute = in.nextInt();
-            System.out.print("Введите секунду: ");
-            int second = in.nextInt();
-            return new GregorianCalendar(year, month - 1, day, hour, minute, second);
+            int choice = in.nextInt();
+
+            if (choice == 1) {
+                System.out.print("Введите год: ");
+                int year = in.nextInt();
+                System.out.print("Введите месяц: ");
+                int month = in.nextInt();
+                System.out.print("Введите день: ");
+                int day = in.nextInt();
+                System.out.print("Введите час: ");
+                int hour = in.nextInt();
+                System.out.print("Введите минуту: ");
+                int minute = in.nextInt();
+                System.out.print("Введите секунду: ");
+                int second = in.nextInt();
+                calendar = new GregorianCalendar(year, month - 1, day, hour, minute, second);
+            } else {
+                calendar = new GregorianCalendar();
+                calendar.add(Calendar.MINUTE, 30);
+            }
+
+            return calendar;
+
         } catch (Exception e) {
             System.out.println("Вводите только целые числа! Повторите ввод.");
             return getDate();
