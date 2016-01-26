@@ -2,6 +2,7 @@ package o26.controller;
 
 import o26.model.ITask;
 import o26.model.Parameter;
+import o26.model.IUser;
 import o26.view.MenuItem;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class Journal {
     private ITaskCreator taskCreator;
     private MenuItem view;
     private INotification notification;
+    private IUser user;
     
     public void addTask(List<Parameter> parameters) {
         if (taskCreator.validate(parameters)) {
@@ -72,5 +74,9 @@ public class Journal {
 
     public void setView(MenuItem view) {
         this.view = view;
+    }
+
+    public void setUser(IUser user) {
+        this.user = user;
     }
 }

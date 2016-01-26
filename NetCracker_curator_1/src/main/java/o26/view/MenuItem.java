@@ -9,7 +9,9 @@ import o26.controller.Journal;
 import o26.model.Parameter;
 
 public abstract class MenuItem {
+
     public abstract void show(Journal journal);
+
     protected int choice(int min, int max){
         int choice;
         try{
