@@ -4,12 +4,9 @@ import o26.controller.*;
 import o26.view.MenuItem;
 import o26.view.MenuMenuItem;
 import o26.view.NotificationViewer;
+import o26.view.UserItem;
 
 public final class Main {
-
-    /*
-    * Сделал приватный конструктор и финальный класс, чтобы не ругался PMD.
-    * */
 
     private Main() {
 
@@ -19,20 +16,25 @@ public final class Main {
         Loader dataLoader = new DataLoader();
         ITaskCreator taskCreator = new TaskCreator();
         INotification notification = new Notification();
-            NotificationViewer notificationViewer = new NotificationViewer();
+        NotificationViewer notificationViewer = new NotificationViewer();
         notification.setNotificationViewer(notificationViewer);
-        MenuItem menuItem = new MenuMenuItem();
+        MenuItem menuItem = new MenuMenuItem(); //Итем главного меню
+        MenuItem userItem = new UserItem();
         Journal journal = new Journal();
 
         journal.setLoader(dataLoader);
         journal.setTaskCreator(taskCreator);
         journal.setNotification(notification);
+        journal.setView(userItem);
+
+        journal.showMenu();
+
         journal.setView(menuItem);
-        
+
         journal.load();
         journal.notificationStart();
         journal.showMenu();
-        
+
         System.exit(0);
     }
 }
