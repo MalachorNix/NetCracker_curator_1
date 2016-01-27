@@ -17,14 +17,15 @@ public class UserItem extends MenuItem {
         System.out.println("Чтобы зарегистрироваться, нажмите 2.");
         System.out.println("Чтобы выйти из программы, нажмите 0.");
 
-        choice();
+        choice(journal);
 
 
     }
 
-    private void choice() {
+    private void choice(Journal journal) {
         Scanner scanner = new Scanner(System.in);
         int choice;
+        String login, password, password1;
         try {
             do {
                 System.out.print("Выберите действие: ");
@@ -32,10 +33,12 @@ public class UserItem extends MenuItem {
                 switch (choice) {
                     case 1:
                         System.out.println("Ввод логина/пароля");
-                        login();
+                        login = inputLogin();
+                        password = inputPassword();
                         break;
                     case 2:
                         System.out.println("Регистрация");
+                        registration(journal);
                         break;
                     case 0:
                         System.exit(0);
@@ -45,13 +48,48 @@ public class UserItem extends MenuItem {
             } while (choice != 1);
         } catch (InputMismatchException e) {
             System.out.println("Вводите только целые числа.");
-            choice();
+            choice(journal);
         }
     }
 
-    private void login() {
+    private void registration(Journal journal) {
+        String login;
+        String password;
+        String password1;
+        int check = 0;
 
+        login = inputLogin();
+
+        do {
+            password = inputPassword();
+            password1 = inputPassword();
+
+            check = journal.validatePasswords(password, password1);
+            if (check == -1) {
+                System.out.println("Пароли не совпадают. Попробуйте снова.");
+            }
+        } while (check != 1);
+
+        journal.registration(login, password);
     }
+
+    private String inputLogin() {
+        Scanner scanner = new Scanner(System.in);
+        String login;
+
+        System.out.print("Введите свой логин: ");
+        login = scanner.nextLine();
+        return login;
+    }
+
+    private String inputPassword() {
+        String password;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите свой пароль: ");
+        password = scanner.nextLine();
+        return password;
+    }
+
 
     @Override
     public String toString() {

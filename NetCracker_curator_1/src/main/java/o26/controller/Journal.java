@@ -14,6 +14,7 @@ public class Journal {
     private MenuItem view;
     private INotification notification;
     private IUser user;
+    private IUserData userData;
     
     public void addTask(List<Parameter> parameters) {
         if (taskCreator.validate(parameters)) {
@@ -78,5 +79,21 @@ public class Journal {
 
     public void setUser(IUser user) {
         this.user = user;
+    }
+
+    public void setUserData(IUserData userData) {
+        this.userData = userData;
+    }
+
+    public int validatePasswords(String password, String password1) {
+        if (password.equals(password1)) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    public void registration(String login, String password) {
+        this.userData.userRegistration(login, password);
     }
 }

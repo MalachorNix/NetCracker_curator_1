@@ -19,13 +19,15 @@ public final class Main {
         NotificationViewer notificationViewer = new NotificationViewer();
         notification.setNotificationViewer(notificationViewer);
         MenuItem menuItem = new MenuMenuItem(); //Итем главного меню
-        MenuItem userItem = new UserItem();
+        MenuItem userItem = new UserItem(); //Итем входа пользователя
+        IUserData userData = new UserData();
         Journal journal = new Journal();
 
         journal.setLoader(dataLoader);
         journal.setTaskCreator(taskCreator);
         journal.setNotification(notification);
         journal.setView(userItem);
+        journal.setUserData(userData);
 
         journal.showMenu();
 
