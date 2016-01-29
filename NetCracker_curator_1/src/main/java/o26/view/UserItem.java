@@ -49,6 +49,8 @@ public class UserItem extends MenuItem {
                 }
             } while (choice != 1);
             if(!login(journal)) {
+                System.out.println("Неправильный логин или пароль!");
+                salutation();
                 choice(journal);
             }
         } catch (InputMismatchException e) {
@@ -61,15 +63,15 @@ public class UserItem extends MenuItem {
         String login = inputLogin();
         String password = inputPassword();
         
-        journal.login(login, password);//todo
-        return true;
+        journal.login(login, password);
+        return false;
     }
 
     private void registration(Journal journal) {
         String login;
         String password;
         String password1;
-        int check;
+        boolean check;
 
         login = inputLogin();
 
@@ -78,12 +80,12 @@ public class UserItem extends MenuItem {
             password1 = inputPassword();
 
             check = journal.validatePasswords(password, password1);
-            if (check == -1) {
+            if (!check) {
                 System.out.println("Пароли не совпадают. Попробуйте снова.");
             }
-        } while (check != 1);
+        } while (!check);
 
-        if (journal.registration(login, password) == -1) {
+        if (!journal.registration(login, password)) {
             System.out.println("Данный логин занят. Попробуйте другой.");
         } else {
             System.out.println("Регистрация прошла успешно!");

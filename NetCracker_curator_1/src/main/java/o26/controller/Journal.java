@@ -87,32 +87,32 @@ public class Journal {
         this.userData = userData;
     }
 
-    public int validatePasswords(String password, String password1) {
+    public boolean validatePasswords(String password, String password1) {
         if (password.equals(password1)) {
-            return 1;
+            return true;
         } else {
-            return -1;
+            return false;
         }
     }
 
-    public int registration(String login, String password) {
-        if (this.userData.userRegistration(login, password) == -1) {
-            return -1;
+    public boolean registration(String login, String password) {
+        if (!this.userData.userRegistration(login, password)) {
+            return false;
         } else {
-            return 1;
+            return true;
         }
     }
     
-    public int checkLogin(String login) {
-        if (this.userData.checkLogin(login) == -1) {
-            return 1;
+    public boolean checkLogin(String login) {
+        if (!this.userData.checkLogin(login)) {
+            return true;
         } else {
-            return -1;
+            return false;
         }
     }
     
     public void login(String login, String password) {
-        if (checkLogin(login) == 1 && this.userData.checkPassword(login, password) == 1) {
+        if (checkLogin(login) && this.userData.checkPassword(login, password)) {
             user = new User(login, password);
             view = new MenuMenuItem();
             this.load();

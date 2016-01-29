@@ -2,18 +2,16 @@ package o26.controller;
 
 
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UserData implements IUserData{
 
     @Override
-    public int userRegistration(String login, String password) {
+    public boolean userRegistration(String login, String password) {
 
         FileWriter fileWriter = null;
         
-        if(checkLogin(login) == -1) {
-            return -1;
+        if(!checkLogin(login)) {
+            return false;
         }
         
         try {
@@ -34,11 +32,11 @@ public class UserData implements IUserData{
                 }
             }
         }
-        return 1;
+        return true;
     }
     
     @Override
-    public int checkLogin(String login) {
+    public boolean checkLogin(String login) {
         FileReader reader = null;
         BufferedReader bufferedReader = null;
         
@@ -49,7 +47,7 @@ public class UserData implements IUserData{
             do {
                 login1 = bufferedReader.readLine();
                     if (login.equals(login1)) {
-                    return -1;
+                    return false;
                     }
             } while (bufferedReader.readLine() != null);
         } catch (FileNotFoundException e) {
@@ -75,11 +73,11 @@ public class UserData implements IUserData{
                 }
             }
         }
-        return 1;
+        return true;
     }
     
     @Override
-    public int checkPassword(String login, String password) {
+    public boolean checkPassword(String login, String password) {
         FileReader reader = null;
         BufferedReader bufferedReader = null;
         
@@ -88,7 +86,7 @@ public class UserData implements IUserData{
             bufferedReader = new BufferedReader(reader);
             while(!login.equals(bufferedReader.readLine()));
             if (password.equals(bufferedReader.readLine())) {
-                return 1;
+                return true;
             }
         } catch (FileNotFoundException ex) {
             System.out.println("Файл users не найден!");
@@ -114,6 +112,6 @@ public class UserData implements IUserData{
             }
         }
         
-        return -1;
+        return false;
     }
 }
