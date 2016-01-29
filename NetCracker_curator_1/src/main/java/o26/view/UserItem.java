@@ -12,14 +12,15 @@ public class UserItem extends MenuItem {
 
     @Override
     public void show(Journal journal) {
+        salutation();
+        choice(journal);
+    }
+    
+    private void salutation() {
         System.out.println("Добро пожаловать в планировщик задач!");
         System.out.println("Чтобы войти в программу, нажмите 1.");
         System.out.println("Чтобы зарегистрироваться, нажмите 2.");
         System.out.println("Чтобы выйти из программы, нажмите 0.");
-
-        choice(journal);
-
-
     }
 
     private void choice(Journal journal) {
@@ -56,7 +57,7 @@ public class UserItem extends MenuItem {
         String login;
         String password;
         String password1;
-        int check = 0;
+        int check;
 
         login = inputLogin();
 
@@ -70,7 +71,12 @@ public class UserItem extends MenuItem {
             }
         } while (check != 1);
 
-        journal.registration(login, password);
+        if (journal.registration(login, password) == -1) {
+            System.out.println("Данный логин занят. Попробуйте другой.");
+        } else {
+            System.out.println("Регистрация прошла успешно!");
+        }
+        salutation();
     }
 
     private String inputLogin() {

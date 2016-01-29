@@ -93,7 +93,11 @@ public class Journal {
         }
     }
 
-    public void registration(String login, String password) {
-        this.userData.userRegistration(login, password);
+    public int registration(String login, String password) {
+        if (this.userData.userRegistration(login, password) == -1) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 }
