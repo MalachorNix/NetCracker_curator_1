@@ -34,8 +34,9 @@ public class UserItem extends MenuItem {
                 switch (choice) {
                     case 1:
                         System.out.println("Ввод логина/пароля");
-                        login = inputLogin();
-                        password = inputPassword();
+//                        login = inputLogin();
+//                        password = inputPassword();
+//                        login(journal);
                         break;
                     case 2:
                         System.out.println("Регистрация");
@@ -47,10 +48,21 @@ public class UserItem extends MenuItem {
                         System.out.println("Такого действия нет!");
                 }
             } while (choice != 1);
+            if(!login(journal)) {
+                choice(journal);
+            }
         } catch (InputMismatchException e) {
             System.out.println("Вводите только целые числа.");
             choice(journal);
         }
+    }
+    
+    private boolean login(Journal journal) {
+        String login = inputLogin();
+        String password = inputPassword();
+        
+        journal.login(login, password);//todo
+        return true;
     }
 
     private void registration(Journal journal) {

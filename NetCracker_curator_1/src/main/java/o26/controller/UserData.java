@@ -2,6 +2,8 @@ package o26.controller;
 
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserData implements IUserData{
 
@@ -35,7 +37,8 @@ public class UserData implements IUserData{
         return 1;
     }
     
-    private int checkLogin(String login) {
+    @Override
+    public int checkLogin(String login) {
         FileReader reader = null;
         BufferedReader bufferedReader = null;
         
@@ -50,9 +53,9 @@ public class UserData implements IUserData{
                     }
             } while (bufferedReader.readLine() != null);
         } catch (FileNotFoundException e) {
-            System.out.println("Файл logins не найден!");
+            System.out.println("Файл users не найден!");
         } catch (IOException e) {
-            System.out.println("Ошибка чтения из файла logins");
+            System.out.println("Ошибка чтения из файла users");
         } finally {
             if (reader != null) {
                 try {
@@ -73,5 +76,44 @@ public class UserData implements IUserData{
             }
         }
         return 1;
+    }
+    
+    @Override
+    public int checkPassword(String login, String password) {
+        FileReader reader = null;
+        BufferedReader bufferedReader = null;
+        
+        try {
+            reader = new FileReader("users");
+            bufferedReader = new BufferedReader(reader);
+            while(!login.equals(bufferedReader.readLine()));
+            if (password.equals(bufferedReader.readLine())) {
+                return 1;
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Файл users не найден!");
+        } catch (IOException e) {
+            System.out.println("Ошибка чтения из файла users");
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    System.out.println("Ошибка ввода/вывода при закрытии "
+                            + "потока чтения");
+                }
+            }
+            
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    System.out.println("Ошибка ввода/вывода при закрытии "
+                            + "потока чтения");
+                }
+            }
+        }
+        
+        return -1;
     }
 }

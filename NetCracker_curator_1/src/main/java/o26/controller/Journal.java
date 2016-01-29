@@ -6,6 +6,8 @@ import o26.model.IUser;
 import o26.view.MenuItem;
 
 import java.util.List;
+import o26.model.User;
+import o26.view.MenuMenuItem;
 
 public class Journal {
     private List<ITask> tasks;
@@ -98,6 +100,24 @@ public class Journal {
             return -1;
         } else {
             return 1;
+        }
+    }
+    
+    public int checkLogin(String login) {
+        if (this.userData.checkLogin(login) == -1) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+    
+    public void login(String login, String password) {
+        if (checkLogin(login) == 1 && this.userData.checkPassword(login, password) == 1) {
+            user = new User(login, password);
+            view = new MenuMenuItem();
+            this.load();
+            this.notificationStart();
+            this.showMenu();
         }
     }
 }

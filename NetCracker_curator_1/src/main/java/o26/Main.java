@@ -31,11 +31,11 @@ public final class Main {
 
         journal.showMenu();
 
-        journal.setView(menuItem);
-
-        journal.load();
-        journal.notificationStart();
-        journal.showMenu();
+//        journal.setView(menuItem);
+//
+//        journal.load();
+//        journal.notificationStart();
+//        journal.showMenu();
 
         System.exit(0);
     }
