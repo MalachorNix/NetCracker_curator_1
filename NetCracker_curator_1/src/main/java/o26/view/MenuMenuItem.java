@@ -16,7 +16,8 @@ public class MenuMenuItem extends MenuItem {
         item.add(new EditMenuItem());
         item.add(new DeleteMenuItem());
         int select;
-        System.out.println("Планировщик задач");
+        System.out.println("\nДобро пожаловать, " + journal.getUserLogin() 
+                + "\n");
         do{
             int countPoints = item.size();
             for(int i = 0; i < countPoints; i++){

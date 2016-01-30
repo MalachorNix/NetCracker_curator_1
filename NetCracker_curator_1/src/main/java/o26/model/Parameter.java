@@ -28,6 +28,10 @@ public class Parameter implements Serializable{
             public String toString() {
                 return "контакты";
             }
+        }, ID {
+            public String toString() {
+                return "id";
+            }
         }
     }
     private TypeParameter type;

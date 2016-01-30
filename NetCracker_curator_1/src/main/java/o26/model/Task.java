@@ -9,12 +9,12 @@ import java.util.List;
 public class Task implements Serializable, ITask{
 
     private List<Parameter> parameters;
-
+    
     public Task(List<Parameter> parameters) {
         this.parameters = parameters;
     }
-
-    @Override
+    
+   @Override
     public Object getValue(Parameter.TypeParameter type) {
         for (Parameter parameter : parameters) {
             if (type == parameter.getType()) return parameter.getValue();

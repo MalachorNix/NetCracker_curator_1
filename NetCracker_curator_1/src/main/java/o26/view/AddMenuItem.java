@@ -11,11 +11,17 @@ public class AddMenuItem extends MenuItem {
     @Override
     public void show(Journal journal) {
         List<Parameter> parameters = new ArrayList<>();
-        parameters.add(new Parameter(Parameter.TypeParameter.NAME, in(Parameter.TypeParameter.NAME)));
-        parameters.add(new Parameter(Parameter.TypeParameter.DESCRIPTION, in(Parameter.TypeParameter.DESCRIPTION)));
-        parameters.add(new Parameter(Parameter.TypeParameter.CONTACTS, in(Parameter.TypeParameter.CONTACTS)));
-        parameters.add(new Parameter(Parameter.TypeParameter.DATE, in(Parameter.TypeParameter.DATE)));
-        journal.addTask(parameters);
+        Object name =  in(Parameter.TypeParameter.NAME);
+        Object description = in(Parameter.TypeParameter.DESCRIPTION);
+        Object contacts = in(Parameter.TypeParameter.CONTACTS);
+        Object date = in(Parameter.TypeParameter.DATE);
+      
+        parameters.add(new Parameter(Parameter.TypeParameter.NAME, name));
+        parameters.add(new Parameter(Parameter.TypeParameter.DESCRIPTION, description));
+        parameters.add(new Parameter(Parameter.TypeParameter.CONTACTS, contacts));
+        parameters.add(new Parameter(Parameter.TypeParameter.DATE, date));
+        parameters.add(new Parameter(Parameter.TypeParameter.ID, 0));
+        journal.addTask(parameters, journal.getTasks());
         System.out.println("Задача добавлена!\n");
         journal.journalChanged();
     }

@@ -18,8 +18,8 @@ public class Journal {
     private IUser user;
     private IUserData userData;
     
-    public void addTask(List<Parameter> parameters) {
-        if (taskCreator.validate(parameters)) {
+    public void addTask(List<Parameter> parameters, List<ITask> tasks) {
+        if (taskCreator.validate(parameters, tasks)) {
             tasks.add(taskCreator.createTask(parameters));
         } else {
             System.out.println("Задачу создать нельзя!");
@@ -81,6 +81,10 @@ public class Journal {
 
     public void setUser(IUser user) {
         this.user = user;
+    }
+    
+    public String getUserLogin() {
+        return user.getLogin();
     }
 
     public void setUserData(IUserData userData) {

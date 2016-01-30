@@ -34,9 +34,6 @@ public class UserItem extends MenuItem {
                 switch (choice) {
                     case 1:
                         System.out.println("Ввод логина/пароля");
-//                        login = inputLogin();
-//                        password = inputPassword();
-//                        login(journal);
                         break;
                     case 2:
                         System.out.println("Регистрация");

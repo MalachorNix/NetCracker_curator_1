@@ -283,7 +283,7 @@ public class NotificationViewer {
             GregorianCalendar newDate = new GregorianCalendar(newYear, newMonth - 1, newDay, newHour,
                     newMinute, newSecond);
             parameters.add(new Parameter(Parameter.TypeParameter.DATE, newDate));
-            journal.addTask(parameters);
+            journal.addTask(parameters, journal.getTasks());
             journal.journalChanged();
             postponedFrame.dispose();
 
