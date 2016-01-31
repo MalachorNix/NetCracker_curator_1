@@ -51,7 +51,7 @@ public class UserData implements IUserData{
                     }
             } while (bufferedReader.readLine() != null);
         } catch (FileNotFoundException e) {
-            System.out.println("Файл users не найден!");
+            System.out.println("Такого пользователя нет!");
         } catch (IOException e) {
             System.out.println("Ошибка чтения из файла users");
         } finally {
@@ -89,7 +89,7 @@ public class UserData implements IUserData{
                 return true;
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("Файл users не найден!");
+            System.out.println("Такого пользователя нет!");
         } catch (IOException e) {
             System.out.println("Ошибка чтения из файла users");
         } finally {

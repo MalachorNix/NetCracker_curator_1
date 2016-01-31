@@ -1,6 +1,7 @@
 package o26.view;
 
 
+import java.io.Console;
 import o26.controller.Journal;
 
 import java.util.InputMismatchException;
@@ -9,7 +10,8 @@ import java.util.Scanner;
 public class UserItem extends MenuItem {
 
     private static final String ITEM = "Экран входа пользователя";
-
+    private static final Console console = System.console();
+    
     @Override
     public void show(Journal journal) {
         salutation();
@@ -57,8 +59,14 @@ public class UserItem extends MenuItem {
     }
     
     private boolean login(Journal journal) {
+        String password;
         String login = inputLogin();
-        String password = inputPassword();
+        
+        if (console == null) {
+            password = inputPassword();
+        } else {
+            password = hidePassword();
+        }
         
         journal.login(login, password);
         return false;
@@ -73,9 +81,16 @@ public class UserItem extends MenuItem {
         login = inputLogin();
 
         do {
+//            password = inputPassword();
+//            password1 = inputPassword();
+            
+            if (console == null) {
             password = inputPassword();
             password1 = inputPassword();
-
+            } else {
+            password = hidePassword();
+            password1 = hidePassword();
+            }
             check = journal.validatePasswords(password, password1);
             if (!check) {
                 System.out.println("Пароли не совпадают. Попробуйте снова.");
@@ -101,9 +116,20 @@ public class UserItem extends MenuItem {
 
     private String inputPassword() {
         String password;
+        
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите свой пароль: ");
         password = scanner.nextLine();
+        
+        return password;
+    }
+    
+    private String hidePassword() {
+        String password;
+        
+        char[] pass = console.readPassword("Введите свой пароль: ");
+        password = new String(pass);
+        
         return password;
     }
 

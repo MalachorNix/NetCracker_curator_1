@@ -10,10 +10,12 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DataLoader implements Loader{
 
     @SuppressWarnings("unchecked")
+    @Override
     public List<ITask> loadData() {
         FileInputStream fis = null;
         ObjectInputStream ois = null;
@@ -30,25 +32,32 @@ public class DataLoader implements Loader{
             try {
                 if (ois != null) ois.close();
             } catch (IOException e) {
-                System.out.println("Ошибка закрытия потока чтения задач: " + e.getMessage());
+                System.out.println("Ошибка закрытия потока чтения задач: " 
+                        + e.getMessage());
             } finally {
                 try {
                     if (fis != null) fis.close();
                 } catch (IOException e) {
-                    System.out.println("Ошибка закрытия потока чтения задач из файла: " + e.getMessage());
+                    System.out.println("Ошибка закрытия потока чтения "
+                            + "задач из файла: " 
+                            + e.getMessage());
                 }
             }
         }
         return result;
     }
 
-    public void saveData(List<ITask> tasks) {
+    @Override
+    public void saveData(List<ITask> tasks, Map<String, Integer> idList) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {
             fos = new FileOutputStream("data");
             oos = new ObjectOutputStream(fos);
             oos.writeObject((tasks == null) ? new ArrayList<>() : tasks);
+            fos = new FileOutputStream("loginAndId");
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(idList);
         } catch (IOException ioe) {
             System.out.println("Ошибка сохранения: " + ioe.getMessage());
         } finally {
@@ -57,14 +66,16 @@ public class DataLoader implements Loader{
                     oos.close();
                 }
             } catch (IOException ex) {
-                System.out.println("Ошибка закрытия потока записи задач: " + ex.getMessage());
+                System.out.println("Ошибка закрытия потока записи задач: " 
+                        + ex.getMessage());
             } finally {
                 try {
                     if (fos != null) {
                         fos.close();
                     }
                 } catch (IOException ex) {
-                    System.out.println("Ошибка закрытия потока записи в файл: " + ex.getMessage());
+                    System.out.println("Ошибка закрытия потока записи в файл: " 
+                            + ex.getMessage());
                 }
             }
         }

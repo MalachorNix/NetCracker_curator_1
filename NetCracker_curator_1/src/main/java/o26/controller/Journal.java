@@ -3,11 +3,14 @@ package o26.controller;
 import o26.model.ITask;
 import o26.model.Parameter;
 import o26.model.IUser;
+import o26.model.User;
+import o26.view.MenuMenuItem;
 import o26.view.MenuItem;
 
 import java.util.List;
-import o26.model.User;
-import o26.view.MenuMenuItem;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Journal {
     private List<ITask> tasks;
@@ -42,7 +45,11 @@ public class Journal {
     }
 
     public void save() {
-        loader.saveData(tasks);
+        Map<String, Integer> idList = new HashMap<>();
+        for(ITask task: tasks) {
+            idList.put(user.getLogin(), (Integer) task.getValue(Parameter.TypeParameter.ID));
+        }
+        loader.saveData(tasks, idList);
     }
 
     @SuppressWarnings("unchecked")
@@ -117,7 +124,7 @@ public class Journal {
     
     public void login(String login, String password) {
         if (checkLogin(login) && this.userData.checkPassword(login, password)) {
-            user = new User(login, password);
+            user = new User(login, password, new ArrayList<Integer>());
             view = new MenuMenuItem();
             this.load();
             this.notificationStart();
