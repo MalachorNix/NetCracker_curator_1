@@ -28,7 +28,6 @@ public class UserItem extends MenuItem {
     private void choice(Journal journal) {
         Scanner scanner = new Scanner(System.in);
         int choice;
-        String login, password, password1;
         try {
             do {
                 System.out.print("Выберите действие: ");
@@ -43,6 +42,7 @@ public class UserItem extends MenuItem {
                         break;
                     case 0:
                         System.exit(0);
+                        break;
                     default:
                         System.out.println("Такого действия нет!");
                 }

@@ -16,14 +16,18 @@ public class TaskCreator implements ITaskCreator{
     @Override
     public boolean validate(List<Parameter> parameters, List<ITask> tasks) {
         int id;
-        for (Parameter parameter : parameters) {
-            if (parameter.getType().toString().equals(parameter.getType().ID.toString())) {
-                id = (int) parameter.getValue();
-                for(int i = 0; i < tasks.size(); i++) {
-                    if ((int) tasks.get(i).getValue(Parameter.TypeParameter.ID) > id) {
-                        id = (int) tasks.get(i).getValue(Parameter.TypeParameter.ID);
-                        id++;
-                        parameter.setValue(Parameter.TypeParameter.ID, id);
+        if (tasks != null && tasks.size() >= 0) {
+            for (Parameter parameter : parameters) {
+                if (parameter.getType().toString().equals(Parameter.TypeParameter.ID.toString())) {
+                    id = (int) parameter.getValue();
+                    if (tasks.size() > 0) {
+                        for (int i = 0; i < tasks.size(); i++) {
+                            if ((int) tasks.get(i).getValue(Parameter.TypeParameter.ID) >= id) {
+                                id = (int) tasks.get(i).getValue(Parameter.TypeParameter.ID);
+                                id++;
+                                parameter.setValue(Parameter.TypeParameter.ID, id);
+                            }
+                        }
                     }
                 }
             }
