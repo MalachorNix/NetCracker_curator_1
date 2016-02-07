@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class UserItem extends MenuItem {
 
     private static final String ITEM = "Экран входа пользователя";
-    private static final Console console = System.console();
+    private static final Console CONSOLE = System.console();
     
     @Override
     public void show(Journal journal) {
@@ -45,11 +45,13 @@ public class UserItem extends MenuItem {
                         break;
                     default:
                         System.out.println("Такого действия нет!");
+                        break;
                 }
             } while (choice != 1);
             if(!login(journal)) {
                 System.out.println("Неправильный логин или пароль!");
                 salutation();
+//                journal = new Journal();
                 choice(journal);
             }
         } catch (InputMismatchException e) {
@@ -62,7 +64,7 @@ public class UserItem extends MenuItem {
         String password;
         String login = inputLogin();
         
-        if (console == null) {
+        if (CONSOLE == null) {
             password = inputPassword();
         } else {
             password = hidePassword();
@@ -80,11 +82,8 @@ public class UserItem extends MenuItem {
 
         login = inputLogin();
 
-        do {
-//            password = inputPassword();
-//            password1 = inputPassword();
-            
-            if (console == null) {
+        do {            
+            if (CONSOLE == null) {
             password = inputPassword();
             password1 = inputPassword();
             } else {
@@ -127,7 +126,7 @@ public class UserItem extends MenuItem {
     private String hidePassword() {
         String password;
         
-        char[] pass = console.readPassword("Введите свой пароль: ");
+        char[] pass = CONSOLE.readPassword("Введите свой пароль: ");
         password = new String(pass);
         
         return password;

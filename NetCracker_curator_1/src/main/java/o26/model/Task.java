@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Objects;
 
 
 public class Task implements Serializable, ITask{
@@ -51,5 +52,20 @@ public class Task implements Serializable, ITask{
         }
         result = stringBuilder.toString();
         return result;
+    }
+    
+//    @Override
+//    public boolean equals(Object o) {
+//        if(!(o instanceof ITask)) {
+//            return false;
+//        }
+//        
+//    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.parameters);
+        return hash;
     }
 }

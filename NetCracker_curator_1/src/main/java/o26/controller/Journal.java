@@ -9,8 +9,6 @@ import o26.view.MenuItem;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Journal {
     private List<ITask> tasks;
@@ -20,9 +18,10 @@ public class Journal {
     private INotification notification;
     private IUser user;
     private IUserData userData;
+    private List<Integer> listId;
     
     public void addTask(List<Parameter> parameters, List<ITask> tasks) {
-        if (taskCreator.validate(parameters, tasks)) {
+        if (taskCreator.validate(parameters, listId)) {
             tasks.add(taskCreator.createTask(parameters));
         } else {
             System.out.println("Задачу создать нельзя!");
@@ -30,6 +29,7 @@ public class Journal {
     }
 
     public void deleteTask(int id) {
+        listId.remove(tasks.get(id).getValue(Parameter.TypeParameter.ID));
         tasks.remove(id);
     }
 
@@ -45,16 +45,16 @@ public class Journal {
     }
 
     public void save() {
-        Map<String, Integer> idList = new HashMap<>();
+        List<Integer> idList = new ArrayList<>();
         for(ITask task: tasks) {
-            idList.put(user.getLogin(), (Integer) task.getValue(Parameter.TypeParameter.ID));
+            idList.add((Integer) task.getValue(Parameter.TypeParameter.ID));
         }
-        loader.saveData(tasks, idList);
+        loader.saveData(tasks, user.getLogin(), idList);
     }
 
     @SuppressWarnings("unchecked")
     public void load() {
-        tasks = loader.loadData();
+        tasks = loader.loadData(user.getLogin());
     }
     
     public void showMenu() {
@@ -124,8 +124,10 @@ public class Journal {
     
     public void login(String login, String password) {
         if (checkLogin(login) && this.userData.checkPassword(login, password)) {
-            user = new User(login, password, new ArrayList<Integer>());
+            user = new User(login, password, new ArrayList<>());
             view = new MenuMenuItem();
+            this.listId = loader.getListId();
+            tasks = null;
             this.load();
             this.notificationStart();
             this.showMenu();

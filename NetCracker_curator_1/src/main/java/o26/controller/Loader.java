@@ -3,11 +3,12 @@ package o26.controller;
 import o26.model.ITask;
 
 import java.util.List;
-import java.util.Map;
 
 public interface Loader {
 
-    List loadData();
+    List loadData(String login);
 
-    void saveData(List<ITask> tasks, Map<String, Integer> idList);
+    void saveData(List<ITask> tasks, String login, List<Integer> idList);
+    
+    List<Integer> getListId();
 }
