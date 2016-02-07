@@ -54,13 +54,22 @@ public class Task implements Serializable, ITask{
         return result;
     }
     
-//    @Override
-//    public boolean equals(Object o) {
-//        if(!(o instanceof ITask)) {
-//            return false;
-//        }
-//        
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if(!(o instanceof ITask)) {
+            return false;
+        }
+        for (int i = 0; i < parameters.size(); i++) {
+            if (!this.parameters.get(i).getValue().equals(((ITask) o).getParameters().get(i).getValue())) {
+                return false;
+            }
+        }
+        /*if (this.hashCode() != o.hashCode()) {
+            return false;
+        }*/
+        return true;
+
+    }
 
     @Override
     public int hashCode() {
