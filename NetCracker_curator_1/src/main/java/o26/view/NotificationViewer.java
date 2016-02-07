@@ -21,150 +21,152 @@ public class NotificationViewer {
 
     public void show(Journal journal, int id) {
 
-        String name = journal.getTasks().get(id).getValue(Parameter.TypeParameter.NAME).toString();
-        String description = journal.getTasks().get(id).getValue(Parameter.TypeParameter.DESCRIPTION).toString();
-        String contacts = journal.getTasks().get(id).getValue(Parameter.TypeParameter.CONTACTS).toString();
-        String date = simpleDateFormat.format(((GregorianCalendar)(journal.getTasks().get(id).getValue(Parameter.TypeParameter.DATE))).getTime());
+        if (!journal.getTasks().isEmpty()) {
+            String name = journal.getTasks().get(id).getValue(Parameter.TypeParameter.NAME).toString();
+            String description = journal.getTasks().get(id).getValue(Parameter.TypeParameter.DESCRIPTION).toString();
+            String contacts = journal.getTasks().get(id).getValue(Parameter.TypeParameter.CONTACTS).toString();
+            String date = simpleDateFormat.format(((GregorianCalendar)(journal.getTasks().get(id).getValue(Parameter.TypeParameter.DATE))).getTime());
 
-        List<Parameter> parameters = new ArrayList<>();
-        parameters.add(new Parameter(Parameter.TypeParameter.NAME, name));
-        parameters.add(new Parameter(Parameter.TypeParameter.DESCRIPTION, description));
-        parameters.add(new Parameter(Parameter.TypeParameter.CONTACTS, contacts));
+            List<Parameter> parameters = new ArrayList<>();
+            parameters.add(new Parameter(Parameter.TypeParameter.NAME, name));
+            parameters.add(new Parameter(Parameter.TypeParameter.DESCRIPTION, description));
+            parameters.add(new Parameter(Parameter.TypeParameter.CONTACTS, contacts));
 
-        JFrame frame = new JFrame();
-        frame.setSize(800, 250);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
+            JFrame frame = new JFrame();
+            frame.setSize(800, 250);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.addWindowListener(new WindowListener() {
+                @Override
+                public void windowOpened(WindowEvent e) {
 
-            }
+                }
 
-            @Override
-            public void windowClosing(WindowEvent e) {
-                holdTask(journal, frame, parameters);
-            }
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    holdTask(journal, frame, parameters);
+                }
 
-            @Override
-            public void windowClosed(WindowEvent e) {
+                @Override
+                public void windowClosed(WindowEvent e) {
 
-            }
+                }
 
-            @Override
-            public void windowIconified(WindowEvent e) {
+                @Override
+                public void windowIconified(WindowEvent e) {
 
-            }
+                }
 
-            @Override
-            public void windowDeiconified(WindowEvent e) {
+                @Override
+                public void windowDeiconified(WindowEvent e) {
 
-            }
+                }
 
-            @Override
-            public void windowActivated(WindowEvent e) {
+                @Override
+                public void windowActivated(WindowEvent e) {
 
-            }
+                }
 
-            @Override
-            public void windowDeactivated(WindowEvent e) {
+                @Override
+                public void windowDeactivated(WindowEvent e) {
 
-            }
-        });
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
+                }
+            });
+            frame.setVisible(true);
+            frame.setLocationRelativeTo(null);
 
-        Box boxName = Box.createHorizontalBox();
-        JLabel labelName = new JLabel("Название задачи:");
-        JLabel textName = new JLabel(name);
-        boxName.add(labelName);
-        boxName.add(Box.createHorizontalStrut(12));
-        boxName.add(textName);
+            Box boxName = Box.createHorizontalBox();
+            JLabel labelName = new JLabel("Название задачи:");
+            JLabel textName = new JLabel(name);
+            boxName.add(labelName);
+            boxName.add(Box.createHorizontalStrut(12));
+            boxName.add(textName);
 
-        Box boxDescription = Box.createHorizontalBox();
-        JLabel labelDescription = new JLabel("Описание задачи:");
-        JLabel textDescription = new JLabel(description);
-        boxDescription.add(labelDescription);
-        boxDescription.add(Box.createHorizontalStrut(12));
-        boxDescription.add(textDescription);
+            Box boxDescription = Box.createHorizontalBox();
+            JLabel labelDescription = new JLabel("Описание задачи:");
+            JLabel textDescription = new JLabel(description);
+            boxDescription.add(labelDescription);
+            boxDescription.add(Box.createHorizontalStrut(12));
+            boxDescription.add(textDescription);
 
-        Box boxContacts = Box.createHorizontalBox();
-        JLabel labelContacts = new JLabel("Контакты:");
-        JLabel textContacts = new JLabel(contacts);
-        boxContacts.add(labelContacts);
-        boxContacts.add(Box.createHorizontalStrut(12));
-        boxContacts.add(textContacts);
+            Box boxContacts = Box.createHorizontalBox();
+            JLabel labelContacts = new JLabel("Контакты:");
+            JLabel textContacts = new JLabel(contacts);
+            boxContacts.add(labelContacts);
+            boxContacts.add(Box.createHorizontalStrut(12));
+            boxContacts.add(textContacts);
 
-        Box boxDate = Box.createHorizontalBox();
-        JLabel labelDate = new JLabel("Время:");
-        JLabel textDate = new JLabel(date);
-        boxDate.add(labelDate);
-        boxDate.add(Box.createHorizontalStrut(12));
-        boxDate.add(textDate);
+            Box boxDate = Box.createHorizontalBox();
+            JLabel labelDate = new JLabel("Время:");
+            JLabel textDate = new JLabel(date);
+            boxDate.add(labelDate);
+            boxDate.add(Box.createHorizontalStrut(12));
+            boxDate.add(textDate);
 
-        Box boxButtons = Box.createHorizontalBox();
-        JButton postponed = new JButton("Отложить");
-        JButton complete = new JButton("Завершить");
-        boxButtons.add(postponed, Component.CENTER_ALIGNMENT);
-        boxButtons.add(Box.createHorizontalStrut(12));
-        boxButtons.add(complete, Component.CENTER_ALIGNMENT);
+            Box boxButtons = Box.createHorizontalBox();
+            JButton postponed = new JButton("Отложить");
+            JButton complete = new JButton("Завершить");
+            boxButtons.add(postponed, Component.CENTER_ALIGNMENT);
+            boxButtons.add(Box.createHorizontalStrut(12));
+            boxButtons.add(complete, Component.CENTER_ALIGNMENT);
 
-        Box boxFrame = Box.createVerticalBox();
-        boxFrame.add(Box.createVerticalStrut(12));
-        boxFrame.add(boxName);
-        boxFrame.add(Box.createVerticalStrut(12));
-        boxFrame.add(boxDescription);
-        boxFrame.add(Box.createVerticalStrut(12));
-        boxFrame.add(boxDate);
-        boxFrame.add(Box.createVerticalStrut(12));
-        boxFrame.add(boxContacts);
-        boxFrame.add(Box.createVerticalStrut(12));
-        boxFrame.add(boxButtons);
-        boxFrame.add(Box.createVerticalStrut(12));
+            Box boxFrame = Box.createVerticalBox();
+            boxFrame.add(Box.createVerticalStrut(12));
+            boxFrame.add(boxName);
+            boxFrame.add(Box.createVerticalStrut(12));
+            boxFrame.add(boxDescription);
+            boxFrame.add(Box.createVerticalStrut(12));
+            boxFrame.add(boxDate);
+            boxFrame.add(Box.createVerticalStrut(12));
+            boxFrame.add(boxContacts);
+            boxFrame.add(Box.createVerticalStrut(12));
+            boxFrame.add(boxButtons);
+            boxFrame.add(Box.createVerticalStrut(12));
 
-        labelDate.setPreferredSize(labelContacts.getPreferredSize());
-        labelDescription.setPreferredSize(labelDate.getPreferredSize());
-        labelName.setPreferredSize(labelDescription.getPreferredSize());
+            labelDate.setPreferredSize(labelContacts.getPreferredSize());
+            labelDescription.setPreferredSize(labelDate.getPreferredSize());
+            labelName.setPreferredSize(labelDescription.getPreferredSize());
 
-        frame.setContentPane(boxFrame);
-        frame.pack();
-        frame.setResizable(false);
-
-
-        postponed.setVisible(true);
-        postponed.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                holdTask(journal, frame, parameters);      
-            }
-        }); 
-        journal.deleteTask(id);
-
-        complete.setVisible(true);
-        complete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                JFrame completeFrame = new JFrame("Завершено");
-                completeFrame.setVisible(true);
-                completeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                completeFrame.setResizable(false);
-                completeFrame.setSize(100, 125);
-
-                JLabel completeLabel = new JLabel("Задача завершена");
-                completeLabel.setVisible(true);
-
-                Box completeBox = Box.createHorizontalBox();
-                completeBox.add(Box.createVerticalStrut(12));
-                completeBox.add(completeLabel);
-                completeBox.add(Box.createVerticalStrut(12));
-
-                completeFrame.setContentPane(completeBox);
-                completeFrame.setLocationRelativeTo(null);
-                completeFrame.setResizable(false);
+            frame.setContentPane(boxFrame);
+            frame.pack();
+            frame.setResizable(false);
 
 
-            }
-        });
+            postponed.setVisible(true);
+            postponed.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    holdTask(journal, frame, parameters);
+                }
+            });
+            journal.deleteTask(id);
+
+            complete.setVisible(true);
+            complete.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                    JFrame completeFrame = new JFrame("Завершено");
+                    completeFrame.setVisible(true);
+                    completeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    completeFrame.setResizable(false);
+                    completeFrame.setSize(100, 125);
+
+                    JLabel completeLabel = new JLabel("Задача завершена");
+                    completeLabel.setVisible(true);
+
+                    Box completeBox = Box.createHorizontalBox();
+                    completeBox.add(Box.createVerticalStrut(12));
+                    completeBox.add(completeLabel);
+                    completeBox.add(Box.createVerticalStrut(12));
+
+                    completeFrame.setContentPane(completeBox);
+                    completeFrame.setLocationRelativeTo(null);
+                    completeFrame.setResizable(false);
+
+
+                }
+            });
+        }
     }
     
     private void holdTask(Journal journal, JFrame frame, List<Parameter> parameters){

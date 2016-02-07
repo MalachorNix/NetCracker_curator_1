@@ -1,8 +1,9 @@
 package o26.controller;
 
-import java.io.File;
 import o26.model.ITask;
+import o26.model.Parameter;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -10,15 +11,12 @@ import java.io.ObjectInputStream;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import o26.model.Parameter;
 
 public class DataLoader implements Loader{
 
-    @SuppressWarnings("unchecked")
     @Override
     public List<ITask> loadData(String login) {
         FileInputStream fis = null;
@@ -30,12 +28,14 @@ public class DataLoader implements Loader{
             if(loginAndId.exists()) {
                 fis = new FileInputStream(loginAndId);
                 ois = new ObjectInputStream(fis);
+                @SuppressWarnings("unchecked")
                 Map<String, List<Integer>> idList = (HashMap) ois.readObject();
                 List<Integer> id = idList.get(login);
                 
                 if (id != null) {
                     fis = new FileInputStream("data");
                     ois = new ObjectInputStream(fis);
+                    @SuppressWarnings("unchecked")
                     List<ITask> tmp = (ArrayList) ois.readObject();
                     result = new ArrayList<>();
                     
@@ -95,7 +95,6 @@ public class DataLoader implements Loader{
                             tmp.add(task);
                         }
                     }
-//                    tmp.addAll(tasks);
                     tasks = tmp;
                 }
             }
@@ -106,7 +105,6 @@ public class DataLoader implements Loader{
             
             File loginAndId = new File("loginAndId");
             Map<String, List<Integer>> idList1 = null;
-            
             if (loginAndId.exists()) {
                 fis = new FileInputStream(loginAndId);
                 ois = new ObjectInputStream(fis);
@@ -179,7 +177,6 @@ public class DataLoader implements Loader{
                 for(List<Integer> i: idList.values()) {
                     listId.addAll(i);
                 }
-//                Collections.sort(listId);
             }
         } catch (FileNotFoundException e) {
             return new ArrayList<>();
