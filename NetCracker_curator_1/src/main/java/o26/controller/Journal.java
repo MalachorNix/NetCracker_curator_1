@@ -99,19 +99,11 @@ public class Journal {
     }
 
     public boolean validatePasswords(String password, String password1) {
-        if (password.equals(password1)) {
-            return true;
-        } else {
-            return false;
-        }
+        return password.equals(password1);
     }
 
     public boolean registration(String login, String password) {
-        if (!this.userData.userRegistration(login, password)) {
-            return false;
-        } else {
-            return true;
-        }
+        return this.userData.userRegistration(login, password);
     }
     
     public boolean checkLogin(String login) {
