@@ -4,8 +4,8 @@ import o26.model.ITask;
 import o26.model.Parameter;
 import o26.model.IUser;
 import o26.model.User;
-import o26.view.MenuMenuItem;
-import o26.view.MenuItem;
+import o26.view.MainMenuItem;
+import o26.view.AbstractMenuItem;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class Journal {
     private List<ITask> tasks;
     private Loader loader;
     private ITaskCreator taskCreator;
-    private MenuItem view;
+    private AbstractMenuItem view;
     private INotification notification;
     private IUser user;
     private IUserData userData;
@@ -82,7 +82,7 @@ public class Journal {
         this.notification = notification;
     }
 
-    public void setView(MenuItem view) {
+    public void setView(AbstractMenuItem view) {
         this.view = view;
     }
 
@@ -117,7 +117,7 @@ public class Journal {
     public void login(String login, String password) {
         if (checkLogin(login) && this.userData.checkPassword(login, password)) {
             user = new User(login, password, new ArrayList<>());
-            view = new MenuMenuItem();
+            view = new MainMenuItem();
             this.listId = loader.getListId();
             tasks = null;
             this.load();

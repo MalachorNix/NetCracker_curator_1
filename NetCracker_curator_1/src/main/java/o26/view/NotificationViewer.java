@@ -17,7 +17,7 @@ import java.util.List;
 
 public class NotificationViewer {
 
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM y 'г.' HH:mm:ss");
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM y 'г.' HH:mm:ss");
 
     public void show(Journal journal, int id) {
 

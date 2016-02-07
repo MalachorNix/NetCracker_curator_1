@@ -6,7 +6,7 @@ import java.util.List;
 import o26.controller.Journal;
 import o26.model.ITask;
 
-public class ListMenuItem extends MenuItem {
+public class ListMenuItem extends AbstractMenuItem {
     private static final String ITEM = "Просмотр списка задач";
     
     @Override

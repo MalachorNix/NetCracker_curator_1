@@ -5,7 +5,7 @@ import java.util.List;
 import o26.controller.Journal;
 import o26.model.Parameter;
 
-public class AddMenuItem extends MenuItem {
+public class AddMenuItem extends AbstractMenuItem {
     private static final String ITEM = "Добавление задач";
     
     @Override

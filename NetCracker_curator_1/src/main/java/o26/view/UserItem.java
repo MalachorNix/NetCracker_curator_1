@@ -7,7 +7,7 @@ import o26.controller.Journal;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class UserItem extends MenuItem {
+public class UserItem extends AbstractMenuItem {
 
     private static final String ITEM = "Экран входа пользователя";
     private static final Console CONSOLE = System.console();

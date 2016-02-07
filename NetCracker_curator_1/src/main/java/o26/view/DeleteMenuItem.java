@@ -2,7 +2,7 @@ package o26.view;
 
 import o26.controller.Journal;
 
-public class DeleteMenuItem extends MenuItem {
+public class DeleteMenuItem extends AbstractMenuItem {
     private static final String ITEM = "Удаление задач";
     
     @Override

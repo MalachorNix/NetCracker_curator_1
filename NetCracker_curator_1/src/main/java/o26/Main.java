@@ -1,7 +1,7 @@
 package o26;
 
 import o26.controller.*;
-import o26.view.MenuItem;
+import o26.view.AbstractMenuItem;
 import o26.view.NotificationViewer;
 import o26.view.UserItem;
 
@@ -17,7 +17,7 @@ public final class Main {
         INotification notification = new Notification();
         NotificationViewer notificationViewer = new NotificationViewer();
         notification.setNotificationViewer(notificationViewer);
-        MenuItem userItem = new UserItem(); //Итем входа пользователя
+        AbstractMenuItem userItem = new UserItem(); //Итем входа пользователя
         IUserData userData = new UserData();
         Journal journal = new Journal();
 

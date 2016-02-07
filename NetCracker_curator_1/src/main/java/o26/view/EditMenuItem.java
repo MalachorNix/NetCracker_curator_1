@@ -5,7 +5,7 @@ import o26.model.Parameter;
 
 import java.util.List;
 
-public class EditMenuItem extends MenuItem {
+public class EditMenuItem extends AbstractMenuItem {
     private static final String ITEM = "Редактирование задач";
     
     @Override
