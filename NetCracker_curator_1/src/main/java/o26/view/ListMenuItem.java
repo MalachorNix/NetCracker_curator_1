@@ -18,12 +18,13 @@ public class ListMenuItem extends AbstractMenuItem {
         if (countTasks == 0) {
             System.out.println("Список задач пуст!");
         } else {
+            StringBuilder breakingLine = new StringBuilder("");
+            StringBuilder border = new StringBuilder("~");
             for(int i = 0; i < countTasks; i++){
                 int lengthId = i+"".length();
-                String breakingLine = "";
                 int lengthLine = 40 - lengthId - 2;
                 for(int j = 0; j < lengthLine; j++) {
-                    breakingLine+="~";
+                    breakingLine.append(border);
                 }
                 String task = tasks.get(i).toString();
                 System.out.println("<"+(i+1)+">"+breakingLine);

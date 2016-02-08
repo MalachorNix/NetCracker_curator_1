@@ -12,26 +12,22 @@ public class DeleteMenuItem extends AbstractMenuItem {
             System.out.println("Удаление задачи");
             System.out.println("\t<Id> Удалить задачу с индексом Id");
             System.out.println("\t<0> Вернуться в меню");
+
             int countTasks = journal.getTasks().size();
             selectedId = choice(0, countTasks);
-            switch(selectedId){
-                case 0:{
-                    break;
-                }
-                default:{
-                    System.out.println(journal.getTasks().get(selectedId-1).toString());
-                    System.out.println("Вы уверены, что хотите удалить эту задачу?");
-                    System.out.println("\t<1> Да");
-                    System.out.println("\t<0> Нет");
-                    if(choice(0, 1)!=0){
-                        journal.deleteTask(selectedId-1);
-                        System.out.println("Задача удалена!\n");
-                        journal.journalChanged();
-                    }
-                    break;
+
+            if (selectedId != 0) {
+                System.out.println(journal.getTasks().get(selectedId-1).toString());
+                System.out.println("Вы уверены, что хотите удалить эту задачу?");
+                System.out.println("\t<1> Да");
+                System.out.println("\t<0> Нет");
+                if(choice(0, 1) != 0){
+                    journal.deleteTask(selectedId - 1);
+                    System.out.println("Задача удалена!\n");
+                    journal.journalChanged();
                 }
             }
-        }while(selectedId!=0);
+        } while(selectedId != 0);
     }
     
     @Override

@@ -14,14 +14,15 @@ public abstract class AbstractMenuItem {
 
     protected int choice(int min, int max){
         int choice;
-        try{
+        try {
             boolean notValid;
-            do{
+            Scanner scanner = new Scanner(System.in);
+            do {
                 System.out.print("Выберите пункт (от " + min + " до " + max + "): ");
-                choice = Integer.parseInt(new Scanner(System.in).nextLine());
+                choice = Integer.parseInt(scanner.nextLine());
                 notValid = min > choice || choice > max;
                 if(notValid) System.out.println("Данного пункта нет! Попробуйте снова!");
-            }while(notValid);
+            } while(notValid);
         }
         catch(Exception e){
             choice = -1;

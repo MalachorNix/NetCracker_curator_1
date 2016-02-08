@@ -96,10 +96,10 @@ public class UserItem extends AbstractMenuItem {
             }
         } while (!check);
 
-        if (!journal.registration(login, password)) {
-            System.out.println("Данный логин занят. Попробуйте другой.");
-        } else {
+        if (journal.registration(login, password)) {
             System.out.println("Регистрация прошла успешно!");
+        } else {
+            System.out.println("Данный логин занят. Попробуйте другой.");
         }
         salutation();
     }
