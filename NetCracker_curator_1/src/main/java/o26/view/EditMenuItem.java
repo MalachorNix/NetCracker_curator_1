@@ -52,7 +52,7 @@ public class EditMenuItem extends AbstractMenuItem {
             System.out.println("\t<0> Сохранить изменения и вернуться к выбору задачи");
             select = choice(0, count);
             Parameter parameter = parameters.get(select - 1);
-            parameter.setValue(parameter.getType(), in(parameter.getType()));
+            parameter.setValue(parameter.getType(), inputParameter(parameter.getType()));
             if(select != 0){
                 System.out.println("Параметр изменен!\n");
             }

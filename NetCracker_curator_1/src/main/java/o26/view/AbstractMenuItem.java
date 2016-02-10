@@ -30,7 +30,7 @@ public abstract class AbstractMenuItem {
         System.out.println();
         return choice;
     }
-    protected Object in(Parameter.TypeParameter parameter){
+    protected Object inputParameter(Parameter.TypeParameter parameter){
         String nameParameter = parameter.toString();
         Scanner text = new Scanner(System.in);
         String output;

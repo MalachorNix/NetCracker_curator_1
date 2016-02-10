@@ -11,10 +11,10 @@ public class AddMenuItem extends AbstractMenuItem {
     @Override
     public void show(Journal journal) {
         List<Parameter> parameters = new ArrayList<>();
-        Object name =  in(Parameter.TypeParameter.NAME);
-        Object description = in(Parameter.TypeParameter.DESCRIPTION);
-        Object contacts = in(Parameter.TypeParameter.CONTACTS);
-        Object date = in(Parameter.TypeParameter.DATE);
+        Object name =  inputParameter(Parameter.TypeParameter.NAME);
+        Object description = inputParameter(Parameter.TypeParameter.DESCRIPTION);
+        Object contacts = inputParameter(Parameter.TypeParameter.CONTACTS);
+        Object date = inputParameter(Parameter.TypeParameter.DATE);
       
         parameters.add(new Parameter(Parameter.TypeParameter.NAME, name));
         parameters.add(new Parameter(Parameter.TypeParameter.DESCRIPTION, description));
