@@ -1,114 +1,128 @@
 package o26.controller;
 
 
+import javax.crypto.NoSuchPaddingException;
 import java.io.*;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserData implements IUserData{
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean userRegistration(String login, String password) {
 
-        FileWriter fileWriter = null;
-        
+        FileInputStream fileInputStream = null;
+        FileOutputStream fileOutputStream = null;
+        HashMap<String, String> userData;
+
         if(!checkLogin(login)) {
             return false;
         }
-        
+
         try {
-            fileWriter = new FileWriter("users", true);
-            fileWriter.write(login + "\n");
-            fileWriter.write(password + "\n");
+            File usersFile = new File("secretUsers");
+
+            if (usersFile.exists()) {
+                fileInputStream = new FileInputStream(usersFile);
+                userData = (HashMap<String, String>) Decryptor.decrypt(fileInputStream);
+                if (userData != null) {
+                    userData.put(login, password);
+                }
+            } else {
+                userData = new HashMap<>();
+                userData.put(login, password);
+            }
+            fileOutputStream = new FileOutputStream(usersFile);
+
+            Encryptor.encrypt(userData, fileOutputStream);
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден!");
         } catch (IOException e) {
             System.out.println("Ошибка записи в файл!");
+        } catch (NoSuchPaddingException | InvalidKeyException | NoSuchAlgorithmException e) {
+            System.out.println("Ошибка шифрования данных!");
         } finally {
-            if (fileWriter != null) {
-                try {
-                    fileWriter.close();
-                } catch (IOException e) {
-                    System.out.println("Ошибка закрытия потока регистрации "
-                            + "пользователя в файл!");
+            try {
+                if (fileInputStream != null) {
+                    fileInputStream.close();
                 }
+                if (fileOutputStream != null) {
+                    fileOutputStream.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка работы с файлом пользовтелей");
             }
         }
         return true;
     }
     
     @Override
+    @SuppressWarnings("unchecked")
     public boolean checkLogin(String login) {
-        FileReader reader = null;
-        BufferedReader bufferedReader = null;
+        FileInputStream fileInputStream = null;
+        Map<String, String> userData;
         
         try {
-            reader = new FileReader("users");
-            bufferedReader = new BufferedReader(reader);
-            String login1;
-            do {
-                login1 = bufferedReader.readLine();
-                    if (login.equals(login1)) {
+            File usersFile = new File("secretUsers");
+
+            if (usersFile.exists()) {
+                fileInputStream = new FileInputStream(usersFile);
+                userData = (HashMap) Decryptor.decrypt(fileInputStream);
+                if (userData != null && userData.containsKey(login)) {
                     return false;
-                    }
-            } while (bufferedReader.readLine() != null);
+                }
+            }
         } catch (FileNotFoundException e) {
             System.out.println("Такого пользователя нет!");
         } catch (IOException e) {
             System.out.println("Ошибка чтения из файла users");
+        } catch (NoSuchPaddingException | InvalidKeyException | NoSuchAlgorithmException e) {
+            System.out.println("Ошибка шифрования файла");
         } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    System.out.println("Ошибка ввода/вывода при закрытии "
-                            + "потока чтения");
+            try {
+                if (fileInputStream != null) {
+                    fileInputStream.close();
                 }
-            }
-            
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException e) {
-                    System.out.println("Ошибка ввода/вывода при закрытии "
-                            + "потока чтения");
-                }
+            } catch (IOException e) {
+                System.out.println("Ошибка работы с файлом пользовтелей");
             }
         }
         return true;
     }
     
     @Override
+    @SuppressWarnings("unchecked")
     public boolean checkPassword(String login, String password) {
-        FileReader reader = null;
-        BufferedReader bufferedReader = null;
+        FileInputStream fileInputStream = null;
+        Map<String, String> userData;
         
         try {
-            reader = new FileReader("users");
-            bufferedReader = new BufferedReader(reader);
-            while(!login.equals(bufferedReader.readLine()));
-            if (password.equals(bufferedReader.readLine())) {
-                return true;
+            File usersFile = new File("secretUsers");
+
+            if (usersFile.exists()) {
+                fileInputStream = new FileInputStream(usersFile);
+                userData = (HashMap) Decryptor.decrypt(fileInputStream);
+                if (userData != null && userData.containsKey(login)) {
+                    if (userData.get(login).equals(password))
+                        return true;
+                }
             }
         } catch (FileNotFoundException ex) {
             System.out.println("Такого пользователя нет!");
         } catch (IOException e) {
             System.out.println("Ошибка чтения из файла users");
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException e) {
+            System.out.println("Ошибка шифрования файла");
         } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    System.out.println("Ошибка ввода/вывода при закрытии "
-                            + "потока чтения");
+            try {
+                if (fileInputStream != null) {
+                    fileInputStream.close();
                 }
-            }
-            
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException e) {
-                    System.out.println("Ошибка ввода/вывода при закрытии "
-                            + "потока чтения");
-                }
+            } catch (IOException e) {
+                System.out.println("Ошибка работы с файлом пользовтелей");
             }
         }
         

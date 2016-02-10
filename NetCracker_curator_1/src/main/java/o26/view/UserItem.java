@@ -22,7 +22,7 @@ public class UserItem extends AbstractMenuItem {
         System.out.println("Добро пожаловать в планировщик задач!");
         System.out.println("Чтобы войти в программу, нажмите 1.");
         System.out.println("Чтобы зарегистрироваться, нажмите 2.");
-        System.out.println("Чтобы выйти из программы, нажмите 0.");
+        System.out.println("Чтобы выйти из программы, нажмите 0.\n");
     }
 
     private void choice(Journal journal) {
@@ -34,10 +34,10 @@ public class UserItem extends AbstractMenuItem {
                 choice = scanner.nextInt();
                 switch (choice) {
                     case 1:
-                        System.out.println("Ввод логина/пароля");
+                        System.out.println("\nВвод логина/пароля");
                         break;
                     case 2:
-                        System.out.println("Регистрация");
+                        System.out.println("\nРегистрация");
                         registration(journal);
                         break;
                     case 0:
@@ -51,7 +51,6 @@ public class UserItem extends AbstractMenuItem {
             if(!login(journal)) {
                 System.out.println("Неправильный логин или пароль!");
                 salutation();
-//                journal = new Journal();
                 choice(journal);
             }
         } catch (InputMismatchException e) {
