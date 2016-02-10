@@ -6,25 +6,24 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.Base64;
 
 public class Encryptor {
 
-    private static final byte[] key = "MyDifficultPassw".getBytes();
-    private static final String transformation = "AES";
+    private static final byte[] KEY = "MyDifficultPassw".getBytes();
+    private static final String TRANSFORMATION = "AES";
+
+    private Encryptor() {
+
+    }
 
     public static void encrypt(Serializable object, OutputStream ostream) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
         try {
-            // Length is 16 byte
-            SecretKeySpec sks = new SecretKeySpec(key, transformation);
+            SecretKeySpec sks = new SecretKeySpec(KEY, TRANSFORMATION);
 
-            // Create cipher
-            Cipher cipher = Cipher.getInstance(transformation);
+            Cipher cipher = Cipher.getInstance(TRANSFORMATION);
             cipher.init(Cipher.ENCRYPT_MODE, sks);
             SealedObject sealedObject = new SealedObject(object, cipher);
 
-            // Wrap the output stream
             CipherOutputStream cos = new CipherOutputStream(ostream, cipher);
             ObjectOutputStream outputStream = new ObjectOutputStream(cos);
             outputStream.writeObject(sealedObject);

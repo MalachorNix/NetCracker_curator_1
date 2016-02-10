@@ -6,16 +6,19 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 
 public class Decryptor {
 
-    private static final byte[] key = "MyDifficultPassw".getBytes();
-    private static final String transformation = "AES";
+    private static final byte[] KEY = "MyDifficultPassw".getBytes();
+    private static final String TRANSFORMATION = "AES";
+
+    private Decryptor() {
+
+    }
 
     public static Object decrypt(InputStream istream) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
-        SecretKeySpec sks = new SecretKeySpec(key, transformation);
-        Cipher cipher = Cipher.getInstance(transformation);
+        SecretKeySpec sks = new SecretKeySpec(KEY, TRANSFORMATION);
+        Cipher cipher = Cipher.getInstance(TRANSFORMATION);
         cipher.init(Cipher.DECRYPT_MODE, sks);
 
         CipherInputStream cipherInputStream = new CipherInputStream(istream, cipher);
