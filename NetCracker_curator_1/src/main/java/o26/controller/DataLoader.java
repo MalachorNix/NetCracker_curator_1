@@ -41,7 +41,7 @@ public class DataLoader implements Loader{
                     
                     for (ITask task : tmp) {
                         for (Integer tmpId : id) {
-                            if (((Integer) task.getValue(Parameter.TypeParameter.ID)).equals(tmpId)) {
+                            if (task.getValue(Parameter.TypeParameter.ID).equals(tmpId)) {
                                 result.add(task);
                             }
                         }
@@ -77,6 +77,7 @@ public class DataLoader implements Loader{
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void saveData(List<ITask> tasks, String login, List<Integer> idList) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
@@ -104,7 +105,7 @@ public class DataLoader implements Loader{
             oos.writeObject((tasks == null) ? new ArrayList<>() : tasks);
             
             File loginAndId = new File("loginAndId");
-            Map<String, List<Integer>> idList1 = null;
+            Map<String, List<Integer>> idList1;
             if (loginAndId.exists()) {
                 fis = new FileInputStream(loginAndId);
                 ois = new ObjectInputStream(fis);
@@ -165,19 +166,20 @@ public class DataLoader implements Loader{
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         List<Integer> listId = null;
+
         try {
-            File loginAndId = new File("loginAndId");
-            
-            if(loginAndId.exists()) {
-                fis = new FileInputStream(loginAndId);
-                ois = new ObjectInputStream(fis);
-                Map<String, List<Integer>> idList = (HashMap) ois.readObject();
-                listId = new ArrayList<>();
-                
-                for(List<Integer> i: idList.values()) {
-                    listId.addAll(i);
-                }
+
+            fis = new FileInputStream("loginAndId");
+            ois = new ObjectInputStream(fis);
+
+            @SuppressWarnings("unchecked")
+            Map<String, List<Integer>> idList = (HashMap) ois.readObject();
+            listId = new ArrayList<>();
+
+            for (List<Integer> i : idList.values()) {
+                listId.addAll(i);
             }
+
         } catch (FileNotFoundException e) {
             return new ArrayList<>();
         } catch (IOException e) {

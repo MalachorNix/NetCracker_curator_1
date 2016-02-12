@@ -7,7 +7,7 @@ import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-public class Encryptor {
+public final class Encryptor {
 
     private static final byte[] KEY = "MyDifficultPassw".getBytes();
     private static final String TRANSFORMATION = "AES";
@@ -16,7 +16,8 @@ public class Encryptor {
 
     }
 
-    public static void encrypt(Serializable object, OutputStream ostream) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
+    public static void encrypt(Serializable object, OutputStream outStream) throws IOException,
+            NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
         try {
             SecretKeySpec sks = new SecretKeySpec(KEY, TRANSFORMATION);
 
@@ -24,7 +25,7 @@ public class Encryptor {
             cipher.init(Cipher.ENCRYPT_MODE, sks);
             SealedObject sealedObject = new SealedObject(object, cipher);
 
-            CipherOutputStream cos = new CipherOutputStream(ostream, cipher);
+            CipherOutputStream cos = new CipherOutputStream(outStream, cipher);
             ObjectOutputStream outputStream = new ObjectOutputStream(cos);
             outputStream.writeObject(sealedObject);
             outputStream.close();

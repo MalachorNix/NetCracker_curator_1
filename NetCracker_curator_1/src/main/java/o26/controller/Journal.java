@@ -18,18 +18,15 @@ public class Journal {
     private INotification notification;
     private IUser user;
     private IUserData userData;
-    private List<Integer> listId;
+    private ListID listID;
     
     public void addTask(List<Parameter> parameters, List<ITask> tasks) {
-        if (taskCreator.validate(parameters, listId)) {
-            tasks.add(taskCreator.createTask(parameters));
-        } else {
-            System.out.println("Задачу создать нельзя!");
-        }
+        listID.addID(parameters);
+        tasks.add(taskCreator.createTask(parameters));
     }
 
     public void deleteTask(int id) {
-        listId.remove(tasks.get(id).getValue(Parameter.TypeParameter.ID));
+        listID.removeID((Integer) tasks.get(id).getValue(Parameter.TypeParameter.ID));
         tasks.remove(id);
     }
 
@@ -116,9 +113,9 @@ public class Journal {
     
     public void login(String login, String password) {
         if (checkLogin(login) && this.userData.checkPassword(login, password)) {
-            user = new User(login, password, new ArrayList<>());
-            view = new MainMenuItem();
-            this.listId = loader.getListId();
+            this.setUser(new User(login, password, new ArrayList<>()));
+            this.setView(new MainMenuItem());
+            listID = ListID.getInstance();
             tasks = null;
             this.load();
             this.notificationStart();
