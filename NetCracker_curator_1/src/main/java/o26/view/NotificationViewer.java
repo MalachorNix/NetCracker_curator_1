@@ -140,53 +140,24 @@ public class NotificationViewer {
         JFrame postponedFrame = new JFrame("Отложить задачу");
         frame.dispose();
         ArrayList<JTextField> listTextFields = new ArrayList<>();
-        Box boxYear = Box.createHorizontalBox();
+
         JLabel labelYear = new JLabel("Год:");
-        JTextField year = new JTextField(15);
-        boxYear.add(labelYear);
-        boxYear.add(Box.createHorizontalStrut(6));
-        boxYear.add(year);
-        listTextFields.add(year);
+        Box boxYear = createBox(15, 6, listTextFields, labelYear);
 
-        Box boxMonth = Box.createHorizontalBox();
         JLabel labelMonth = new JLabel("Месяц:");
-        JTextField month = new JTextField(15);
-        boxMonth.add(labelMonth);
-        boxMonth.add(Box.createHorizontalStrut(6));
-        boxMonth.add(month);
-        listTextFields.add(month);
+        Box boxMonth = createBox(15, 6, listTextFields, labelMonth);
 
-        Box boxDay = Box.createHorizontalBox();
         JLabel labelDay = new JLabel("День:");
-        JTextField day = new JTextField(15);
-        boxDay.add(labelDay);
-        boxDay.add(Box.createHorizontalStrut(6));
-        boxDay.add(day);
-        listTextFields.add(day);
+        Box boxDay = createBox(15, 6, listTextFields, labelDay);
 
-        Box boxHour = Box.createHorizontalBox();
         JLabel labelHour = new JLabel("Час:");
-        JTextField hour = new JTextField(15);
-        boxHour.add(labelHour);
-        boxHour.add(Box.createHorizontalStrut(6));
-        boxHour.add(hour);
-        listTextFields.add(hour);
+        Box boxHour = createBox(15, 6, listTextFields, labelHour);
 
-        Box boxMinute = Box.createHorizontalBox();
         JLabel labelMinute = new JLabel("Минута:");
-        JTextField minute = new JTextField(15);
-        boxMinute.add(labelMinute);
-        boxMinute.add(Box.createHorizontalStrut(6));
-        boxMinute.add(minute);
-        listTextFields.add(minute);
+        Box boxMinute = createBox(15, 6, listTextFields, labelMinute);
 
-        Box boxSecond = Box.createHorizontalBox();
         JLabel labelSecond = new JLabel("Секунда:");
-        JTextField second = new JTextField(15);
-        boxSecond.add(labelSecond);
-        boxSecond.add(Box.createHorizontalStrut(6));
-        boxSecond.add(second);
-        listTextFields.add(second);
+        Box boxSecond = createBox(15, 6, listTextFields, labelSecond);
 
         Box boxOK = Box.createHorizontalBox();
         JButton okButton = new JButton("ОК");
@@ -217,13 +188,6 @@ public class NotificationViewer {
         postponedFrame.setContentPane(mainBox);
         postponedFrame.setResizable(false);
         postponedFrame.pack();
-
-        year.setVisible(true);
-        month.setVisible(true);
-        day.setVisible(true);
-        hour.setVisible(true);
-        minute.setVisible(true);
-        second.setVisible(true);
         postponedFrame.setVisible(true);
 
         postponedFrame.setSize(200, 300);
@@ -292,5 +256,20 @@ public class NotificationViewer {
             errorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             errorFrame.setResizable(false);
         }
+    }
+
+    private Box createBox(int textFieldColumns, int strutWidth, List<JTextField> listTextFields, JLabel label) {
+
+        Box box = Box.createHorizontalBox();
+        JTextField textField = new JTextField(textFieldColumns);
+
+        box.add(label);
+        box.add(Box.createHorizontalStrut(strutWidth));
+        box.add(textField);
+        listTextFields.add(textField);
+
+        textField.setVisible(true);
+
+        return box;
     }
 }

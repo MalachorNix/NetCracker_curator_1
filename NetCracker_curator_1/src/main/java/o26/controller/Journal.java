@@ -26,7 +26,10 @@ public class Journal {
     }
 
     public void deleteTask(int id) {
-        listID.removeID((Integer) tasks.get(id).getValue(Parameter.TypeParameter.ID));
+        Integer taskID = (Integer) tasks.get(id).getValue(Parameter.TypeParameter.ID);
+        if (taskID != null) {
+            listID.removeID((Integer) tasks.get(id).getValue(Parameter.TypeParameter.ID));
+        }
         tasks.remove(id);
     }
 
@@ -104,11 +107,7 @@ public class Journal {
     }
     
     public boolean checkLogin(String login) {
-        if (!this.userData.checkLogin(login)) {
-            return true;
-        } else {
-            return false;
-        }
+        return !this.userData.checkLogin(login);
     }
     
     public void login(String login, String password) {
