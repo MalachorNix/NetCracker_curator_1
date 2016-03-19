@@ -5,10 +5,6 @@ import java.io.Serializable;
 public class Parameter implements Serializable{
     public enum TypeParameter{
         NAME {
-            /*public boolean validate(Object value) {
-                throw new UnsupportedOperationException("Not supported yet.");
-            }*/
-
             @Override
             public String toString() {
                 return "название задачи";

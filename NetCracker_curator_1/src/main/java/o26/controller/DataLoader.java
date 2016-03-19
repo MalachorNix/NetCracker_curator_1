@@ -79,6 +79,10 @@ public class DataLoader implements Loader{
     @Override
     @SuppressWarnings("unchecked")
     public void saveData(List<ITask> tasks, String login, List<Integer> idList) {
+
+        TaskXmlCreator taskXmlCreator = new TaskXmlCreator();
+        taskXmlCreator.createXml(tasks);
+
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         FileInputStream fis = null;
