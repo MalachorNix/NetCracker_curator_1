@@ -31,8 +31,12 @@ public class DataLoader implements Loader{
                 @SuppressWarnings("unchecked")
                 Map<String, List<Integer>> idList = (HashMap) ois.readObject();
                 List<Integer> id = idList.get(login);
-                
+
                 if (id != null) {
+                    result = new TaskXmlParser().parse("data.xml", id);
+                }
+
+                /*if (id != null) {
                     fis = new FileInputStream("data");
                     ois = new ObjectInputStream(fis);
                     @SuppressWarnings("unchecked")
@@ -46,7 +50,7 @@ public class DataLoader implements Loader{
                             }
                         }
                     }
-                }
+                }*/
             }            
         } catch (FileNotFoundException e) {
             result = new ArrayList<>();
@@ -88,11 +92,14 @@ public class DataLoader implements Loader{
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         try {
-            File data = new File("data");
-            if (data.exists()) {
-                fis = new FileInputStream(data);
-                ois = new ObjectInputStream(fis);
-                List<ITask> tmp = (ArrayList) ois.readObject();
+//            File data = new File("data");
+//            File data = new File("data.xml");
+//            if (data.exists()) {
+//                fis = new FileInputStream(data);
+//                ois = new ObjectInputStream(fis);
+//                List<ITask> tmp = (ArrayList) ois.readObject();
+
+                List<ITask> tmp = new TaskXmlParser().parse("data.xml", idList);
 
                 if (tmp != null) {
                     for(ITask task: tasks) {
@@ -102,13 +109,13 @@ public class DataLoader implements Loader{
                     }
                     tasks = tmp;
                 }
-            }
+//            }
             
-            fos = new FileOutputStream(data);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject((tasks == null) ? new ArrayList<>() : tasks);
+//            fos = new FileOutputStream(data);
+//            oos = new ObjectOutputStream(fos);
+//            oos.writeObject((tasks == null) ? new ArrayList<>() : tasks);
 
-            taskXmlCreator.createTaskXml(tasks, "data.xml"); // TODO: 19.03.2016 HERE
+            taskXmlCreator.createTaskXml(tasks, "data.xml");
             
             File loginAndId = new File("loginAndId");
             Map<String, List<Integer>> idList1;
