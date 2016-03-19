@@ -10,11 +10,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 
 public class NotificationViewer {
 
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM y 'г.' HH:mm:ss");
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMMM y 'г.' HH:mm:ss", new Locale("ru"));
 
     public void show(Journal journal, int id) {
 
@@ -22,7 +23,7 @@ public class NotificationViewer {
             String name = journal.getTasks().get(id).getValue(Parameter.TypeParameter.NAME).toString();
             String description = journal.getTasks().get(id).getValue(Parameter.TypeParameter.DESCRIPTION).toString();
             String contacts = journal.getTasks().get(id).getValue(Parameter.TypeParameter.CONTACTS).toString();
-            String date = simpleDateFormat.format(((GregorianCalendar)(journal.getTasks().get(id).getValue(Parameter.TypeParameter.DATE))).getTime());
+            String date = simpleDateFormat.format(((GregorianCalendar) (journal.getTasks().get(id).getValue(Parameter.TypeParameter.DATE))).getTime());
 
             List<Parameter> parameters = new ArrayList<>();
             parameters.add(new Parameter(Parameter.TypeParameter.NAME, name));
@@ -41,33 +42,17 @@ public class NotificationViewer {
             frame.setVisible(true);
             frame.setLocationRelativeTo(null);
 
-            Box boxName = Box.createHorizontalBox();
             JLabel labelName = new JLabel("Название задачи:");
-            JLabel textName = new JLabel(name);
-            boxName.add(labelName);
-            boxName.add(Box.createHorizontalStrut(12));
-            boxName.add(textName);
+            Box boxName = createParameterBox(labelName, name, 12);
 
-            Box boxDescription = Box.createHorizontalBox();
             JLabel labelDescription = new JLabel("Описание задачи:");
-            JLabel textDescription = new JLabel(description);
-            boxDescription.add(labelDescription);
-            boxDescription.add(Box.createHorizontalStrut(12));
-            boxDescription.add(textDescription);
+            Box boxDescription = createParameterBox(labelDescription, description, 12);
 
-            Box boxContacts = Box.createHorizontalBox();
             JLabel labelContacts = new JLabel("Контакты:");
-            JLabel textContacts = new JLabel(contacts);
-            boxContacts.add(labelContacts);
-            boxContacts.add(Box.createHorizontalStrut(12));
-            boxContacts.add(textContacts);
+            Box boxContacts = createParameterBox(labelContacts, contacts, 12);
 
-            Box boxDate = Box.createHorizontalBox();
             JLabel labelDate = new JLabel("Время:");
-            JLabel textDate = new JLabel(date);
-            boxDate.add(labelDate);
-            boxDate.add(Box.createHorizontalStrut(12));
-            boxDate.add(textDate);
+            Box boxDate = createParameterBox(labelDate, date, 12);
 
             Box boxButtons = Box.createHorizontalBox();
             JButton postponed = new JButton("Отложить");
@@ -77,17 +62,13 @@ public class NotificationViewer {
             boxButtons.add(complete, Component.CENTER_ALIGNMENT);
 
             Box boxFrame = Box.createVerticalBox();
+            Box[] boxes = {boxName, boxDescription, boxDate, boxContacts, boxButtons};
             boxFrame.add(Box.createVerticalStrut(12));
-            boxFrame.add(boxName);
-            boxFrame.add(Box.createVerticalStrut(12));
-            boxFrame.add(boxDescription);
-            boxFrame.add(Box.createVerticalStrut(12));
-            boxFrame.add(boxDate);
-            boxFrame.add(Box.createVerticalStrut(12));
-            boxFrame.add(boxContacts);
-            boxFrame.add(Box.createVerticalStrut(12));
-            boxFrame.add(boxButtons);
-            boxFrame.add(Box.createVerticalStrut(12));
+
+            for (Box box : boxes) {
+                boxFrame.add(box);
+                boxFrame.add(Box.createVerticalStrut(12));
+            }
 
             labelDate.setPreferredSize(labelContacts.getPreferredSize());
             labelDescription.setPreferredSize(labelDate.getPreferredSize());
@@ -96,7 +77,6 @@ public class NotificationViewer {
             frame.setContentPane(boxFrame);
             frame.pack();
             frame.setResizable(false);
-
 
             postponed.setVisible(true);
             postponed.addActionListener(new ActionListener() {
@@ -135,29 +115,29 @@ public class NotificationViewer {
             });
         }
     }
-    
-    private void holdTask(Journal journal, JFrame frame, List<Parameter> parameters){
+
+    private void holdTask(Journal journal, JFrame frame, List<Parameter> parameters) {
         JFrame postponedFrame = new JFrame("Отложить задачу");
         frame.dispose();
         ArrayList<JTextField> listTextFields = new ArrayList<>();
 
         JLabel labelYear = new JLabel("Год:");
-        Box boxYear = createBox(15, 6, listTextFields, labelYear);
+        Box boxYear = createCalendarBox(15, 6, listTextFields, labelYear);
 
         JLabel labelMonth = new JLabel("Месяц:");
-        Box boxMonth = createBox(15, 6, listTextFields, labelMonth);
+        Box boxMonth = createCalendarBox(15, 6, listTextFields, labelMonth);
 
         JLabel labelDay = new JLabel("День:");
-        Box boxDay = createBox(15, 6, listTextFields, labelDay);
+        Box boxDay = createCalendarBox(15, 6, listTextFields, labelDay);
 
         JLabel labelHour = new JLabel("Час:");
-        Box boxHour = createBox(15, 6, listTextFields, labelHour);
+        Box boxHour = createCalendarBox(15, 6, listTextFields, labelHour);
 
         JLabel labelMinute = new JLabel("Минута:");
-        Box boxMinute = createBox(15, 6, listTextFields, labelMinute);
+        Box boxMinute = createCalendarBox(15, 6, listTextFields, labelMinute);
 
         JLabel labelSecond = new JLabel("Секунда:");
-        Box boxSecond = createBox(15, 6, listTextFields, labelSecond);
+        Box boxSecond = createCalendarBox(15, 6, listTextFields, labelSecond);
 
         Box boxOK = Box.createHorizontalBox();
         JButton okButton = new JButton("ОК");
@@ -199,12 +179,12 @@ public class NotificationViewer {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                inputNewDate(journal , parameters, postponedFrame, listTextFields);
+                inputNewDate(journal, parameters, postponedFrame, listTextFields);
             }
         });
     }
-    
-    private void inputNewDate(Journal journal, List<Parameter> parameters, JFrame postponedFrame,  List<JTextField> list){
+
+    private void inputNewDate(Journal journal, List<Parameter> parameters, JFrame postponedFrame, List<JTextField> list) {
         try {
             int newYear = Integer.parseInt(list.get(0).getText());
             int newMonth = Integer.parseInt(list.get(1).getText());
@@ -242,8 +222,7 @@ public class NotificationViewer {
             frame2.setContentPane(success);
             frame2.setLocationRelativeTo(null);
             frame2.setResizable(false);
-        } 
-        catch (NumberFormatException e1) {
+        } catch (NumberFormatException e1) {
             JFrame errorFrame = new JFrame("Ошибка");
             JLabel errorLabel = new JLabel("Значения отсутствуют, введен текст или нецелые числа! Исправьте ошибки.");
             Box errorBox = Box.createHorizontalBox();
@@ -258,7 +237,7 @@ public class NotificationViewer {
         }
     }
 
-    private Box createBox(int textFieldColumns, int strutWidth, List<JTextField> listTextFields, JLabel label) {
+    private Box createCalendarBox(int textFieldColumns, int strutWidth, List<JTextField> listTextFields, JLabel label) {
 
         Box box = Box.createHorizontalBox();
         JTextField textField = new JTextField(textFieldColumns);
@@ -270,6 +249,15 @@ public class NotificationViewer {
 
         textField.setVisible(true);
 
+        return box;
+    }
+
+    private Box createParameterBox(JLabel descriptionLabel, String text, int widthStrut) {
+        Box box = Box.createHorizontalBox();
+        JLabel data = new JLabel(text);
+        box.add(descriptionLabel);
+        box.add(Box.createHorizontalStrut(widthStrut));
+        box.add(data);
         return box;
     }
 }

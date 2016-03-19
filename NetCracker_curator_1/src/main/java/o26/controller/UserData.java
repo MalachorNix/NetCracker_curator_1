@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserData implements IUserData{
+public class UserData implements IUserData {
 
     @Override
     @SuppressWarnings("unchecked")
@@ -18,7 +18,7 @@ public class UserData implements IUserData{
         FileOutputStream fileOutputStream = null;
         HashMap<String, String> userData;
 
-        if(!checkLogin(login)) {
+        if (!checkLogin(login)) {
             return false;
         }
 
@@ -58,13 +58,13 @@ public class UserData implements IUserData{
         }
         return true;
     }
-    
+
     @Override
     @SuppressWarnings("unchecked")
     public boolean checkLogin(String login) {
         FileInputStream fileInputStream = null;
         Map<String, String> userData;
-        
+
         try {
             File usersFile = new File("secretUsers");
 
@@ -92,21 +92,20 @@ public class UserData implements IUserData{
         }
         return true;
     }
-    
+
     @Override
     @SuppressWarnings("unchecked")
     public boolean checkPassword(String login, String password) {
         FileInputStream fileInputStream = null;
         Map<String, String> userData;
-        
+
         try {
             File usersFile = new File("secretUsers");
 
             if (usersFile.exists()) {
                 fileInputStream = new FileInputStream(usersFile);
                 userData = (HashMap) Decryptor.decrypt(fileInputStream);
-                if (userData != null && userData.containsKey(login)) {
-                    if (userData.get(login).equals(password))
+                if (userData != null && userData.containsKey(login) && userData.get(login).equals(password)) {
                         return true;
                 }
             }
@@ -125,7 +124,7 @@ public class UserData implements IUserData{
                 System.out.println("Ошибка работы с файлом пользовтелей");
             }
         }
-        
+
         return false;
     }
 }

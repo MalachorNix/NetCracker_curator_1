@@ -1,7 +1,6 @@
 package o26.controller;
 
 import o26.model.ITask;
-import o26.model.Parameter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,7 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DataLoader implements Loader{
+public class DataLoader implements Loader {
+
+    private static final String ERROR_CLOSING_READ_STREAM = "Ошибка закрытия потока чтения из файла.";
 
     @Override
     public List<ITask> loadData(String login) {
@@ -24,8 +25,8 @@ public class DataLoader implements Loader{
         List<ITask> result = null;
         try {
             File loginAndId = new File("loginAndId");
-            
-            if(loginAndId.exists()) {
+
+            if (loginAndId.exists()) {
                 fis = new FileInputStream(loginAndId);
                 ois = new ObjectInputStream(fis);
                 @SuppressWarnings("unchecked")
@@ -35,23 +36,7 @@ public class DataLoader implements Loader{
                 if (id != null) {
                     result = new TaskXmlParser().parse("data.xml", id);
                 }
-
-                /*if (id != null) {
-                    fis = new FileInputStream("data");
-                    ois = new ObjectInputStream(fis);
-                    @SuppressWarnings("unchecked")
-                    List<ITask> tmp = (ArrayList) ois.readObject();
-                    result = new ArrayList<>();
-                    
-                    for (ITask task : tmp) {
-                        for (Integer tmpId : id) {
-                            if (task.getValue(Parameter.TypeParameter.ID).equals(tmpId)) {
-                                result.add(task);
-                            }
-                        }
-                    }
-                }*/
-            }            
+            }
         } catch (FileNotFoundException e) {
             result = new ArrayList<>();
         } catch (IOException | ClassNotFoundException e) {
@@ -60,14 +45,14 @@ public class DataLoader implements Loader{
             try {
                 if (ois != null) ois.close();
             } catch (IOException e) {
-                System.out.println("Ошибка закрытия потока чтения задач: " 
+                System.out.println("Ошибка закрытия потока чтения задач: "
                         + e.getMessage());
             } finally {
                 try {
                     if (fis != null) fis.close();
                 } catch (IOException e) {
                     System.out.println("Ошибка закрытия потока чтения "
-                            + "задач из файла: " 
+                            + "задач из файла: "
                             + e.getMessage());
                 }
             }
@@ -85,38 +70,26 @@ public class DataLoader implements Loader{
     public void saveData(List<ITask> tasks, String login, List<Integer> idList) {
 
         TaskXmlCreator taskXmlCreator = new TaskXmlCreator();
-//        taskXmlCreator.createTaskXml(tasks);
 
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         try {
-//            File data = new File("data");
-//            File data = new File("data.xml");
-//            if (data.exists()) {
-//                fis = new FileInputStream(data);
-//                ois = new ObjectInputStream(fis);
-//                List<ITask> tmp = (ArrayList) ois.readObject();
 
-                List<ITask> tmp = new TaskXmlParser().parse("data.xml", idList);
+            List<ITask> tmp = new TaskXmlParser().parse("data.xml", idList);
 
-                if (tmp != null) {
-                    for(ITask task: tasks) {
-                        if(!tmp.contains(task)) {
-                            tmp.add(task);
-                        }
+            if (tmp != null) {
+                for (ITask task : tasks) {
+                    if (!tmp.contains(task)) {
+                        tmp.add(task);
                     }
-                    tasks = tmp;
                 }
-//            }
-            
-//            fos = new FileOutputStream(data);
-//            oos = new ObjectOutputStream(fos);
-//            oos.writeObject((tasks == null) ? new ArrayList<>() : tasks);
+                tasks = tmp;
+            }
 
             taskXmlCreator.createTaskXml(tasks, "data.xml");
-            
+
             File loginAndId = new File("loginAndId");
             Map<String, List<Integer>> idList1;
             if (loginAndId.exists()) {
@@ -129,7 +102,6 @@ public class DataLoader implements Loader{
                 oos = new ObjectOutputStream(fos);
                 oos.writeObject(idList1);
 
-//                taskXmlCreator.createTaskXml();
 
             } else {
                 idList1 = new HashMap<>();
@@ -148,7 +120,7 @@ public class DataLoader implements Loader{
                     oos.close();
                 }
             } catch (IOException ex) {
-                System.out.println("Ошибка закрытия потока записи задач: " 
+                System.out.println("Ошибка закрытия потока записи задач: "
                         + ex.getMessage());
             } finally {
                 try {
@@ -156,7 +128,7 @@ public class DataLoader implements Loader{
                         fos.close();
                     }
                 } catch (IOException ex) {
-                    System.out.println("Ошибка закрытия потока записи в файл: " 
+                    System.out.println("Ошибка закрытия потока записи в файл: "
                             + ex.getMessage());
                 }
             }
@@ -165,18 +137,18 @@ public class DataLoader implements Loader{
                     fis.close();
                 }
             } catch (IOException iOException) {
-                System.out.println("Ошибка закрытия потока чтения из файла.");
+                System.out.println(ERROR_CLOSING_READ_STREAM);
             }
             try {
                 if (ois != null) {
                     ois.close();
                 }
             } catch (IOException iOException) {
-                System.out.println("Ошибка закрытия потока чтения из файла.");
+                System.out.println(ERROR_CLOSING_READ_STREAM);
             }
         }
     }
-    
+
     @Override
     public List<Integer> getListId() {
         FileInputStream fis = null;
@@ -207,18 +179,18 @@ public class DataLoader implements Loader{
                 try {
                     fis.close();
                 } catch (IOException ex) {
-                    System.out.println("Ошибка закрытия потока чтения из файла.");
+                    System.out.println(ERROR_CLOSING_READ_STREAM);
                 }
             }
             if (ois != null) {
                 try {
                     ois.close();
                 } catch (IOException ex) {
-                    System.out.println("Ошибка закрытия потока чтения из файла.");
+                    System.out.println(ERROR_CLOSING_READ_STREAM);
                 }
             }
         }
-        
+
         if (listId == null) {
             return new ArrayList<>();
         } else {

@@ -5,14 +5,16 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import o26.controller.Journal;
 import o26.model.Parameter;
 
 public abstract class AbstractMenuItem {
 
+    private static final String ENTER = "Введите ";
     public abstract void show(Journal journal);
 
-    protected int choice(int min, int max){
+    protected int choice(int min, int max) {
         int choice;
         try {
             boolean notValid;
@@ -21,23 +23,23 @@ public abstract class AbstractMenuItem {
                 System.out.print("Выберите пункт (от " + min + " до " + max + "): ");
                 choice = Integer.parseInt(scanner.nextLine());
                 notValid = min > choice || choice > max;
-                if(notValid) System.out.println("Данного пункта нет! Попробуйте снова!");
-            } while(notValid);
-        }
-        catch(Exception e){
+                if (notValid) System.out.println("Данного пункта нет! Попробуйте снова!");
+            } while (notValid);
+        } catch (Exception e) {
             choice = -1;
         }
         System.out.println();
         return choice;
     }
-    protected Object inputParameter(Parameter.TypeParameter parameter){
+
+    protected Object inputParameter(Parameter.TypeParameter parameter) {
         String nameParameter = parameter.toString();
         Scanner text = new Scanner(System.in);
         String output;
         Pattern p = Pattern.compile("^\\s+");
         Matcher m;
-        System.out.println("Введите "+nameParameter+":\n");
-        switch(nameParameter){
+        System.out.println(ENTER + nameParameter + ":\n");
+        switch (nameParameter) {
             case "время оповещения": {
                 return getDate();
             }
@@ -47,7 +49,7 @@ public abstract class AbstractMenuItem {
                 output = m.replaceFirst("");
                 while (output.length() == 0) {
                     System.out.println("Пустое название запрещено.");
-                    System.out.println("Введите " + nameParameter + ":\n");
+                    System.out.println(ENTER + nameParameter + ":\n");
                     name = text.nextLine();
                     m = p.matcher(name);
                     output = m.replaceFirst("");
@@ -60,7 +62,7 @@ public abstract class AbstractMenuItem {
                 output = m.replaceFirst("");
                 while (output.length() == 0) {
                     System.out.println("Пустое описание запрещено.");
-                    System.out.println("Введите " + nameParameter + ":\n");
+                    System.out.println(ENTER + nameParameter + ":\n");
                     description = text.nextLine();
                     m = p.matcher(description);
                     output = m.replaceFirst("");
@@ -74,7 +76,7 @@ public abstract class AbstractMenuItem {
                 output = m.replaceFirst("");
                 while (output.length() == 0) {
                     System.out.println("Пустое поле контактов запрещено.");
-                    System.out.println("Введите "+nameParameter+":\n");
+                    System.out.println(ENTER + nameParameter + ":\n");
                     contacts = text.nextLine();
                     m = p.matcher(contacts);
                     output = m.replaceFirst("");
@@ -85,6 +87,7 @@ public abstract class AbstractMenuItem {
                 return text.nextLine();
         }
     }
+
     private GregorianCalendar getDate() {
         try {
             System.out.println("Введите 1, если хотите установить свою дату оповещения.");

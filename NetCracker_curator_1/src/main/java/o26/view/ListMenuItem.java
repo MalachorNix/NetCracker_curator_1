@@ -8,7 +8,7 @@ import o26.model.ITask;
 
 public class ListMenuItem extends AbstractMenuItem {
     private static final String ITEM = "Просмотр списка задач";
-    
+
     @Override
     @SuppressWarnings("unchecked")
     public void show(Journal journal) {
@@ -20,23 +20,22 @@ public class ListMenuItem extends AbstractMenuItem {
         } else {
             StringBuilder breakingLine = new StringBuilder("");
             StringBuilder border = new StringBuilder("~");
-            for(int i = 0; i < countTasks; i++){
-                int lengthId = i+"".length();
-                int lengthLine = 40 - lengthId - 2;
-                for(int j = 0; j < lengthLine; j++) {
+            for (int i = 0; i < countTasks; i++) {
+                int lengthLine = 40 - i - 2;
+                for (int j = 0; j < lengthLine; j++) {
                     breakingLine.append(border);
                 }
                 String task = tasks.get(i).toString();
-                System.out.println("<"+(i+1)+">"+breakingLine);
+                System.out.println("<" + (i + 1) + ">" + breakingLine);
                 System.out.println(task);
-                System.out.println("<"+(i+1)+">"+breakingLine);
+                System.out.println("<" + (i + 1) + ">" + breakingLine);
             }
             System.out.println();
         }
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return ITEM;
     }
 }
