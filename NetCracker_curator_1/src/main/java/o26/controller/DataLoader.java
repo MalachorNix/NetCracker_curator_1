@@ -81,7 +81,7 @@ public class DataLoader implements Loader{
     public void saveData(List<ITask> tasks, String login, List<Integer> idList) {
 
         TaskXmlCreator taskXmlCreator = new TaskXmlCreator();
-        taskXmlCreator.createXml(tasks);
+//        taskXmlCreator.createTaskXml(tasks);
 
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
@@ -107,6 +107,8 @@ public class DataLoader implements Loader{
             fos = new FileOutputStream(data);
             oos = new ObjectOutputStream(fos);
             oos.writeObject((tasks == null) ? new ArrayList<>() : tasks);
+
+            taskXmlCreator.createTaskXml(tasks, "data.xml"); // TODO: 19.03.2016 HERE
             
             File loginAndId = new File("loginAndId");
             Map<String, List<Integer>> idList1;
@@ -119,6 +121,9 @@ public class DataLoader implements Loader{
                 fos = new FileOutputStream(loginAndId);
                 oos = new ObjectOutputStream(fos);
                 oos.writeObject(idList1);
+
+//                taskXmlCreator.createTaskXml();
+
             } else {
                 idList1 = new HashMap<>();
                 idList1.put(login, idList);

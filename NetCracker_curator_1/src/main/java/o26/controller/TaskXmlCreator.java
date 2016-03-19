@@ -14,7 +14,7 @@ import java.util.List;
 
 public class TaskXmlCreator {
 
-    public void createXml(List<ITask> tasks) {
+    public void createTaskXml(List<ITask> tasks, String fileName) {
         // Корневой элемент
         Element tasksElement = new Element("tasks");
         Document doc = new Document(tasksElement);
@@ -23,17 +23,20 @@ public class TaskXmlCreator {
             // Элемент отдельной задачи
             Element taskElement = new Element("task");
 
+            Element id = new Element("id");
             Element name = new Element("name");
             Element description = new Element("description");
             Element contacts = new Element("contacts");
             Element date = new Element("date");
 
+            id.setText(Integer.toString((int) task.getValue(Parameter.TypeParameter.ID)));
             name.setText((String) task.getValue(Parameter.TypeParameter.NAME));
             description.setText((String) task.getValue(Parameter.TypeParameter.DESCRIPTION));
             contacts.setText((String) task.getValue(Parameter.TypeParameter.CONTACTS));
             GregorianCalendar calendar = (GregorianCalendar) task.getValue(Parameter.TypeParameter.DATE);
-            date.setText(calendar.toString());
+            date.setText(Long.toString(calendar.getTimeInMillis()));
 
+            taskElement.addContent(id);
             taskElement.addContent(name);
             taskElement.addContent(description);
             taskElement.addContent(contacts);
@@ -45,7 +48,7 @@ public class TaskXmlCreator {
         XMLOutputter xmlOutputter = new XMLOutputter();
         xmlOutputter.setFormat(Format.getPrettyFormat());
         try {
-            xmlOutputter.output(doc, new FileWriter("test.xml"));
+            xmlOutputter.output(doc, new FileWriter(fileName));
         } catch (IOException e) {
             e.printStackTrace();
         }
