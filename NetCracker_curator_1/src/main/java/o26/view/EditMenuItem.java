@@ -3,13 +3,17 @@ package o26.view;
 import o26.controller.Journal;
 import o26.model.Parameter;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 public class EditMenuItem extends AbstractMenuItem {
     private static final String ITEM = "Редактирование задач";
     
     @Override
-    public void show(Journal journal) {
+    public void show(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         int selectedId;
 
         do {

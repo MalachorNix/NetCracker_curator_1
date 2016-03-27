@@ -1,5 +1,9 @@
 package o26.view;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -12,7 +16,7 @@ import o26.model.Parameter;
 public abstract class AbstractMenuItem {
 
     private static final String ENTER = "Введите ";
-    public abstract void show(Journal journal);
+    public abstract void show(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream);
 
     protected int choice(int min, int max) {
         int choice;

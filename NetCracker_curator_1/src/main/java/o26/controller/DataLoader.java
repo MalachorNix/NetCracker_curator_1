@@ -17,6 +17,7 @@ import java.util.Map;
 public class DataLoader implements Loader {
 
     private static final String ERROR_CLOSING_READ_STREAM = "Ошибка закрытия потока чтения из файла.";
+    private static final String SERVER_OUTPUT_PATH = "serverSide/";
 
     @Override
     public List<ITask> loadData(String login) {
@@ -24,7 +25,7 @@ public class DataLoader implements Loader {
         ObjectInputStream ois = null;
         List<ITask> result = null;
         try {
-            File loginAndId = new File("loginAndId");
+            File loginAndId = new File(SERVER_OUTPUT_PATH + "loginAndId");
 
             if (loginAndId.exists()) {
                 fis = new FileInputStream(loginAndId);
@@ -34,7 +35,7 @@ public class DataLoader implements Loader {
                 List<Integer> id = idList.get(login);
 
                 if (id != null) {
-                    result = new TaskXmlParser().parse("data.xml", id);
+                    result = new TaskXmlParser().parse(SERVER_OUTPUT_PATH + "data.xml", id);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -77,7 +78,7 @@ public class DataLoader implements Loader {
         ObjectInputStream ois = null;
         try {
 
-            List<ITask> tmp = new TaskXmlParser().parse("data.xml", idList);
+            List<ITask> tmp = new TaskXmlParser().parse(SERVER_OUTPUT_PATH + "data.xml", idList);
 
             if (tmp != null) {
                 for (ITask task : tasks) {
@@ -88,9 +89,9 @@ public class DataLoader implements Loader {
                 tasks = tmp;
             }
 
-            taskXmlCreator.createTaskXml(tasks, "data.xml");
+            taskXmlCreator.createTaskXml(tasks, SERVER_OUTPUT_PATH + "data.xml");
 
-            File loginAndId = new File("loginAndId");
+            File loginAndId = new File(SERVER_OUTPUT_PATH + "loginAndId");
             Map<String, List<Integer>> idList1;
             if (loginAndId.exists()) {
                 fis = new FileInputStream(loginAndId);
@@ -157,7 +158,7 @@ public class DataLoader implements Loader {
 
         try {
 
-            fis = new FileInputStream("loginAndId");
+            fis = new FileInputStream(SERVER_OUTPUT_PATH + "loginAndId");
             ois = new ObjectInputStream(fis);
 
             @SuppressWarnings("unchecked")

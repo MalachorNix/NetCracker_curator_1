@@ -2,11 +2,16 @@ package o26.view;
 
 import o26.controller.Journal;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class DeleteMenuItem extends AbstractMenuItem {
     private static final String ITEM = "Удаление задач";
     
     @Override
-    public void show(Journal journal) {
+    public void show(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         int selectedId;
         do{
             System.out.println("Удаление задачи");

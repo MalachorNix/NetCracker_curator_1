@@ -27,7 +27,6 @@ public final class Main {
         journal.setView(userItem);
         journal.setUserData(userData);
 
-        journal.showMenu();
-        System.exit(0);
+//        journal.showMenu();
     }
 }

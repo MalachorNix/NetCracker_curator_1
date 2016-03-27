@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserData implements IUserData {
+    private static final String SERVER_OUTPUT_PATH = "serverSide/";
 
     @Override
     @SuppressWarnings("unchecked")
@@ -23,7 +24,7 @@ public class UserData implements IUserData {
         }
 
         try {
-            File usersFile = new File("secretUsers");
+            File usersFile = new File(SERVER_OUTPUT_PATH + "secretUsers");
 
             if (usersFile.exists()) {
                 fileInputStream = new FileInputStream(usersFile);
@@ -66,7 +67,7 @@ public class UserData implements IUserData {
         Map<String, String> userData;
 
         try {
-            File usersFile = new File("secretUsers");
+            File usersFile = new File(SERVER_OUTPUT_PATH + "secretUsers");
 
             if (usersFile.exists()) {
                 fileInputStream = new FileInputStream(usersFile);
@@ -100,13 +101,13 @@ public class UserData implements IUserData {
         Map<String, String> userData;
 
         try {
-            File usersFile = new File("secretUsers");
+            File usersFile = new File(SERVER_OUTPUT_PATH + "secretUsers");
 
             if (usersFile.exists()) {
                 fileInputStream = new FileInputStream(usersFile);
                 userData = (HashMap) Decryptor.decrypt(fileInputStream);
                 if (userData != null && userData.containsKey(login) && userData.get(login).equals(password)) {
-                        return true;
+                    return true;
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -121,7 +122,7 @@ public class UserData implements IUserData {
                     fileInputStream.close();
                 }
             } catch (IOException e) {
-                System.out.println("Ошибка работы с файлом пользовтелей");
+                System.out.println("Ошибка работы с файлом пользователей");
             }
         }
 

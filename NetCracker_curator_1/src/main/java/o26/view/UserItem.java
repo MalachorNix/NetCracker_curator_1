@@ -1,7 +1,8 @@
 package o26.view;
 
 
-import java.io.Console;
+import java.io.*;
+
 import o26.controller.Journal;
 
 import java.util.InputMismatchException;
@@ -11,13 +12,13 @@ public class UserItem extends AbstractMenuItem {
 
     private static final String ITEM = "Экран входа пользователя";
     private static final Console CONSOLE = System.console();
-    
+
     @Override
-    public void show(Journal journal) {
+    public void show(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         salutation();
-        choice(journal);
+        choice(journal, inputStream, outputStream);
     }
-    
+
     private void salutation() {
         System.out.println("Добро пожаловать в планировщик задач!");
         System.out.println("Чтобы войти в программу, нажмите 1.");
@@ -25,7 +26,7 @@ public class UserItem extends AbstractMenuItem {
         System.out.println("Чтобы выйти из программы, нажмите 0.\n");
     }
 
-    private void choice(Journal journal) {
+    private void choice(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         Scanner scanner = new Scanner(System.in);
         int choice;
         try {
@@ -38,9 +39,15 @@ public class UserItem extends AbstractMenuItem {
                         break;
                     case 2:
                         System.out.println("\nРегистрация");
-                        registration(journal);
+                        registration(journal, inputStream, outputStream);
                         break;
                     case 0:
+                        try {
+                            outputStream.writeInt(0);
+                            outputStream.flush();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         System.exit(0);
                         break;
                     default:
@@ -48,54 +55,93 @@ public class UserItem extends AbstractMenuItem {
                         break;
                 }
             } while (choice != 1);
-            if(!login(journal)) {
+            if (!login(journal, inputStream, outputStream)) {
                 System.out.println("Неправильный логин или пароль!");
                 salutation();
-                choice(journal);
+                choice(journal, inputStream, outputStream);
             }
         } catch (InputMismatchException e) {
             System.out.println("Вводите только целые числа.");
-            choice(journal);
+            choice(journal, inputStream, outputStream);
         }
     }
-    
-    private boolean login(Journal journal) {
+
+    private boolean login(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         String password;
         String login = inputLogin();
-        
+
         if (CONSOLE == null) {
             password = inputPassword();
         } else {
             password = hidePassword();
         }
-        
-        journal.login(login, password);
+
+        try {
+            outputStream.writeInt(1);
+            outputStream.flush();
+            outputStream.writeUTF(login);
+            outputStream.flush();
+            outputStream.writeUTF(password);
+            outputStream.flush();
+            // TODO: 26.03.2016 избавиться от юзеритем в стеке
+            if (inputStream.readBoolean()) {
+                AbstractMenuItem menuItem = new MainMenuItem();
+                menuItem.show(journal, inputStream, outputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // TODO: 26.03.2016 Что-то потом с этим придумать
         return false;
     }
 
-    private void registration(Journal journal) {
+    private void registration(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         String login;
         String password;
         String password1;
-        boolean check;
+        boolean check = false;
 
         login = inputLogin();
 
-        do {            
+        do {
             if (CONSOLE == null) {
-            password = inputPassword();
-            password1 = inputPassword();
+                password = inputPassword();
+                password1 = inputPassword();
             } else {
-            password = hidePassword();
-            password1 = hidePassword();
+                password = hidePassword();
+                password1 = hidePassword();
             }
-            check = journal.validatePasswords(password, password1);
+
+            try {
+                outputStream.writeInt(4);
+                outputStream.flush();
+                outputStream.writeUTF(password);
+                outputStream.flush();
+                outputStream.writeUTF(password1);
+                outputStream.flush();
+                check = inputStream.readBoolean();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             if (!check) {
                 System.out.println("Пароли не совпадают. Попробуйте снова.");
             }
         } while (!check);
 
-        if (journal.registration(login, password)) {
+        boolean success = false;
+        try {
+            outputStream.writeInt(5);
+            outputStream.flush();
+            outputStream.writeUTF(login);
+            outputStream.flush();
+            outputStream.writeUTF(password);
+            outputStream.flush();
+            success = inputStream.readBoolean();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (success) {
             System.out.println("Регистрация прошла успешно!");
         } else {
             System.out.println("Данный логин занят. Попробуйте другой.");
@@ -114,20 +160,20 @@ public class UserItem extends AbstractMenuItem {
 
     private String inputPassword() {
         String password;
-        
+
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите свой пароль: ");
         password = scanner.nextLine();
-        
+
         return password;
     }
-    
+
     private String hidePassword() {
         String password;
-        
+
         char[] pass = CONSOLE.readPassword("Введите свой пароль: ");
         password = new String(pass);
-        
+
         return password;
     }
 

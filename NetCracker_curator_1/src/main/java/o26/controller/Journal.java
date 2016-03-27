@@ -7,6 +7,10 @@ import o26.model.User;
 import o26.view.MainMenuItem;
 import o26.view.AbstractMenuItem;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -19,7 +23,10 @@ public class Journal {
     private IUser user;
     private IUserData userData;
     private ListID listID;
-    
+    private Socket socket;
+    private DataInputStream dataInputStream;
+    private DataOutputStream dataOutputStream;
+
     public void addTask(List<Parameter> parameters, List<ITask> tasks) {
         listID.addID(parameters);
         tasks.add(taskCreator.createTask(parameters));
@@ -46,7 +53,7 @@ public class Journal {
 
     public void save() {
         List<Integer> idList = new ArrayList<>();
-        for(ITask task: tasks) {
+        for (ITask task : tasks) {
             idList.add((Integer) task.getValue(Parameter.TypeParameter.ID));
         }
         loader.saveData(tasks, user.getLogin(), idList);
@@ -56,21 +63,21 @@ public class Journal {
     public void load() {
         tasks = loader.loadData(user.getLogin());
     }
-    
-    public void showMenu() {
+
+    /*public void showMenu() {
         this.view.show(this);
-    }
+    }*/
 
     public void notificationStart() {
         journalChanged();
         notification.start();
     }
-    
+
     public void journalChanged() {
         notification.setActual(this);
     }
-    
-    public void setLoader(Loader loader){
+
+    public void setLoader(Loader loader) {
         this.loader = loader;
     }
 
@@ -89,7 +96,7 @@ public class Journal {
     public void setUser(IUser user) {
         this.user = user;
     }
-    
+
     public String getUserLogin() {
         return user.getLogin();
     }
@@ -105,12 +112,12 @@ public class Journal {
     public boolean registration(String login, String password) {
         return this.userData.userRegistration(login, password);
     }
-    
+
     public boolean checkLogin(String login) {
         return !this.userData.checkLogin(login);
     }
-    
-    public void login(String login, String password) {
+
+    public boolean login(String login, String password) {
         if (checkLogin(login) && this.userData.checkPassword(login, password)) {
             this.setUser(new User(login, password, new ArrayList<>()));
             this.setView(new MainMenuItem());
@@ -118,7 +125,23 @@ public class Journal {
             tasks = null;
             this.load();
             this.notificationStart();
-            this.showMenu();
+//            this.showMenu();
+            return true;
         }
+        return false;
+    }
+
+    public void setSocket(Socket socket) throws IOException {
+        this.socket = socket;
+        this.dataInputStream = new DataInputStream(this.socket.getInputStream());
+        this.dataOutputStream = new DataOutputStream(this.socket.getOutputStream());
+    }
+
+    public DataInputStream getDataInputStream() {
+        return dataInputStream;
+    }
+
+    public DataOutputStream getDataOutputStream() {
+        return dataOutputStream;
     }
 }
