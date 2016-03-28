@@ -92,9 +92,39 @@ public class Server {
                     case 7:
                         List<Parameter> parameters = (ArrayList) in.readObject();
                         journal.addTask(parameters, journal.getTasks());
+                        journal.journalChanged();
                         break;
-                    // Оповещение об изменение журнала
+                    // Редактирование задачи
                     case 8:
+                        out.writeInt(journal.getTasks().size());
+                        out.flush();
+                        int selectedId = in.readInt();
+                        if (selectedId != 0) {
+                            out.writeUTF(journal.getTasks().get(selectedId - 1).toString());
+                            out.flush();
+                            int choiceForEditing = in.readInt();
+                            if (choiceForEditing != 0) {
+                                out.writeObject((journal.getTasks().get(selectedId - 1)).getParameters());
+                                out.flush();
+                                List<Parameter> editParameters = (List<Parameter>) in.readObject();
+                                journal.editTask(selectedId - 1, editParameters);
+                                journal.journalChanged();
+                            }
+                        }
+                        break;
+                    // Удаление задачи
+                    case 9:
+                        out.writeInt(journal.getTasks().size());
+                        out.flush();
+                        selectedId = in.readInt();
+                        if (selectedId != 0) {
+                            out.writeUTF(journal.getTasks().get(selectedId - 1).toString());
+                            out.flush();
+                            int choiceForDeleting = in.readInt();
+                            if (choiceForDeleting != 0) {
+                                journal.deleteTask(selectedId - 1);
+                            }
+                        }
                         journal.journalChanged();
                         break;
                     // Выход

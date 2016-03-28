@@ -1,10 +1,6 @@
 package o26.view;
 
-
 import java.io.*;
-
-import o26.controller.Journal;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,9 +10,9 @@ public class UserItem extends AbstractMenuItem {
     private static final Console CONSOLE = System.console();
 
     @Override
-    public void show(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
+    public void show(ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         salutation();
-        choice(journal, inputStream, outputStream);
+        choice(inputStream, outputStream);
     }
 
     private void salutation() {
@@ -26,7 +22,7 @@ public class UserItem extends AbstractMenuItem {
         System.out.println("Чтобы выйти из программы, нажмите 0.\n");
     }
 
-    private void choice(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
+    private void choice(ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         Scanner scanner = new Scanner(System.in);
         int choice;
         try {
@@ -39,7 +35,7 @@ public class UserItem extends AbstractMenuItem {
                         break;
                     case 2:
                         System.out.println("\nРегистрация");
-                        registration(journal, inputStream, outputStream);
+                        registration(inputStream, outputStream);
                         break;
                     case 0:
                         try {
@@ -55,18 +51,18 @@ public class UserItem extends AbstractMenuItem {
                         break;
                 }
             } while (choice != 1);
-            if (!login(journal, inputStream, outputStream)) {
+            if (!login(inputStream, outputStream)) {
                 System.out.println("Неправильный логин или пароль!");
                 salutation();
-                choice(journal, inputStream, outputStream);
+                choice(inputStream, outputStream);
             }
         } catch (InputMismatchException e) {
             System.out.println("Вводите только целые числа.");
-            choice(journal, inputStream, outputStream);
+            choice(inputStream, outputStream);
         }
     }
 
-    private boolean login(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
+    private boolean login(ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         String password;
         String login = inputLogin();
 
@@ -86,7 +82,7 @@ public class UserItem extends AbstractMenuItem {
             // TODO: 26.03.2016 избавиться от юзеритем в стеке
             if (inputStream.readBoolean()) {
                 AbstractMenuItem menuItem = new MainMenuItem();
-                menuItem.show(journal, inputStream, outputStream);
+                menuItem.show(inputStream, outputStream);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,7 +91,7 @@ public class UserItem extends AbstractMenuItem {
         return false;
     }
 
-    private void registration(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
+    private void registration(ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         String login;
         String password;
         String password1;

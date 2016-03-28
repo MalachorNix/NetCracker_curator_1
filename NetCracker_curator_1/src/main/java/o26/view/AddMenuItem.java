@@ -6,14 +6,13 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import o26.controller.Journal;
 import o26.model.Parameter;
 
 public class AddMenuItem extends AbstractMenuItem {
     private static final String ITEM = "Добавление задач";
 
     @Override
-    public void show(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
+    public void show(ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         List<Parameter> parameters = new ArrayList<>();
         Object name = inputParameter(Parameter.TypeParameter.NAME);
         Object description = inputParameter(Parameter.TypeParameter.DESCRIPTION);
@@ -36,12 +35,6 @@ public class AddMenuItem extends AbstractMenuItem {
         }
 
         System.out.println("Задача добавлена!\n");
-        try {
-            outputStream.writeInt(8);
-            outputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

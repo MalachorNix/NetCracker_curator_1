@@ -2,14 +2,12 @@ package o26.view;
 
 import java.io.*;
 
-import o26.controller.Journal;
-
 public class ListMenuItem extends AbstractMenuItem {
     private static final String ITEM = "Просмотр списка задач";
 
     @Override
     @SuppressWarnings("unchecked")
-    public void show(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
+    public void show(ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         int countTask;
 
         try {
@@ -18,7 +16,7 @@ public class ListMenuItem extends AbstractMenuItem {
             countTask = inputStream.readInt();
 
             if (countTask == 0) {
-                System.out.println("Список задач пуст!");
+                System.out.println("Список задач пуст!\n");
             } else {
                 StringBuilder breakingLine = new StringBuilder("");
                 StringBuilder border = new StringBuilder("~");
@@ -27,7 +25,6 @@ public class ListMenuItem extends AbstractMenuItem {
                     for (int j = 0; j < lengthLine; j++) {
                         breakingLine.append(border);
                     }
-//                String task = tasks.get(i).toString();
                     String task = inputStream.readUTF();
                     System.out.println("<" + (i + 1) + ">" + breakingLine);
                     System.out.println(task);

@@ -1,6 +1,5 @@
 package o26.client;
 
-import o26.controller.Journal;
 import o26.view.*;
 
 import java.net.*;
@@ -25,7 +24,7 @@ public class Client {
             AbstractMenuItem menuItem = new UserItem();
 
             while (true) {
-                menuItem.show(new Journal(), in, out);
+                menuItem.show(in, out);
             }
         } catch (Exception x) {
             x.printStackTrace();

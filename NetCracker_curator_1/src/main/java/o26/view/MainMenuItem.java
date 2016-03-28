@@ -4,13 +4,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import o26.controller.Journal;
-
 public class MainMenuItem extends AbstractMenuItem {
     private static final String ITEM = "Меню";
 
     @Override
-    public void show(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream) {
+    public void show(ObjectInputStream inputStream, ObjectOutputStream outputStream) {
         List<AbstractMenuItem> item = new ArrayList<>();
         item.add(new ListMenuItem());
         item.add(new AddMenuItem());
@@ -48,7 +46,7 @@ public class MainMenuItem extends AbstractMenuItem {
                     System.out.println("До свидания!\n");
                 } else {
                     try {
-                        item.get(select - 1).show(journal, inputStream, outputStream);
+                        item.get(select - 1).show(inputStream, outputStream);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println("Вводите только числа!");
                     }

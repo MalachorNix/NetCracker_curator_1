@@ -1,7 +1,5 @@
 package o26.view;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Calendar;
@@ -10,13 +8,12 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import o26.controller.Journal;
 import o26.model.Parameter;
 
 public abstract class AbstractMenuItem {
 
     private static final String ENTER = "Введите ";
-    public abstract void show(Journal journal, ObjectInputStream inputStream, ObjectOutputStream outputStream);
+    public abstract void show(ObjectInputStream inputStream, ObjectOutputStream outputStream);
 
     protected int choice(int min, int max) {
         int choice;
